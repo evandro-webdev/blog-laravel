@@ -2,9 +2,9 @@
 
 @php
   $map = [
-    'Post publicado' => ['icon' => 'new-doc-green.svg', 'bg' => 'bg-green-100'],
-    'Post atualizado' => ['icon' => 'edit-blue.svg', 'bg' => 'bg-blue-100'],
-    'Post deletado'   => ['icon' => 'trash-red.svg', 'bg' => 'bg-red-100'],
+    'Post publicado' => ['icon' => 'doc-plus-green.svg', 'bg' => 'bg-green-50'],
+    'Post atualizado' => ['icon' => 'edit-blue.svg', 'bg' => 'bg-blue-50'],
+    'Post deletado'   => ['icon' => 'trash-red.svg', 'bg' => 'bg-red-50'],
   ];
 
   $data = $map[$activity->action] ?? ['icon' => 'doc-blue.svg', 'bg' => 'bg-gray-100'];
