@@ -9,7 +9,7 @@ use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterUserController::class, 'create']);
