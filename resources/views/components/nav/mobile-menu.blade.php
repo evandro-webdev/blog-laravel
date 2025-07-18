@@ -7,7 +7,7 @@
   <div class="border-t border-gray-300 pt-4 pb-3">
     <div class="flex items-center px-5">
       <div class="shrink-0">
-        <img class="size-10 rounded-full" src="https://avatar.iran.liara.run/public/boy" alt="">
+        <div class="w-8 h-8 rounded-full bg-gray-500"></div>
       </div>
       <div class="ml-3">
         <div class="text-base/5 font-medium text-gray-900">Evandro</div>

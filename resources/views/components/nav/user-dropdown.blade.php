@@ -12,7 +12,7 @@
           id="user-menu-button"
         >
           <span class="sr-only">Abrir menu do usuário</span>
-          <img class="size-8 rounded-full" src="https://avatar.iran.liara.run/public/boy" alt="">
+          <div class="w-8 h-8 rounded-full bg-gray-500"></div>
         </button>
       </div>
 

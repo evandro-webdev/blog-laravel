@@ -21,7 +21,7 @@
         @endauth
 
         @guest
-          <div class="flex items-center gap-2">
+          <div class="items-center gap-2 hidden md:flex">
             <x-ui.forms.button href="/login">Entrar</x-ui.forms.button>
             <x-ui.forms.button href="/register" outline>Criar conta</x-ui.forms.button>
           </div>
