@@ -59,7 +59,32 @@
 
         </div>
       </x-ui.panel>
-    </div>
+
+      <div 
+          x-data="{
+            tab: (new URLSearchParams(window.location.search)).get('tab') || 'overview',
+              updateUrl() {
+                const url = new URL(window.location);
+                url.searchParams.set('tab', this.tab);
+                window.history.replaceState({}, '', url);
+              }
+            }"
+          x-init="updateUrl()"
+          x-effect="updateUrl()"
+          class="mt-6"
+        >
+          <div class="sm:w-max p-1 rounded bg-gray-100 flex flex-wrap">
+            <x-ui.tab value="profile" x-model="tab">Perfil</x-ui.tab>
+            <x-ui.tab value="read" x-model="tab">Lidos</x-ui.tab>
+            <x-ui.tab value="saved" x-model="tab">Salvos</x-ui.tab>
+            <x-ui.tab value="notifications" x-model="tab">Notificações</x-ui.tab>
+          </div>
+            
+          <div class="mt-6">
+            <x-profile.tabs.profile :$user/>
+          </div>
+        </div>
+      </div>
 
   </x-section>
 </x-layout>

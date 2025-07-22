@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class ProfileController extends Controller
 {
   public function show()
   {
-    return view('auth.profile');
+    $user = Auth::user();
+    
+    return view('auth.profile', ['user' => $user]);
   }
 }
