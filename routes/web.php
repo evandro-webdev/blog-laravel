@@ -9,7 +9,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
-Route::get('/profile', [ProfileController::class, 'show']);
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth');
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 
 Route::delete('/logout', [SessionController::class, 'destroy']);
 
-Route::middleware('auth')->prefix('/admin')->group(function () {
+Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
   Route::get('/dashboard', [AdminController::class, 'dashboard']);
   Route::get('/posts/create', [PostController::class, 'create']);
   Route::post('/posts', [PostController::class, 'store']);

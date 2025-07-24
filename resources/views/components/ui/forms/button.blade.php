@@ -20,6 +20,10 @@
     'danger' => [
       'filled' => 'border border-red-600 bg-red-600 text-white hover:bg-red-700',
       'outline' => 'border border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
+    ],
+    'neutral' => [
+      'filled' => 'border border-gray-600 bg-gray-600 text-white hover:bg-gray-700',
+      'outline' => 'border border-gray-600 text-gray-900 hover:bg-gray-600 hover:text-white'
     ]
   ];
 
