@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="mt-3 space-y-1 px-2">
-      <x-nav.mobile-link href="#">Perfil</x-nav.mobile-link>
-      <x-nav.mobile-link href="#">Dashboard</x-nav.mobile-link>
+      <x-nav.mobile-link href="/profile">Perfil</x-nav.mobile-link>
+      <x-nav.mobile-link href="/dashboard">Dashboard</x-nav.mobile-link>
       <x-nav.mobile-link href="#">Sair</x-nav.mobile-link>
     </div>
   </div>
