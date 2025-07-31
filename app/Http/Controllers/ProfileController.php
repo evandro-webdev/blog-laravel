@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -16,47 +17,63 @@ class ProfileController extends Controller
   }
 
   public function update(Request $request)
-  {
-    $attributes = $request->validate([
-      'name' => ['required'],
-      'email' => ['required', 'email', 'unique:users,email'],
-      'bio' => ['nullable', 'string', 'max:500'],
+    {
+        $user = Auth::user();
 
-      'social_networks' => ['nullable', 'array'],
-      'social_networks.*.provider' => ['required', 'string', 'in:twitter, instagram, facebook, linkedin, github, website, youtube'],
-      'social_networks.*.url' => ['required', 'url']
-    ]);
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'bio' => ['nullable', 'string', 'max:500'],
+            'city' => ['nullable', 'string', 'max:85'],
+            
+            'twitter' => ['nullable', 'url', 'max:255'],
+            'github' => ['nullable', 'url', 'max:255'],
+            'instagram' => ['nullable', 'url', 'max:255'],
+            'linkedin' => ['nullable', 'url', 'max:255'],
+            'youtube' => ['nullable', 'url', 'max:255'],
+        ]);
 
-    DB::transaction(function () use ($request, $attributes){
-      $user = Auth::user();
+        $user->update([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'bio' => $attributes['bio'],
+            'city' => $attributes['city']
+        ]);
 
-      $user->update([
-        'name' => $attributes['name'],
-        'email' => $attributes['email'],
-        'bio' => $attributes['bio'] ?? null,
-      ]);
+        $this->syncSocials($user, $attributes);
 
-      if($request->has('social_networks')){
-        $this->syncSocialProfiles($user, $attributes['social_networks']);
-      }
-    });
-
-    return response()->json(['success' => 'Perfil atualizado']);
-  }
-
-  protected function syncSocialProfiles(User $user, array $socialNetworks){
-    $user->socialProfiles()->delete();
-
-    foreach($socialNetworks as $network){
-      $user->socialProfiles()->create([
-        'provider' => $network['provider'],
-        'url' => $this->normalizeUrl($network['url'], $network['provider']),
-      ]);
+        return redirect('/profile');
     }
-  }
 
-  protected function normalizeUrl($url, $provider){
-    if(!preg_match("~^(?:f|ht)tps?://~i", $url)){
+    private function syncSocials($user, $data)
+    {
+      $socials = [
+        'twitter' => $data['twitter'] ?? null,
+        'github' => $data['github'] ?? null,
+        'instagram' => $data['instagram'] ?? null,
+        'linkedin' => $data['linkedin'] ?? null,
+        'youtube' => $data['youtube'] ?? null,
+      ];
+
+      foreach ($socials as $provider => $url) {
+        if ($url) {
+          $normalizedUrl = $this->normalizeUrl($url);
+
+          $user->socialProfiles()->updateOrCreate(
+            ['provider' => $provider],
+            ['url' => $normalizedUrl]
+          );
+        } else {
+          $user->socialProfiles()->where('provider', $provider)->delete();
+        }
+      }
+    }
+
+  protected function normalizeUrl($url)
+  {
+    $url = trim($url);
+    
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
       return "https://" . $url;
     }
 

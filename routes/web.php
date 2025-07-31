@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth');
+Route::patch('/profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
