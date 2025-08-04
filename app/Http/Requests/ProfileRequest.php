@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class ProfileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+      return true;
     }
 
     /**
@@ -23,7 +24,7 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
       return [
-        'name' => ['require"d', 'string', 'max:255'],
+        'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'email', Rule::unique('users')->ignore(Auth::id())],
         'bio' => ['nullable', 'string', 'max:500'],
         'city' => ['nullable', 'string', 'max:85'],

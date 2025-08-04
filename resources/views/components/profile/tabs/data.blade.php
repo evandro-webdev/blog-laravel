@@ -1,4 +1,4 @@
-<div x-show="tab === 'profile'" class="space-y-6">
+<div x-show="tab === 'data'" class="space-y-6">
   <form action="/profile" method="POST" class="space-y-6">
     @csrf
     @method('PATCH')
