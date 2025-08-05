@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
   }
 
-  public function socialProfiles()
+  public function socialProfiles(): HasMany
   {
     return $this->hasMany(SocialProfile::class);
   }
@@ -33,5 +33,19 @@ class User extends Authenticatable
   public function posts(): HasMany
   {
     return $this->hasMany(Post::class);
+  }
+
+  public function followers()
+  {
+    return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')
+                ->withTimestamps()
+                ->withPivot('created_at');
+  }
+
+  public function following()
+  {
+    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')
+                ->withTimestamps()
+                ->withPivot('created_at');
   }
 }
