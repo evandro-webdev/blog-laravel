@@ -60,30 +60,18 @@
         </div>
       </x-ui.panel>
 
-      <div 
-        x-data="{
-          tab: (new URLSearchParams(window.location.search)).get('tab') || 'overview',
-            updateUrl() {
-              const url = new URL(window.location);
-              url.searchParams.set('tab', this.tab);
-              window.history.replaceState({}, '', url);
-            }
-          }"
-        x-init="updateUrl()"
-        x-effect="updateUrl()"
-        class="mt-6"
-      >
-        <div class="sm:w-max p-1 rounded bg-gray-100 flex flex-wrap">
+      <x-ui.tab-container default-tab="data">
+        <x-slot:tabs>
           <x-ui.tab value="data" x-model="tab">Dados</x-ui.tab>
           <x-ui.tab value="read" x-model="tab">Lidos</x-ui.tab>
           <x-ui.tab value="saved" x-model="tab">Salvos</x-ui.tab>
           <x-ui.tab value="notifications" x-model="tab">Notificações</x-ui.tab>
-        </div>
-            
-        <div class="mt-6">
+        </x-slot:tabs>
+
+        <x-slot:content>
           <x-profile.tabs.data :$user/>
-        </div>
-      </div>
+        </x-slot:content>
+      </x-ui.tab-container>
     </div> 
   </x-section>
 </x-layout>
