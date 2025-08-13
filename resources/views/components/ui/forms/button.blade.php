@@ -1,12 +1,21 @@
 @props([
   'variant' => 'default',
+  'size' => 'md',
   'href' => null,
   'outline' => false,
   'type' => 'submit'
 ])
 
 @php
-  $baseClasses = 'px-6 py-2 rounded-md font-medium cursor-pointer block text-center transition-colors duration-200';
+  $baseClasses = 'rounded-md font-medium cursor-pointer block text-center transition-colors duration-200';
+
+  $sizeStyles = [
+    'xs' => 'px-2 py-1 text-xs',
+    'sm' => 'px-3 py-1.5 text-sm',
+    'md' => 'px-6 py-2 text-base',
+    'lg' => 'px-8 py-3 text-lg',
+    'xl' => 'px-10 py-4 text-xl'
+  ];
 
   $variantStyles = [
     'default' => [
@@ -27,9 +36,10 @@
     ]
   ];
 
+  $sizeClasses = $sizeStyles[$size] ?? $sizeStyles['md'];
   $variantClasses = $variantStyles[$variant][$outline ? 'outline' : 'filled'] ?? '';
 
-  $classes = implode(' ', [$baseClasses, $variantClasses]);
+  $classes = implode(' ', [$baseClasses, $sizeClasses, $variantClasses]);
 @endphp
 
 @if ($href)
