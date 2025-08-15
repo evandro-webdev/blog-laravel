@@ -9,7 +9,8 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
-Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'myProfile'])->middleware('auth');
+Route::get('/user/{user}', [ProfileController::class, 'show']);
 Route::patch('/profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
@@ -22,6 +23,11 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::delete('/logout', [SessionController::class, 'destroy']);
+
+Route::middleware('auth')->group(function () {
+  Route::post('/user/{user}/follow', [FollowController::class, 'store']);
+  Route::delete('/user/{user}/follow', [FollowController::class, 'destroy']);
+});
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
   Route::get('/dashboard', [AdminController::class, 'dashboard']);
