@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,24 +38,22 @@ class User extends Authenticatable
   public function followers(): BelongsToMany
   {
     return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')
-                ->withTimestamps()
                 ->withPivot('created_at');
   }
 
   public function following(): BelongsToMany
   {
     return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')
-                ->withTimestamps()
                 ->withPivot('created_at');
   }
 
   public function isFollowing($userId)
   {
-    return $this->following()->where('id', $userId)->exists();
+    return $this->following()->where('users.id', $userId)->exists();
   }
 
   public function isFollowedBy($userId)
   {
-    return $this->followers()->where('id', $userId)->exists();
+    return $this->followers()->where('users.id', $userId)->exists();
   }
 }
