@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
-  public function show()
+  public function myProfile()
   {
     $user = Auth::user();
-    
-    return view('auth.profile', ['user' => $user]);
+
+    return view('profile.show', ['user' => $user, 'isOwnProfile' => true]);
+  }
+
+  public function show(User $user)
+  {
+    $isOwnProfile = Auth::check() && Auth::id() === $user->id;
+
+    return view('profile.show', ['user' => $user, 'isOwnProfile' => $isOwnProfile]);
   }
 
   public function update(ProfileRequest $request)
