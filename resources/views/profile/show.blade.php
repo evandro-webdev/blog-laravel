@@ -13,8 +13,6 @@
           </div>
           <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
   
-          <x-ui.follow-button :$user/>
-          
           <div class="w-full flex justify-around">
             <div class="text-center">
               <span class="text-xl font-bold text-blue-600">{{ $stats['posts_read'] ?? 22 }}</span>
@@ -25,6 +23,8 @@
               <p class="text-sm text-gray-500">Posts salvos</p>
             </div>
           </div>
+
+          <x-ui.follow-button :$user/>
         </div>
       </x-ui.panel>
 

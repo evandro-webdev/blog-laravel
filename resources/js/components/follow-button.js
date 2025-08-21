@@ -18,6 +18,7 @@ function followButton(userId, isFollowingDefault, csrfToken) {
       try {
         const response = await fetch(url, options);
         if (response.ok) {
+          await new Promise(resolve => setTimeout(resolve, 300));
           this.isFollowing = !this.isFollowing;
         } else {
           let error = await response.json();
