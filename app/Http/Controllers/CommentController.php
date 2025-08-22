@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,5 +21,20 @@ class CommentController extends Controller
     ]);
 
     return redirect()->route('posts.show', $post);
+  }
+
+  public function update(Comment $comment)
+  {
+    if(Auth::id() !== $comment->user_id){
+      abort(403, 'Ação não autorizada.');
+    }
+    
+    $attributes = request()->validate([
+      'content' => ['required', 'string', 'max:1000']
+    ]);
+    
+    $comment->update($attributes);
+
+    return redirect()->route('posts.show', $comment->post);
   }
 }
