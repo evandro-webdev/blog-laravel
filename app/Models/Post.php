@@ -27,6 +27,11 @@ class Post extends Model
     return $this->belongsToMany(Tag::class);
   }
 
+  public function comments()
+  {
+    return $this->hasMany(Comment::class);
+  }
+
   public function related(int $limit = 3)
   {
     return Post::query()
