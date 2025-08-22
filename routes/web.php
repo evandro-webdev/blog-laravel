@@ -10,11 +10,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
-Route::get('/profile', [ProfileController::class, 'myProfile'])->middleware('auth');
-Route::get('/user/{user}', [ProfileController::class, 'show']);
-Route::patch('/profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/user/{user}', [ProfileController::class, 'show']);
 
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterUserController::class, 'create']);
@@ -26,15 +24,14 @@ Route::middleware('guest')->group(function () {
 Route::delete('/logout', [SessionController::class, 'destroy']);
 
 Route::middleware('auth')->group(function () {
+  Route::get('/profile', [ProfileController::class, 'myProfile']);
+  Route::patch('/profile', [ProfileController::class, 'update']);
+
   Route::post('/user/{user}/follow', [FollowController::class, 'store']);
   Route::delete('/user/{user}/follow', [FollowController::class, 'destroy']);
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
   Route::get('/dashboard', [AdminController::class, 'dashboard']);
-  Route::get('/posts/create', [PostController::class, 'create']);
-  Route::post('/posts', [PostController::class, 'store']);
-  Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
-  Route::patch('/posts/{post}', [PostController::class, 'update']);
-  Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+  Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
