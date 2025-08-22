@@ -37,4 +37,16 @@ class CommentController extends Controller
 
     return redirect()->route('posts.show', $comment->post);
   }
+
+  public function destroy(Comment $comment)
+  {
+    if(Auth::id() !== $comment->user_id){
+      abort(403, 'Ação não autorizada.');
+    }
+
+    $post = $comment->post;
+    $comment->delete();
+
+    return redirect()->route('posts.show', $post);
+  }
 }
