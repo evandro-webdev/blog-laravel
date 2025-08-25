@@ -15,12 +15,17 @@ class CommentController extends Controller
       'content' => ['required', 'string', 'max:1000']
     ]);
 
-    $post->comments()->create([
+    $comment = $post->comments()->create([
       'user_id' => Auth::id(),
       'content' => $attributes['content']
     ]);
 
-    return redirect()->route('posts.show', $post);
+    $html = view('components.blog.comment', compact('comment'))->render();
+
+    return response()->json([
+      'html' => $html,
+      'id' => $comment->id
+    ]);
   }
 
   public function update(Comment $comment)
@@ -35,7 +40,10 @@ class CommentController extends Controller
     
     $comment->update($attributes);
 
-    return redirect()->route('posts.show', $comment->post);
+    return response()->json([
+      'message' => 'Comentário atualizado com sucesso!',
+      'content' => $comment->content
+    ]);
   }
 
   public function destroy(Comment $comment)
@@ -47,6 +55,9 @@ class CommentController extends Controller
     $post = $comment->post;
     $comment->delete();
 
-    return redirect()->route('posts.show', $post);
+    return response()->json([
+      'message' => 'Comentário deletado com sucesso',
+      'content' => $comment->content
+    ]);
   }
 }
