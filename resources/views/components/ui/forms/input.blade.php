@@ -11,7 +11,7 @@
 ])
 
 @php
-  $baseClasses = 'w-full p-3 border rounded-md outline-none bg-white transition-colors block';
+  $baseClasses = 'w-full p-3 border rounded-md outline-none bg-white transition-colors block resize-none';
 
   $variantClasses = [
     'default' => 'border-gray-300 focus:border-gray-500 focus:ring-1 focus:ring-gray-500',
