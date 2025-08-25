@@ -1,4 +1,4 @@
-<div class="flex gap-3" 
+<div id="comment-{{ $comment->id }}" class="flex gap-3" 
   x-data="{ 
     editing: false, 
     content: '{{ addslashes($comment->content) }}',
@@ -10,7 +10,7 @@
     :alt="$comment->user->name"
   />
 
-  <article class="p-4 rounded-md bg-gray-50 border border-gray-200 flex-1 space-y-3">
+  <article id="comment-{{ $comment->id }}" class="p-4 rounded-md bg-gray-50 border border-gray-200 flex-1 space-y-3">
 
     <header class="flex items-center justify-between">
       <div class="flex items-center gap-2">

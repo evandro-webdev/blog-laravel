@@ -84,7 +84,10 @@
         "
         @delete-comment.window="
           axios.delete('/comments/' + $event.detail.id)
-            .then(() => $dispatch('notify', 'Comentário excluído!'))
+            .then(() => {
+              document.getElementById('comment-' + $event.detail.id).remove();
+              $dispatch('notify', 'Comentário excluído!');
+            })
             .catch(() => $dispatch('notify', 'Erro ao excluir comentário'));
         "
         class="space-y-6"
