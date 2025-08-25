@@ -8,11 +8,9 @@
     <div class="grid gap-2">
       <x-ui.panel>
         <div class="flex flex-col items-center">
-          <x-profile.avatar 
-            :src="Auth::user()->profile_pic"
-            :alt="Auth::user()->name"
-            size="w-24 h-24"
-          />
+
+          <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-24 h-24"/>
+
           <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
   
           <div class="w-full flex justify-around">
@@ -33,9 +31,9 @@
       <x-ui.panel>
         <h3 class="mb-6 font-bold text-gray-800">Estatísticas de leitura</h3>
         <div class="space-y-2">
-          <x-ui.icon-item icon="users-gray" label="Seguindo" value="{{ $user->following_count }}"/>
-          <x-ui.icon-item icon="user-gray" label="Seguidores" value="{{ $user->followers_count }}" data-followers-count/>
-          <x-ui.icon-item icon="comment-gray" label="Comentários" value="{{ $user->comments_count }}"/>
+          <x-ui.icon-item icon="users-gray" label="Seguindo" value="{{ $user->getFollowingCount() }}"/>
+          <x-ui.icon-item icon="user-gray" label="Seguidores" value="{{ $user->getFollowersCount() }}"/>
+          <x-ui.icon-item icon="comment-gray" label="Comentários" value="{{ $user->getCommentsCount() }}"/>
           <x-ui.icon-item icon="star-gray" label="Membro desde" value="{{ $user->created_at->year }}"/>
         </div>
       </x-ui.panel>

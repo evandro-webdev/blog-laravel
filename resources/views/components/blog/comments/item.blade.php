@@ -5,10 +5,7 @@
     menuOpen: false
 }">
 
-  <x-profile.avatar 
-    :src="$comment->user->profile_pic"
-    :alt="$comment->user->name"
-  />
+  <x-profile.avatar :user="$comment->user"/>
 
   <article id="comment-{{ $comment->id }}" class="p-4 rounded-md bg-gray-50 border border-gray-200 flex-1 space-y-3">
 
@@ -23,30 +20,32 @@
         </time>
       </div>
 
-      <div class="relative" @click.away="menuOpen=false">
-        <button @click="menuOpen=!menuOpen" 
-          class="p-1 rounded hover:bg-gray-100" 
-          aria-label="Opções do comentário">
-            <img src="{{ asset('images/icons/dots.svg') }}" class="w-4 h-4" alt="Mais opções">
-        </button>
+      @if (Auth::id() === $comment->user_id)
+        <div class="relative" @click.away="menuOpen=false">
+          <button @click="menuOpen=!menuOpen" 
+            class="p-1 rounded hover:bg-gray-100" 
+            aria-label="Opções do comentário">
+              <img src="{{ asset('images/icons/dots.svg') }}" class="w-4 h-4" alt="Mais opções">
+          </button>
 
-        <div x-show="menuOpen" x-cloak 
-          class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-md z-10">
-            <button @click="editing=true; menuOpen=false"
-              class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100">
-                Editar
-            </button>
-            <button @click="
-                if(confirm('Excluir comentário?')) {
-                  $dispatch('delete-comment', { id: {{ $comment->id }} });
-                }
-                menuOpen=false
-              "
-              class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50">
-                Excluir
-            </button>
+          <div x-show="menuOpen" x-cloak 
+            class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-md z-10">
+              <button @click="editing=true; menuOpen=false"
+                class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100">
+                  Editar
+              </button>
+              <button @click="
+                  if(confirm('Excluir comentário?')) {
+                    $dispatch('delete-comment', { id: {{ $comment->id }} });
+                  }
+                  menuOpen=false
+                "
+                class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50">
+                  Excluir
+              </button>
+          </div>
         </div>
-      </div>
+      @endif
     </header>
 
     <div>

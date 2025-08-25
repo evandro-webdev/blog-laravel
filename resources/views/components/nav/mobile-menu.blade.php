@@ -5,16 +5,16 @@
   </div>
 
   <div class="border-t border-gray-300 pt-4 pb-3">
-    <div class="flex items-center px-5">
-      <x-profile.avatar 
-        :src="Auth::user()->profile_pic"
-        :alt="Auth::user()->name"
-      />
-      <div class="ml-3">
-        <div class="text-base/5 font-medium text-gray-900">Evandro</div>
-        <div class="text-sm font-medium text-gray-500">evandro@example.com</div>
+    @auth
+      <div class="flex items-center px-5">
+        <x-profile.avatar :user="Auth::user()"/>
+
+        <div class="ml-3">
+          <div class="text-base/5 font-medium text-gray-900">{{ Auth::user()->name }}</div>
+          <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
+        </div>
       </div>
-    </div>
+    @endauth
     <div class="mt-3 space-y-1 px-2">
       <x-nav.mobile-link href="/profile">Perfil</x-nav.mobile-link>
       <x-nav.mobile-link href="/dashboard">Dashboard</x-nav.mobile-link>

@@ -56,10 +56,7 @@
 
       <div class="p-6 rounded-md border border-gray-200 flex gap-3">
 
-        <x-profile.avatar 
-          :src="Auth::user()->profile_pic"
-          :alt="Auth::user()->name"
-        />
+        <x-profile.avatar :user="Auth::user()"/>
 
         <form 
           x-data
