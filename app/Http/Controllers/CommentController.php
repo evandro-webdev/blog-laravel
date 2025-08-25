@@ -20,7 +20,7 @@ class CommentController extends Controller
       'content' => $attributes['content']
     ]);
 
-    $html = view('components.blog.comment', compact('comment'))->render();
+    $html = view('components.blog.comments.item', compact('comment'))->render();
 
     return response()->json([
       'html' => $html,

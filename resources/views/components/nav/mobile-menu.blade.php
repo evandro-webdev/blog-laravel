@@ -6,9 +6,10 @@
 
   <div class="border-t border-gray-300 pt-4 pb-3">
     <div class="flex items-center px-5">
-      <div class="shrink-0">
-        <div class="w-8 h-8 rounded-full bg-gray-500"></div>
-      </div>
+      <x-profile.avatar 
+        :src="Auth::user()->profile_pic"
+        :alt="Auth::user()->name"
+      />
       <div class="ml-3">
         <div class="text-base/5 font-medium text-gray-900">Evandro</div>
         <div class="text-sm font-medium text-gray-500">evandro@example.com</div>

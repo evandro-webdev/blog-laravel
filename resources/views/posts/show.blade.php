@@ -42,14 +42,16 @@
 
   </section>
 
-
   <hr class="text-gray-200">
 
   <section class="w-full max-w-[960px] py-20 px-5 mx-auto" aria-label="Seção de comentários">
-    <div class="max-w-[700px] mx-auto space-y-6">
+    <div 
+      x-data="{ count: {{ $post->comments->count() }} }"
+      class="max-w-[700px] mx-auto space-y-6"
+    >
       
       <x-section-heading>
-        Comentários ({{ $post->comments->count() }})
+        Comentários (<span x-text="count"></span>)
       </x-section-heading>
 
       <div class="p-6 rounded-md border border-gray-200 flex gap-3">
@@ -59,11 +61,26 @@
           :alt="Auth::user()->name"
         />
 
-        <form action="{{ route('comments.store', $post) }}" method="POST" class="flex-1 space-y-4">
+        <form 
+          x-data
+          @submit.prevent="
+            axios.post('{{ route('comments.store', $post) }}', {
+              content: $refs.content.value
+            })
+            .then(res => {
+              $refs.content.value = '';
+              document.querySelector('#comments-list').insertAdjacentHTML('afterbegin', res.data.html);
+              count++;
+              $dispatch('notify', 'Comentário adicionado!');
+            })
+            .catch(() => $dispatch('notify', 'Erro ao enviar comentário'));
+          "
+          class="flex-1 space-y-4"
+        >
           @csrf
 
           <label for="content" class="sr-only">Comentário</label>
-          <x-ui.forms.input id="content" name="content" as="textarea" placeholder="Compartilhe sua opinião"/>
+          <x-ui.forms.input x-ref="content" name="content" as="textarea" placeholder="Compartilhe sua opinião"/>
 
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <span class="text-xs text-gray-500">
@@ -86,25 +103,28 @@
           axios.delete('/comments/' + $event.detail.id)
             .then(() => {
               document.getElementById('comment-' + $event.detail.id).remove();
+              count--;
               $dispatch('notify', 'Comentário excluído!');
             })
             .catch(() => $dispatch('notify', 'Erro ao excluir comentário'));
         "
+        id="comments-list"
         class="space-y-6"
       >
         @foreach ($post->comments as $comment)
-          <x-blog.comment :$comment/>
+          <x-blog.comments.item :$comment/>
         @endforeach
       </div>
+
+      <x-ui.toast/>
     </div>
   </section>
 
-
-  {{-- <section class="max-w-[960px] py-20 px-5 mx-auto">
+  <section class="max-w-[960px] py-20 px-5 mx-auto">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @foreach ($relatedPosts as $post)
         <x-blog.post.card :$post/>
       @endforeach
     </div>
-  </section> --}}
+  </section>
 </x-layout>

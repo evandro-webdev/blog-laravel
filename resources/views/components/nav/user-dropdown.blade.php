@@ -12,7 +12,10 @@
           id="user-menu-button"
         >
           <span class="sr-only">Abrir menu do usuário</span>
-          <div class="w-8 h-8 rounded-full bg-gray-500"></div>
+          <x-profile.avatar 
+            :src="Auth::user()->profile_pic"
+            :alt="Auth::user()->name"
+          />
         </button>
       </div>
 

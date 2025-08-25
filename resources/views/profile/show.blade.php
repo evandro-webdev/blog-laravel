@@ -8,9 +8,11 @@
     <div class="grid gap-2">
       <x-ui.panel>
         <div class="flex flex-col items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200">
-            <img src="" alt="">
-          </div>
+          <x-profile.avatar 
+            :src="Auth::user()->profile_pic"
+            :alt="Auth::user()->name"
+            size="w-24 h-24"
+          />
           <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
   
           <div class="w-full flex justify-around">
