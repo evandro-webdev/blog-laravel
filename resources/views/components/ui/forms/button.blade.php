@@ -32,7 +32,7 @@
     ],
     'neutral' => [
       'filled' => 'border border-gray-600 bg-gray-600 text-white hover:bg-gray-700',
-      'outline' => 'border border-gray-600 text-gray-900 hover:bg-gray-600 hover:text-white'
+      'outline' => 'border border-gray-600 text-gray-900 hover:bg-gray-800 hover:text-white hover:border-gray-900'
     ]
   ];
 

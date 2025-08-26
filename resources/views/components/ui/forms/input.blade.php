@@ -7,7 +7,8 @@
   'as' => 'input',
   'variant' => 'default',
   'icon' => false,
-  'tip' => null
+  'tip' => null,
+  'xError' => null
 ])
 
 @php
@@ -32,6 +33,7 @@
   :$label 
   :$name
   :$tip
+  :x-error="$xError"
 >
   @if ($as === 'textarea')
     <textarea 
@@ -46,7 +48,7 @@
       id="{{ $id }}"
       name="{{ $name }}"
       value="{{ $value }}"
-      {{ $attributes->merge(['class' => $inputClasses]) }} 
+      {{ $attributes->except(['x-error'])->merge(['class' => $inputClasses]) }}
     />
   @endif
 </x-ui.forms.field>

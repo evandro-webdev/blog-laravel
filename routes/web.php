@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
@@ -25,8 +26,9 @@ Route::middleware('guest')->group(function () {
 Route::delete('/logout', [SessionController::class, 'destroy']);
 
 Route::middleware('auth')->group(function () {
-  Route::get('/profile', [ProfileController::class, 'myProfile']);
-  Route::patch('/profile', [ProfileController::class, 'update']);
+  Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.myProfile');
+  Route::put('/profile', [ProfileController::class, 'update']);
+  Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
 
   Route::post('/user/{user}/follow', [FollowController::class, 'store']);
   Route::delete('/user/{user}/follow', [FollowController::class, 'destroy']);

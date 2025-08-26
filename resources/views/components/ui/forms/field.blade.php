@@ -2,7 +2,8 @@
   'label',
   'name',
   'icon' => false,
-  'tip' => null
+  'tip' => null,
+  'xError' => null
 ])
 
 <div class="relative flex-1">
@@ -19,6 +20,14 @@
 
     @if ($tip)
       <x-ui.forms.field-tip :$tip />
+    @endif
+
+    <!-- Erro do Laravel (server-side) -->
+    <x-ui.forms.error :error="$errors->first($name)"/>
+    
+    <!-- Erro do Alpine.js (client-side) -->
+    @if($xError)
+      <x-ui.forms.error x-show="{{ $xError }}" x-text="{{ $xError }}" />
     @endif
     
     <x-ui.forms.error :error="$errors->first($name)"/>
