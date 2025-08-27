@@ -22,14 +22,12 @@
       <x-ui.forms.field-tip :$tip />
     @endif
 
-    <!-- Erro do Laravel (server-side) -->
+    <!-- Erro do backend -->
     <x-ui.forms.error :error="$errors->first($name)"/>
     
-    <!-- Erro do Alpine.js (client-side) -->
+    <!-- Erro do frontend -->
     @if($xError)
       <x-ui.forms.error x-show="{{ $xError }}" x-text="{{ $xError }}" />
     @endif
-    
-    <x-ui.forms.error :error="$errors->first($name)"/>
   </div>
 </div>

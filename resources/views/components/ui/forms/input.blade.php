@@ -40,7 +40,7 @@
       id="{{ $id }}"
       name="{{ $name }}"
       rows="4"
-      {{ $attributes->merge(['class' => $inputClasses]) }}
+      {{ $attributes->except(['x-error'])->merge(['class' => $inputClasses]) }}
     >{!! $value !!}</textarea>
   @else
     <input 
