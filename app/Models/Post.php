@@ -32,6 +32,11 @@ class Post extends Model
     return $this->hasMany(Comment::class);
   }
 
+  public function readers(): BelongsToMany
+  {
+    return $this->belongsToMany(User::class, 'read_posts')->withPivot('created_at');
+  }
+
   public function related(int $limit = 3)
   {
     return Post::query()

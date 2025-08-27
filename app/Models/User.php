@@ -36,7 +36,12 @@ class User extends Authenticatable
     return $this->hasMany(Post::class);
   }
 
-  public function comments()
+  public function readPosts(): BelongsToMany
+  {
+    return $this->belongsToMany(Post::class, 'read_posts')->withPivot('created_at');
+  }
+
+  public function comments(): HasMany
   {
     return $this->hasMany(Comment::class);
   }
