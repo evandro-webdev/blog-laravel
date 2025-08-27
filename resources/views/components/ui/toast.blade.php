@@ -1,9 +1,21 @@
 @props([
-  'icon' => null
+  'icon' => null,
+  'position' => 'center-bottom',
 ])
 
 @php
   $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
+
+  $positions = [
+    'right-top'    => 'top-5 right-5',
+    'right-bottom' => 'bottom-5 right-5',
+    'left-top'     => 'top-5 left-5',
+    'left-bottom'  => 'bottom-5 left-5',
+    'center-top'   => 'top-5 left-1/2 transform -translate-x-1/2',
+    'center-bottom'=> 'bottom-5 left-1/2 transform -translate-x-1/2',
+  ];
+
+  $positionClass = $positions[$position];
 @endphp
 
 <div 
@@ -15,7 +27,7 @@
   "
   x-show="show"
   id="toast"
-  class="w-full max-w-xs p-4 rounded-lg fixed bottom-5 right-5 flex items-center justify-between text-gray-500 bg-white shadow-sm" 
+  class="w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} flex items-center justify-between text-gray-500 bg-white shadow-sm" 
   role="alert"
   x-transition:enter="transform ease-out duration-300 transition"
   x-transition:enter-start="translate-y-2 opacity-0"
