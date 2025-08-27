@@ -1,6 +1,5 @@
 @props([
-  'defaultTab' => 'overview',
-  'class' => 'mt-6'
+  'defaultTab' => 'overview'
 ])
 
 <div 
@@ -14,9 +13,9 @@
   }"
   x-init="updateUrl()"
   x-effect="updateUrl()"
-  {{ $attributes->merge(['class' => $class]) }}
+  {{ $attributes->merge(['class']) }}
 >
-  <div class="sm:w-max p-1 rounded bg-gray-100 flex flex-wrap">
+  <div class="p-1 rounded bg-gray-100 flex flex-wrap">
     {{ $tabs }}
   </div>
       

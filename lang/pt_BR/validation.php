@@ -35,7 +35,7 @@ return [
     'can'                  => 'O campo :attribute contém valores não autorizado.',
     'confirmed'            => 'O campo :attribute de confirmação não confere.',
     'contains'             => 'O campo :attribute está faltando um valor obrigatório.',
-    'current_password'     => 'A senha está incorreta.',
+    'current_password'     => 'A senha atual está incorreta.',
     'date'                 => 'O campo :attribute deve ser uma data válida.',
     'date_equals'          => 'O campo :attribute deve ser uma data igual a :date.',
     'date_format'          => 'O campo :attribute não corresponde ao formato :format.',
