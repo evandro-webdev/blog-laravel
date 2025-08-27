@@ -104,47 +104,34 @@
           x-error="errors.current"
           placeholder="Digite sua senha atual"
         />
-        {{-- <x-ui.forms.error :error="$errors->first($name)"/> --}}
 
-        <x-ui.forms.input x-model="fields.new" type="password" name="password" x-error="errors.new" placeholder="Digite sua nova senha"/>
-        <x-ui.forms.input x-model="fields.confirm" type="password" name="password_confirmation" x-error="errors.confirm" placeholder="Confirme sua nova senha"/>
+        <x-ui.forms.input 
+          x-model="fields.new" 
+          type="password" name="password" 
+          x-error="errors.new" 
+          placeholder="Digite sua nova senha"
+        />
+
+        <x-ui.forms.input 
+          x-model="fields.confirm" 
+          type="password" 
+          name="password_confirmation" 
+          x-error="errors.confirm" 
+          placeholder="Confirme sua nova senha"
+        />
       </div>
-      <x-ui.forms.button type="button" @click="submit($event)">Salvar</x-ui.forms.button>
+      <x-ui.forms.button 
+        type="button" 
+        @click="submit($event)"
+      >
+        <span x-show="!loading">Salvar</span>
+        <x-ui.spinner x-show="loading"/>
+      </x-ui.forms.button>
     </form>
+
+    <x-ui.flash :message="session('success')" />
+    <x-ui.toast position="center-top"/>
   </x-ui.panel>
 </div>
 
-<script>
-  function passwordForm(initial){
-    return {
-      fields: { ...initial },
-      errors: {},
-
-      validate() {
-        this.errors = {};
-
-        if(!this.fields.current){
-          this.errors.current = 'Digite sua senha atual';
-        }
-
-        if(!this.fields.new){
-          this.errors.new = 'Digite sua nova senha';
-        }else if(this.fields.new.length < 6){
-          this.errors.new = 'A nova senha precisa ter pelo menos 6 caracteres';          
-        }
-
-        if(this.fields.new !== this.fields.confirm){
-          this.errors.confirm = 'A confirmação de senha não confere';
-        }
-
-        return Object.keys(this.errors).length === 0;
-      },
-
-      submit(event){
-        if (this.validate()) {
-          event.target.closest("form").submit();
-        }
-      }
-    }
-  }
-</script>
+<script src="{{ Vite::asset('resources/js/validations/password.js') }}"></script>
