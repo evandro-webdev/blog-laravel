@@ -1,44 +1,41 @@
 <x-layout>
   <x-section>
-    <x-page-heading 
-      :title="$isOwnProfile ? 'Meu perfil' : $user->name" 
-      :subtitle="$isOwnProfile ? 'Confira ou atualize as informações da sua conta' : 'Perfil público de ' . $user->name"
-    />
-
-    <div class="grid gap-2">
-      <x-ui.panel>
-        <div class="flex flex-col items-center">
-
-          <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-24 h-24"/>
-
-          <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
+    <div class="grid md:grid-cols-3 gap-2">
+      <div class="space-y-2 md:col-span-1">
+        <x-ui.panel>
+          <div class="flex flex-col items-center">
   
-          <div class="w-full flex justify-around">
-            <div class="text-center">
-              <span class="text-xl font-bold text-blue-600">{{ $stats['posts_read'] ?? 22 }}</span>
-              <p class="text-sm text-gray-500">Posts lidos</p>
+            <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-24 h-24"/>
+  
+            <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
+    
+            <div class="w-full flex justify-around">
+              <div class="text-center">
+                <span class="text-xl font-bold text-blue-600">{{ $stats['posts_read'] ?? 22 }}</span>
+                <p class="text-sm text-gray-500">Posts lidos</p>
+              </div>
+              <div class="text-center">
+                <span class="text-xl font-bold text-blue-600">{{ $stats['posts_saved'] ?? 22 }}</span>
+                <p class="text-sm text-gray-500">Posts salvos</p>
+              </div>
             </div>
-            <div class="text-center">
-              <span class="text-xl font-bold text-blue-600">{{ $stats['posts_saved'] ?? 22 }}</span>
-              <p class="text-sm text-gray-500">Posts salvos</p>
-            </div>
+  
+            <x-ui.follow-button :$user/>
           </div>
+        </x-ui.panel>
+  
+        <x-ui.panel>
+          <h3 class="mb-6 font-bold text-gray-800">Estatísticas de leitura</h3>
+          <div class="space-y-2">
+            <x-ui.icon-item icon="users-gray" label="Seguindo" value="{{ $user->getFollowingCount() }}"/>
+            <x-ui.icon-item icon="user-gray" label="Seguidores" value="{{ $user->getFollowersCount() }}"/>
+            <x-ui.icon-item icon="comment-gray" label="Comentários" value="{{ $user->getCommentsCount() }}"/>
+            <x-ui.icon-item icon="star-gray" label="Membro desde" value="{{ $user->created_at->year }}"/>
+          </div>
+        </x-ui.panel>
+      </div>
 
-          <x-ui.follow-button :$user/>
-        </div>
-      </x-ui.panel>
-
-      <x-ui.panel>
-        <h3 class="mb-6 font-bold text-gray-800">Estatísticas de leitura</h3>
-        <div class="space-y-2">
-          <x-ui.icon-item icon="users-gray" label="Seguindo" value="{{ $user->getFollowingCount() }}"/>
-          <x-ui.icon-item icon="user-gray" label="Seguidores" value="{{ $user->getFollowersCount() }}"/>
-          <x-ui.icon-item icon="comment-gray" label="Comentários" value="{{ $user->getCommentsCount() }}"/>
-          <x-ui.icon-item icon="star-gray" label="Membro desde" value="{{ $user->created_at->year }}"/>
-        </div>
-      </x-ui.panel>
-
-      <x-ui.tab-container :default-tab="$isOwnProfile ? 'data' : 'posts'">
+      <x-ui.tab-container :default-tab="$isOwnProfile ? 'data' : 'posts'" class="md:col-span-2">
         <x-slot:tabs>
           @if($isOwnProfile)
             <x-ui.tab value="data" x-model="tab">Dados</x-ui.tab>
