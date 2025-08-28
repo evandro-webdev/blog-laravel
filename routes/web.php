@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostReadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SettingsController;
@@ -36,6 +37,9 @@ Route::middleware('auth')->group(function () {
   Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
   Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
   Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+  Route::post('/posts/{post}/read', [PostReadController::class, 'store'])->name('posts.read.store');
+  Route::delete('/posts/{post}/read', [PostReadController::class, 'destroy'])->name('posts.read.destroy');
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
