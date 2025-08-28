@@ -40,9 +40,11 @@
       {!! $post->content !!}
     </article>
 
+    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200">
+      <x-ui.read-button :$post/>
+    </div>
   </section>
 
-  <hr class="text-gray-200">
 
   <section class="w-full max-w-[960px] py-20 px-5 mx-auto" aria-label="Seção de comentários">
     <div 
@@ -125,3 +127,5 @@
     </div>
   </section>
 </x-layout>
+
+<script src="{{ Vite::asset('resources/js/components/read-button.js') }}"></script>
