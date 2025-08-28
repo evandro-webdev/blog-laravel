@@ -37,6 +37,11 @@ class Post extends Model
     return $this->belongsToMany(User::class, 'read_posts')->withPivot('created_at');
   }
 
+  public function savedBy(): BelongsToMany
+  {
+    return $this->belongsToMany(User::class, 'saved_posts');
+  }
+
   public function markAsRead(User $user)
   {
     $this->readers()->syncWithoutDetaching([
