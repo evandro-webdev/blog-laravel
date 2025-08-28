@@ -3,11 +3,14 @@
   'size' => 'md',
   'href' => null,
   'outline' => false,
-  'type' => 'submit'
+  'type' => 'submit',
+  'icon' => null
 ])
 
 @php
-  $baseClasses = 'rounded-md font-medium cursor-pointer block text-center transition-colors duration-200';
+  $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
+
+  $baseClasses = 'rounded-md font-medium cursor-pointer block text-center flex items-center gap-2 transition-colors duration-200';
 
   $sizeStyles = [
     'xs' => 'px-2 py-1 text-xs',
@@ -44,10 +47,16 @@
 
 @if ($href)
   <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
+    @if ($icon)
+      <img src="{{ $iconUrl }}" alt="" class="inline-block h-[1.4em] w-[1.4em]">
+    @endif
+    <span>{{ $slot }}</span>
   </a>
 @else
   <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
+    @if ($icon)
+      <img src="{{ $iconUrl }}" alt="" class="inline-block h-[1.4em] w-[1.4em]">
+    @endif
+    <span>{{ $slot }}</span>
   </button>
 @endif
