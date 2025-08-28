@@ -37,6 +37,18 @@ class Post extends Model
     return $this->belongsToMany(User::class, 'read_posts')->withPivot('created_at');
   }
 
+  public function markAsRead(User $user)
+  {
+    $this->readers()->syncWithoutDetaching([
+      $user->id => ['created_at' => now()]
+    ]);
+  }
+
+  public function markAsUnread(User $user)
+  {
+    $this->readers()->detach($user->id);
+  }
+
   public function related(int $limit = 3)
   {
     return Post::query()
