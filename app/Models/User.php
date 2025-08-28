@@ -46,6 +46,16 @@ class User extends Authenticatable
     return $this->belongsToMany(Post::class, 'saved_posts');
   }
 
+  public function savePost(Post $post)
+  {
+    return $this->savedPosts()->syncWithoutDetaching([$post->id]);
+  }
+
+  public function unsavePost(Post $post)
+  {
+    return $this->savedPosts()->detach($post->id);
+  }
+
   public function comments(): HasMany
   {
     return $this->hasMany(Comment::class);
