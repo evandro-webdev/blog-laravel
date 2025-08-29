@@ -53,8 +53,8 @@
           @if($isOwnProfile)
             <x-profile.tabs.data :$user/>
             <x-profile.tabs.read :$user/>
-            {{--<x-profile.tabs.saved :$user/>
-            <x-profile.tabs.notifications :$user/> --}}
+            <x-profile.tabs.saved :$user/>
+            {{--<x-profile.tabs.notifications :$user/> --}}
           @else
             {{-- <x-profile.tabs.posts :$user/>
             <x-profile.tabs.activity :$user/>
