@@ -40,11 +40,13 @@
       {!! $post->content !!}
     </article>
 
-    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200">
-      <x-ui.read-button :$post/>
+    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200 flex items-center gap-2">
+      @auth
+        <x-ui.read-button :$post/>
+        <x-ui.save-button :$post/>
+      @endauth
     </div>
   </section>
-
 
   <section class="w-full max-w-[960px] py-20 px-5 mx-auto" aria-label="Seção de comentários">
     <div 
@@ -129,3 +131,4 @@
 </x-layout>
 
 <script src="{{ Vite::asset('resources/js/components/read-button.js') }}"></script>
+<script src="{{ Vite::asset('resources/js/components/save-button.js') }}"></script>
