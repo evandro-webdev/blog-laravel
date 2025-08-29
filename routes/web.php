@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\SavedPostController;
 
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/posts/{post}/read', [PostReadController::class, 'store'])->name('posts.read.store');
   Route::delete('/posts/{post}/read', [PostReadController::class, 'destroy'])->name('posts.read.destroy');
+
+  Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save.store');
+  Route::delete('/posts/{post}/save', [SavedPostController::class, 'destroy'])->name('posts.save.destroy');
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
