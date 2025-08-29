@@ -6,8 +6,8 @@
       @foreach ($user->readPosts as $post)
         <div class="py-4 border-b-1 space-y-1 border-b-gray-200">
           <h3 class="text-gray-800">{{ $post->title }}</h3>
-          <time datetime="{{ $post->created_at }}" class="block mb-1 text-sm text-gray-500">
-            Lido em {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
+          <time datetime="{{ $post->pivot->created_at }}" class="block text-sm text-gray-500">
+            Lido em {{ $post->pivot->created_at->translatedFormat('d \d\e F, Y') }}
           </time>
         </div>
       @endforeach
