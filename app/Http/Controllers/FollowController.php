@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserFollowed;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,7 @@ class FollowController extends Controller
     }
 
     $currentUser->following()->attach($user->id);
+    event(new UserFollowed($currentUser, $user));
 
     return response()->json([
       'message' => 'Usuário seguido com sucesso',
