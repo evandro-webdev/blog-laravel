@@ -17,7 +17,55 @@
         </div>
 
         @auth
-          <x-nav.user-dropdown/>
+          <div class="flex items-center">
+            <div x-data="{ notificationsOpen: false }" class="relative">
+              <button 
+                @click="notificationsOpen = !notificationsOpen; if(notificationsOpen) markAsRead()" 
+                @click.away="notificationsOpen = false"
+                x-cloak
+                class="p-2 rounded-full cursor-pointer hover:bg-blue-50 transition-colors relative"
+              >
+                <span class="w-4 h-4 rounded-full text-xs font-bold text-white bg-blue-600 absolute top-1">{{ Auth::user()->notifications->whereNull('read_at')->count() }}</span>
+                <x-icon.bell class="w-6 h-6 text-blue-600" stroke="1.5"/>
+              </button>
+
+              <div 
+                x-show="notificationsOpen" 
+                x-transition
+                class="w-80 rounded-md absolute top-16 right-0 bg-white shadow-md ring-1 ring-black/5 origin-top-right"
+              >
+                <div class="py-2 px-3 border-b border-gray-100 text-sm font-medium text-gray-800 flex justify-between items-center">
+                  <p>Notificações</p>
+                  @if(Auth::user()->notifications->whereNull('read_at')->count() > 0)
+                    <x-ui.badge pill small>
+                      {{ Auth::user()->notifications->whereNull('read_at')->count() }} novas
+                    </x-ui.badge>
+                  @endif
+                </div>
+
+                <div class="max-h-80 overflow-y-auto">
+                  @forelse (Auth::user()->notifications as $notification)
+                    <div class="p-3 flex gap-2 hover:bg-blue-50 transition-colors">
+                      <x-profile.avatar :user="$notification->actor" />
+                      <div class="flex flex-col gap-1">
+                        <a href="#" class="text-sm font-medium text-gray-800">
+                          {{ $notification->data['message'] }}
+                        </a>
+                        <time class="text-xs text-gray-600" datetime="{{ $notification->created_at }}">
+                          {{ $notification->created_at->diffForHumans() }}
+                        </time>
+                      </div>
+                    </div>
+                  @empty
+                    <div class="p-4 text-sm text-gray-500 text-center">
+                      Nenhuma notificação
+                    </div>
+                  @endforelse
+                </div>
+              </div>
+            </div>
+            <x-nav.user-dropdown/>
+          </div>
         @endauth
 
         @guest
@@ -34,3 +82,9 @@
     <x-nav.mobile-menu/>
   </nav>
 </div>
+
+<script>
+  function markAsRead() {
+    fetch('/notifications/read', { method: 'POST', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' } });
+  }
+</script>
