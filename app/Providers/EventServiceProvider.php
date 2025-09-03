@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\CommentAdded;
 use App\Events\PostPublished;
+use App\Events\PostSaved;
 use App\Events\UserFollowed;
 use App\Listeners\CreateCommentAddedNotification;
 use App\Listeners\CreateFollowNotification;
 use App\Listeners\CreatePostPublishedNotification;
+use App\Listeners\CreatePostSavedNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -22,5 +24,8 @@ class EventServiceProvider extends ServiceProvider
     CommentAdded::class => [
       CreateCommentAddedNotification::class
     ],
+    PostSaved::class => [
+      CreatePostSavedNotification::class
+    ]
   ];
 }
