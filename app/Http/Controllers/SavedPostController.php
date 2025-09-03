@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostSaved;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ class SavedPostController extends Controller
   public function store(Post $post)
   {
     Auth::user()->savePost($post);
+
+    event(new PostSaved($post, Auth::user()));
 
     return response()->json([
       'message' => 'Post salvo',
