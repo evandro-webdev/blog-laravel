@@ -1,51 +1,25 @@
-<div class="hidden md:block">
-  <div class="ml-4 flex items-center md:ml-6">
-    <div
-      class="relative ml-3"
-      onmouseenter="clearTimeout(window.dropdownTimeout); showDropdown()" 
-      onmouseleave="hideDropdownWithDelay()"
-    >
-      <div>
-        <button
-          type="button"
-          class="relative flex max-w-xs items-center rounded-full cursor-pointer bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-          id="user-menu-button"
-        >
-          <span class="sr-only">Abrir menu do usuário</span>
-          <x-profile.avatar :user="Auth::user()"/>
-        </button>
-      </div>
+<div x-data="{ dropdownOpen: false }" class="relative">
+  <button
+    @click="dropdownOpen = !dropdownOpen"
+    @click.away="dropdownOpen = false"
+    x-cloak
+    type="button"
+    class="relative rounded-full cursor-pointer"
+  >
+    <x-profile.avatar :user="Auth::user()"/>
+  </button>
 
-      <div
-        id="user-dropdown"
-        class="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-md ring-1 ring-black/5 origin-top-right
-               opacity-0 scale-95 pointer-events-none
-               transition-all duration-200 ease-in-out overflow-hidden"
-      >
-        <a href="/profile" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Perfil</a>
-        <a href="/admin/dashboard" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Dashboard</a>
-        <form action="/logout" method="POST">
-          @csrf
-          @method('DELETE')
-          <button class="block w-full text-left px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 transition-colors">Sair</button>
-        </form>
-      </div>
-    </div>
+  <div
+    x-show="dropdownOpen"
+    x-transition
+    class="w-40 rounded-md bg-white shadow-md absolute top-16 right-0"
+  >
+    <a href="/profile" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Perfil</a>
+    <a href="/admin/dashboard" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Dashboard</a>
+    <form action="/logout" method="POST">
+      @csrf
+      @method('DELETE')
+      <button class="block w-full text-left px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 transition-colors">Sair</button>
+    </form>
   </div>
 </div>
-
-<script>
-  const dropdown = document.getElementById('user-dropdown');
-
-  function showDropdown() {
-    dropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-    dropdown.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
-  }
-
-  function hideDropdownWithDelay() {
-    window.dropdownTimeout = setTimeout(() => {
-      dropdown.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
-      dropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-    }, 200);
-  }
-</script>
