@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostReadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save.store');
   Route::delete('/posts/{post}/save', [SavedPostController::class, 'destroy'])->name('posts.save.destroy');
+
+  Route::post('/notifications/read', [NotificationController::class, 'markAllAsRead']);
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {

@@ -63,12 +63,17 @@ class User extends Authenticatable
 
   public function notifications(): HasMany
   {
-    return $this->hasMany(Notification::class, 'user_id');
+    return $this->hasMany(Notification::class, 'user_id')->latest();
   }
 
-  public function unreadNotifications()
+  public function unreadNotifications(): HasMany
   {
     return $this->notifications()->whereNull('read_at'); 
+  }
+
+  public function markAllNotificationsAsRead(): void
+  {
+    $this->unreadNotifications()->update(['read_at' => now()]);
   }
 
   public function followers(): BelongsToMany
