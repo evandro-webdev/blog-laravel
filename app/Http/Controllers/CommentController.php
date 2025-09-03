@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentAdded;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -20,8 +21,10 @@ class CommentController extends Controller
       'content' => $attributes['content']
     ]);
 
+    event(new CommentAdded($comment));
+    
     $html = view('components.blog.comments.item', compact('comment'))->render();
-
+    
     return response()->json([
       'html' => $html,
       'id' => $comment->id
