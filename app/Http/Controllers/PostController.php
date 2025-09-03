@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostPublished;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
@@ -47,6 +48,10 @@ class PostController extends Controller
     $post = Auth::user()->posts()->create(Arr::except($attributes, 'tags'));
     $postTagService->addTags($post, $request->tags);
 
+    if($post->published){
+      event(new PostPublished($post));
+    }
+
     $this->logActivity('Post publicado', $post);
 
     return redirect('/admin/dashboard?tab=posts');
@@ -67,6 +72,10 @@ class PostController extends Controller
 
     $post->update(Arr::except($attributes, 'tags'));
     $postTagService->syncTags($post, $request->tags);
+
+    if($post->published){
+      event(new PostPublished($post));
+    }
 
     $this->logActivity('Post atualizado', $post);
 
