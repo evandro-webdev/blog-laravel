@@ -117,7 +117,7 @@ class PostController extends Controller
   private function handleImageUpload(PostRequest $request, ?Post $post = null){
     if($request->hasFile('image')){
       if($post && $post->image){
-        Storage::delete($post->image);
+        Storage::disk('public')->delete($post->image);
       }
 
       return $request->file('image')->store('posts', 'public');
