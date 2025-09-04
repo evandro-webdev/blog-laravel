@@ -31,6 +31,7 @@ Route::delete('/logout', [SessionController::class, 'destroy']);
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.myProfile');
   Route::put('/profile', [ProfileController::class, 'update']);
+  Route::patch('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
   Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
 
   Route::post('/user/{user}/follow', [FollowController::class, 'store']);
