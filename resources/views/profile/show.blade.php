@@ -5,7 +5,19 @@
         <x-ui.panel>
           <div class="flex flex-col items-center">
   
-            <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-24 h-24"/>
+            <div class="relative">
+              <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
+
+              <form id="uploadForm" action="{{ route('profile.updatePicture') }}" method="POST" enctype="multipart/form-data">
+                @method('PATCH')
+                @csrf
+                <input id="profile_pic" type="file" name="profile_pic" hidden  onchange="submitForm()">
+              </form>
+
+              <label for="profile_pic" class="p-2 rounded-full cursor-pointer absolute bottom-0 right-0 bg-blue-600">
+                <x-icon.camera class="w-5 h-5 text-white" stroke="1.5"/>
+              </label>
+            </div>
   
             <h3 class="my-3 font-bold text-gray-800">{{ $user->name }}</h3>
     
@@ -67,3 +79,9 @@
 </x-layout>
 
 <script src="{{ Vite::asset('resources/js/components/follow-button.js') }}"></script>
+
+<script>
+  function submitForm(){
+    document.querySelector('#uploadForm').submit();
+  }
+</script>
