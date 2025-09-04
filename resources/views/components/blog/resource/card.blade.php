@@ -1,6 +1,6 @@
 <x-ui.panel>
   <div class="flex items-center justify-between">
-    <img src="{{ asset('images/icons/download-outline.svg') }}" class="w-7 h-7" alt="">
+    <x-icon.download class="w-6 h-6 text-blue-600" stroke="1.5"/>
     <x-ui.badge small :pill="false">Resource kit</x-ui.badge>
   </div>
   <div class="space-y-2">
@@ -8,6 +8,7 @@
     <p class="text-sm line-clamp-2 text-gray-500">Essential tools and resources for modern DevOps practices</p>
   </div>
   <a href="#" class="font-medium text-blue-600 flex items-center gap-2">
-    Download now <img src="{{ asset('images/icons/download-outline.svg') }}" class="w-5 h-5" alt="">
+    <span>Download now</span>
+    <x-icon.download class="w-4 h-4 text-blue-600" stroke="2"/>
   </a>
 </x-ui.panel>
