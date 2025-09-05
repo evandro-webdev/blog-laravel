@@ -20,7 +20,7 @@
       }
     }
   }" 
-  class="relative"
+  class="relative z-50"
 >
   <button 
     @click="notificationsOpen = !notificationsOpen; if({{ $unreadCount }} > 0) markAsRead()"" 

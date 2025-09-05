@@ -4,7 +4,7 @@
 
     <div class="space-y-2">
       @foreach ($user->savedPosts as $post)
-        <div class="py-4 border-b-1 space-y-1 border-b-gray-200">
+        <div class="py-4 border-b-1 space-y-1 border-b-gray-200 last:border-b-0">
           <h3 class="text-gray-800">{{ $post->title }}</h3>
           <div class="text-sm text-gray-500 flex gap-1">
             <span class="text-blue-500">{{ Str::ucfirst($post->category->name) }}</span>

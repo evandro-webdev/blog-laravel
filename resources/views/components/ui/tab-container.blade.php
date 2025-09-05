@@ -19,7 +19,7 @@
     {{ $tabs }}
   </div>
       
-  <div class="mt-6">
+  <div>
     {{ $content }}
   </div>
 </div>
