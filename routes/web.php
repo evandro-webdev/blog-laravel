@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.myProfile');
   Route::put('/profile', [ProfileController::class, 'update']);
   Route::patch('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
+  
   Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
+  Route::patch('/settings/preferences', [SettingsController::class, 'updatePreferences'])->name('settings.updatePreferences');
 
   Route::post('/user/{user}/follow', [FollowController::class, 'store']);
   Route::delete('/user/{user}/follow', [FollowController::class, 'destroy']);

@@ -48,4 +48,16 @@ class SettingsController extends Controller
       ->back()
       ->with('success', 'Senha atualizada com sucesso!');
   }
+
+  public function updatePreferences(Request $request)
+  {
+    $attributes = $request->validate([
+      'is_private' => ['required', 'boolean']
+    ]);
+
+    $user = $request->user();
+    $user->update($attributes);
+
+    return back()->with('status', 'Preferências atualizadas com sucesso.');
+  }
 }
