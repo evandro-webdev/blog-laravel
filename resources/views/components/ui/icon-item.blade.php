@@ -1,20 +1,23 @@
 @props([
   'icon',
   'label',
-  'value',
-  'iconClass' => '',
-  'labelClass' => 'text-sm font-medium',
+  'value' => null,
+  'iconClass' => 'w-5 h-5',
+  'labelClass' => 'text-sm',
   'valueClass' => 'font-bold',
+  'stroke' => '1.5'
 ])
 
-@php
-  $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
-@endphp
-
-<div {{ $attributes->merge(['class' => 'flex items-center justify-between text-gray-800']) }}>
-    <div class="flex items-center gap-2">
-        <img src="{{ $iconUrl }}" class="{{ $iconClass }}" alt="{{ $label }}">
-        <span class="{{ $labelClass }}">{{ $label }}</span>
-    </div> 
+<div {{ $attributes->merge(['class' =>  'flex items-center justify-between text-gray-600']) }}>
+  <div class="flex items-center gap-2">
+    <x-dynamic-component 
+      :component="'icon.' . $icon"
+      class="{{ $iconClass }}"
+      :stroke="$stroke"
+    />
+    <span class="{{ $labelClass }}">{{ $label }}</span>
+  </div>
+  @if ($value)
     <span class="{{ $valueClass }}">{{ $value }}</span>
+  @endif
 </div>

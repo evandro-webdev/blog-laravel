@@ -48,14 +48,20 @@
 @if ($href)
   <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
     @if ($icon)
-      <img src="{{ $iconUrl }}" alt="" class="inline-block h-[1.4em] w-[1.4em]">
+      <x-dynamic-component 
+        :component="'icon.' . $icon"
+        :stroke="1.5"
+      />
     @endif
     <span>{{ $slot }}</span>
   </a>
 @else
   <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
     @if ($icon)
-      <img src="{{ $iconUrl }}" alt="" class="inline-block h-[1.4em] w-[1.4em]">
+      <x-dynamic-component 
+        :component="'icon.' . $icon"
+        :stroke="1.5"
+      />
     @endif
     <span>{{ $slot }}</span>
   </button>
