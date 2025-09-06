@@ -1,9 +1,9 @@
 <div x-show="tab === 'overview'" class="space-y-6">
   <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-    <x-ui.panel>
+    <x-ui.panel class="space-y-4">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Total Posts</span>
-        <img src="{{ asset('images/icons/doc.svg') }}" class="w-4">
+        <x-ui.icons.doc class="text-blue-600"/>
       </div>
       <div>
         <span class="text-3xl font-bold text-gray-800">{{ $statistics['totalPosts'] }}</span>
@@ -11,10 +11,10 @@
       </div>
     </x-ui.panel>
     
-    <x-ui.panel>
+    <x-ui.panel class="space-y-4">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Total Views</span>
-        <img src="{{ asset('images/icons/eye.svg') }}" class="w-4">
+        <x-ui.icons.eye class="text-blue-600"/>
       </div>
       <div>
         <span class="text-3xl font-bold text-gray-800">{{ $statistics['totalViews'] }}</span>
@@ -22,10 +22,10 @@
       </div>
     </x-ui.panel>
 
-    <x-ui.panel>
+    <x-ui.panel class="space-y-4">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Inscrições</span>
-        <img src="{{ asset('images/icons/users.svg') }}" class="w-4">
+        <x-ui.icons.users class="text-blue-600"/>
       </div>
       <div>
         <span class="text-3xl font-bold text-gray-800">573</span>
@@ -33,10 +33,10 @@
       </div>
     </x-ui.panel>
 
-    <x-ui.panel>
+    <x-ui.panel class="space-y-4">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Engajamento</span>
-        <img src="{{ asset('images/icons/trending-up.svg') }}" class="w-4">
+        <x-ui.icons.arrow-trending class="text-blue-600"/>
       </div>
       <div>
         <span class="text-3xl font-bold text-gray-800">12.4K</span>

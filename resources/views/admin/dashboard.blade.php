@@ -7,7 +7,7 @@
           <x-ui.forms.button href="/admin/posts/create">Novo post</x-ui.forms.button>
         </div>
         
-        <x-ui.tab-container default-tab="overview">
+        <x-ui.tab-container default-tab="overview" class="space-y-2">
           <x-slot:tabs>
             <x-ui.tab value="overview" x-model="tab">Visão</x-ui.tab>
             <x-ui.tab value="posts" x-model="tab">Posts</x-ui.tab>

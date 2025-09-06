@@ -49,7 +49,7 @@
   <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
     @if ($icon)
       <x-dynamic-component 
-        :component="'icon.' . $icon"
+        :component="'ui.icons.' . $icon"
         :stroke="1.5"
       />
     @endif
@@ -59,7 +59,7 @@
   <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
     @if ($icon)
       <x-dynamic-component 
-        :component="'icon.' . $icon"
+        :component="'ui.icons.' . $icon"
         :stroke="1.5"
       />
     @endif

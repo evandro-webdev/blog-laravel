@@ -11,7 +11,7 @@
 <div {{ $attributes->merge(['class' =>  'flex items-center justify-between text-gray-600']) }}>
   <div class="flex items-center gap-2">
     <x-dynamic-component 
-      :component="'icon.' . $icon"
+      :component="'ui.icons.' . $icon"
       class="{{ $iconClass }}"
       :stroke="$stroke"
     />
