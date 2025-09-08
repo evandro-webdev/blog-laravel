@@ -1,4 +1,4 @@
-<div x-show="tab === 'overview'" class="space-y-6">
+<div x-show="tab === 'overview'" class="space-y-2">
   <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
     <x-ui.panel class="space-y-4">
       <div class="flex justify-between">
@@ -44,6 +44,7 @@
       </div>
     </x-ui.panel>
   </div>
+
   <x-ui.panel>
     <div class="space-y-1 mb-6">
       <h3 class="text-2xl font-bold text-gray-900">Atividades recentes</h3>
@@ -53,7 +54,7 @@
       @foreach ($groupedActivities as $label => $activityGroup)
         <h3 class="font-medium text-gray-800">{{ $label }}</h3>
         @foreach ($activityGroup as $activity)
-          <x-blog.dashboard.activity-item :$activity/>
+          <x-blog.dashboard.tabs.overview.activity-item :$activity/>
         @endforeach
         <hr class="text-gray-200">
       @endforeach
@@ -66,7 +67,7 @@
     @php
       $maxCount = $popularCategories->max('posts_count');
     @endphp
-    <h3 class="text-2xl font-bold text-gray-900">Popular Categories</h3>
+    <h3 class="mb-4 text-2xl font-bold text-gray-900">Popular Categories</h3>
 
     <ul class="space-y-4">
       @foreach ($popularCategories as $category)

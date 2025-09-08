@@ -25,14 +25,15 @@
           <button @click="menuOpen=!menuOpen" 
             class="p-1 rounded hover:bg-gray-100" 
             aria-label="Opções do comentário">
-              <img src="{{ asset('images/icons/dots.svg') }}" class="w-4 h-4" alt="Mais opções">
+              <x-ui.icons.ellipsis class="text-gray-700"/>
           </button>
 
           <div x-show="menuOpen" x-cloak 
             class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-md z-10">
               <button @click="editing=true; menuOpen=false"
-                class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100">
-                  Editar
+                class="w-full px-3 py-2 text-left text-blue-600 flex items-center gap-2 hover:bg-blue-50">
+                  <x-ui.icons.edit/>
+                  <span class="font-medium">Editar</span>
               </button>
               <button @click="
                   if(confirm('Excluir comentário?')) {
@@ -40,8 +41,9 @@
                   }
                   menuOpen=false
                 "
-                class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50">
-                  Excluir
+                class="w-full px-3 py-2 text-left text-red-600 flex items-center gap-2 hover:bg-red-50">
+                  <x-ui.icons.trash/>
+                  <span class="font-medium">Excluir</span>
               </button>
           </div>
         </div>

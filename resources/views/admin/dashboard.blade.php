@@ -1,8 +1,8 @@
 <x-layout>
-  <div class="bg-gray-50 flex-1">
+  <div class="flex-1">
     <x-section>
       <div class="max-w-[1280px] mx-auto">
-        <div class="sm:flex items-center justify-between">
+        <div class="mb-4 sm:flex items-center justify-between">
           <x-page-heading title="Dashboard" subtitle="Gerencie o conteúdo do seu blog e veja estatísticas." class="!mb-4"/>
           <x-ui.forms.button href="/admin/posts/create">Novo post</x-ui.forms.button>
         </div>

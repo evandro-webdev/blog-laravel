@@ -10,7 +10,7 @@
 @php
   $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
 
-  $baseClasses = 'rounded-md font-medium cursor-pointer block text-center flex items-center gap-2 transition-colors duration-200';
+  $baseClasses = 'rounded-md font-medium cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
 
   $sizeStyles = [
     'xs' => 'px-2 py-1 text-xs',

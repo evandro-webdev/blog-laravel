@@ -23,7 +23,7 @@ class CommentController extends Controller
 
     event(new CommentAdded($comment));
     
-    $html = view('components.blog.comments.item', compact('comment'))->render();
+    $html = view('components.blog.comments.comment-item', compact('comment'))->render();
     
     return response()->json([
       'html' => $html,

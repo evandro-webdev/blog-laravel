@@ -15,9 +15,10 @@
   x-effect="updateUrl()"
   {{ $attributes->merge(['class']) }}
 >
-  <div class="p-1 rounded bg-gray-100 flex flex-wrap">
+  <div class="p-1 rounded-md border-1 border-gray-200 bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-1">
     {{ $tabs }}
   </div>
+
       
   <div>
     {{ $content }}

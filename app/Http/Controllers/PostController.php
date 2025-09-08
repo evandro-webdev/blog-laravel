@@ -85,6 +85,7 @@ class PostController extends Controller
   public function destroy(Post $post)
   {
     $post->delete();
+    Storage::disk('public')->delete($post->image);
 
     $this->logActivity('Post deletado', $post);
 
