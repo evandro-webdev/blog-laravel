@@ -2,7 +2,7 @@
 
 <div class="flex items-start gap-6">
   <span class="text-lg font-black text-blue-300">{{ $index + 1 }}</span>
-  <x-blog.post.thumbnail size="small" link="{{ $post->image }}"/>
+  <x-blog.post.post-thumbnail size="small" link="{{ $post->image }}"/>
   
   <div class="space-y-2">
     @foreach ($post->tags as $tag)

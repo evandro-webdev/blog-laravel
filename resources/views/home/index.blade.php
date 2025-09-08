@@ -36,7 +36,7 @@
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @foreach ($recentPosts as $post)
-        <x-blog.post.card :$post/>
+        <x-blog.post.post-card :$post/>
       @endforeach
     </div>
   </x-section>
@@ -46,7 +46,7 @@
 
     <div class="grid gap-6 sm:grid-cols-2">
       @foreach ($mostReadPostsThisWeek as $index => $post)
-        <x-blog.post.list-item :$post :$index/>
+        <x-blog.post.post-list-item :$post :$index/>
       @endforeach
     </div>
   </x-section>
@@ -56,7 +56,7 @@
 
     <div class="grid gap-6 md:grid-cols-3">
       @foreach ($recentPosts as $post)
-        <x-blog.post.card compact :$post/>
+        <x-blog.post.post-card compact :$post/>
       @endforeach
     </div>
   </x-section>
@@ -65,9 +65,9 @@
     <x-section-heading link="#">Noticias de tecnologia</x-section-heading>
 
     <div class="grid gap-6">
-      <x-blog.news.card/>
-      <x-blog.news.card/>
-      <x-blog.news.card/>
+      <x-blog.news.news-card/>
+      <x-blog.news.news-card/>
+      <x-blog.news.news-card/>
     </div>
   </x-section>
 
@@ -75,9 +75,9 @@
     <x-section-heading link="#">Recursos gratuitos</x-section-heading>
 
     <div class="grid gap-6 md:grid-cols-3">
-      <x-blog.resource.card/>
-      <x-blog.resource.card/>
-      <x-blog.resource.card/>
+      <x-blog.resource.resource-card/>
+      <x-blog.resource.resource-card/>
+      <x-blog.resource.resource-card/>
     </div>
   </x-section>
 

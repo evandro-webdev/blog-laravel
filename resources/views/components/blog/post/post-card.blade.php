@@ -1,7 +1,7 @@
 @props(['compact' => false, 'post'])
 
 <div class="rounded-lg border border-gray-100 overflow-hidden">
-  <x-blog.post.thumbnail :showBadge="$compact" :link="$post->image" :category="$post->category"/>
+  <x-blog.post.post-thumbnail :showBadge="$compact" :link="$post->image" :category="$post->category"/>
 
   <div class="p-6 space-y-8">
 

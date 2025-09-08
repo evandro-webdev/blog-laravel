@@ -53,7 +53,7 @@
 
     <div class="max-h-80 overflow-y-auto">
       @forelse (Auth::user()->notifications as $notification)
-        <x-nav.notification-item :$notification/>
+        <x-nav.notifications.notification-item :$notification/>
       @empty
         <div class="p-4 text-sm text-gray-500 text-center">
           Nenhuma notificação

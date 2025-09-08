@@ -18,7 +18,7 @@
 
         @auth
           <div class="flex items-center gap-2">
-            <x-nav.notifications-dropdown/>
+            <x-nav.notifications.notifications-dropdown/>
             <x-nav.user-dropdown/>
           </div>
         @endauth

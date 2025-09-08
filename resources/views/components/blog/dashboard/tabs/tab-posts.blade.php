@@ -7,7 +7,7 @@
     <div class="rounded border border-gray-200 overflow-x-auto">
       <table class="w-full text-sm table-auto">
         <thead class="border-b border-gray-200">
-          <tr class="text-left text-gray-500 font-bold">
+          <tr class="text-left text-gray-600">
             <th class="px-3 py-5">Título</th>
             <th class="px-3 py-5 hidden md:table-cell">Categoria</th>
             <th class="px-3 py-5 hidden sm:table-cell">Data</th>
@@ -18,15 +18,15 @@
         </thead>
         <tbody>
           @foreach ($posts as $post)
-            <tr class="border-b border-gray-100 text-gray-900">
-              <td class="px-3 py-5 truncate">
+            <tr class="odd:bg-gray-50">
+              <td class="px-3 py-5 truncate text-gray-800">
                 {{ $post->title }}
               </td>
-              <th class="px-3 py-3 hidden text-left md:table-cell">{{ $post->category->name }}</th>
-              <td class="px-3 py-5 hidden sm:table-cell text-gray-500 whitespace-nowrap">
+              <th class="px-3 py-3 hidden font-medium text-left text-gray-600 md:table-cell">{{ $post->category->name }}</th>
+              <td class="px-3 py-5 hidden sm:table-cell text-gray-600 whitespace-nowrap">
                 {{ $post->created_at->format('d/m/Y') }}
               </td>
-              <td class="px-3 py-5 hidden lg:table-cell text-gray-500 whitespace-nowrap">
+              <td class="px-3 py-5 hidden lg:table-cell text-gray-600 whitespace-nowrap">
                 {{ $post->views }}
               </td>
               <td class="px-3 py-5 whitespace-nowrap">
@@ -42,16 +42,16 @@
               <td class="px-3 py-5 text-right whitespace-nowrap">
                 <div class="flex justify-end gap-4">
                   <a href="/posts/{{ $post->slug }}" target="_blank">
-                    <img src="{{ asset('images/icons/eye.svg') }}" class="w-5">
+                    <x-ui.icons.eye class="text-gray-600"/>
                   </a>
                   <a href="/admin/posts/{{ $post->id }}/edit">
-                    <img src="{{ asset('images/icons/edit.svg') }}" class="w-5">
+                    <x-ui.icons.edit class="text-gray-600"/>
                   </a>
                   <form action="/admin/posts/{{ $post->id }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="cursor-pointer">
-                      <img src="{{ asset('images/icons/trash.svg') }}" class="w-5">
+                      <x-ui.icons.trash class="text-gray-600"/>
                     </button>
                   </form>
                 </div>

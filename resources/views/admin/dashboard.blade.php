@@ -15,9 +15,9 @@
           </x-slot:tabs>
 
           <x-slot:content>
-            <x-blog.tabs.overview :$statistics :$groupedActivities :$activities :$popularCategories/>
-            <x-blog.tabs.posts :$posts/>
-            <x-blog.tabs.drafts/>
+            <x-blog.dashboard.tabs.tab-overview :$statistics :$groupedActivities :$activities :$popularCategories/>
+            <x-blog.dashboard.tabs.tab-posts :$posts/>
+            <x-blog.dashboard.tabs.tab-drafts/>
           </x-slot:content>
         </x-ui.tab-container>
       </div>

@@ -113,7 +113,7 @@
         class="space-y-6"
       >
         @foreach ($post->comments as $comment)
-          <x-blog.comments.item :$comment/>
+          <x-blog.comments.comment-item :$comment/>
         @endforeach
       </div>
 
@@ -124,7 +124,7 @@
   <section class="max-w-[960px] py-20 px-5 mx-auto">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @foreach ($relatedPosts as $post)
-        <x-blog.post.card :$post/>
+        <x-blog.post.post-card :$post/>
       @endforeach
     </div>
   </section>

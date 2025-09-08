@@ -97,10 +97,10 @@
 
         <x-slot:content>
           @if($isOwnProfile)
-            <x-profile.tabs.data :$user/>
-            <x-profile.tabs.read :$user/>
-            <x-profile.tabs.saved :$user/>
-            <x-profile.tabs.preferences :$user/>
+            <x-profile.tabs.tab-data :$user/>
+            <x-profile.tabs.tab-read :$user/>
+            <x-profile.tabs.tab-saved :$user/>
+            <x-profile.tabs.tab-preferences :$user/>
           @else
             {{-- <x-profile.tabs.posts :$user/>
             <x-profile.tabs.activity :$user/>
