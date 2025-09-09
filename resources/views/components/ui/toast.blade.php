@@ -54,6 +54,6 @@
     @click="show=false"
   >
     <span class="sr-only">Fechar</span>
-    <img src="{{ asset('images/icons/close-blue.svg') }}" alt="Botão X de fechar">
+    <x-ui.icons.close class="text-blue-600"/>
   </button>
 </div>

@@ -14,11 +14,7 @@
       : 'border border-blue-600 text-blue-600 hover:bg-blue-100'"
   >
     <template x-if="!loading">
-      <img 
-        :src="isSaved ? '{{ asset('images/icons/unsave.svg') }}' : '{{ asset('images/icons/save.svg') }}'" 
-        alt=""
-        class="inline-block h-[1.4em] w-[1.4em]"
-      />
+      <x-ui.icons.save class="isSaved ? 'text-blue-600' : 'text-white'"/>
     </template>
 
     <x-ui.spinner x-show="loading" class="w-4 h-4"/>

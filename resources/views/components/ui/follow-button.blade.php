@@ -2,7 +2,6 @@
   @unless (Auth::id() === $user->id)   
     <div 
       x-data="followButton({{ $user->id }}, {{ Auth::user()->isFollowing($user->id) ? 'true' : 'false' }}, '{{ csrf_token() }}')"
-      class="mt-3"
     >
       <button 
         @click="toggleFollow" 

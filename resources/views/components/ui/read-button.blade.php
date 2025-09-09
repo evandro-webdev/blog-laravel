@@ -14,11 +14,7 @@
       : 'border border-blue-600 text-blue-600 hover:bg-blue-100'"
   >
     <template x-if="!loading">
-      <img 
-        :src="isRead ? '{{ asset('images/icons/unsee.svg') }}' : '{{ asset('images/icons/see.svg') }}'" 
-        alt=""
-        class="w-4 h-4"
-      />
+      <x-ui.icons.eye class="isRead ? 'text-blue-600' : 'text-white'"/>
     </template>
 
     <x-ui.spinner x-show="loading" class="w-4 h-4"/>

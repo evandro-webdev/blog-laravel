@@ -1,23 +1,29 @@
 @props([
-  'size' => 'base', 
+  'link',      
   'showBadge' => false,
-  'link',
-  'category' => null
+  'category' => null,
 ])
 
 @php
-  $sizeClasses = [
-    'base' => 'h-48',
-    'small' => 'w-24 h-24 rounded-md'
-  ][$size];
-
-  $classes = "shrink-0 relative overflow-hidden $sizeClasses";
+  $containerClasses = 'shrink-0 relative overflow-hidden';
 @endphp
 
-<div {{ $attributes(['class' => $classes]) }}>
-  <img src="{{ $link }}" class="w-full h-full object-cover" alt="" loading="lazy">
+<div {{ $attributes->merge(['class' => $containerClasses]) }}>
+  <img 
+    src="{{ $link }}" 
+    class="w-full h-full object-cover" 
+    alt="{{ $attributes->get('alt', 'Imagem') }}" 
+    loading="lazy"
+  >
 
-  @if ($showBadge)
-    <x-ui.badge href="/categories/{{ strtolower($category->name) }}" class="absolute top-6 left-6" small variant="blue">{{ $category->name }}</x-ui.badge>
+  @if($showBadge && $category)
+    <x-ui.badge 
+      href="#" 
+      class="absolute top-4 left-4"
+      small
+      variant="blue"
+    >
+      {{ $category->name }}
+    </x-ui.badge>
   @endif
 </div>

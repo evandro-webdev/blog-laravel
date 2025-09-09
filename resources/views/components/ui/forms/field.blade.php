@@ -12,7 +12,10 @@
   @endif
 
   @if ($icon)
-    <img src="{{ asset('images/icons/'.$icon.'.svg') }}" class="absolute w-5 h-5 text-blue-400 transform -translate-y-1/2 left-3 top-1/2" alt="">
+    <x-dynamic-component 
+      :component="'ui.icons.' . $icon"
+      class="text-blue-600 absolute transform -translate-y-1/2 left-3 top-1/2"
+    />
   @endif
 
   <div>

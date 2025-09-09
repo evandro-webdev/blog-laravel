@@ -1,6 +1,9 @@
-@props(['title', 'subtitle'])
+@props([
+  'title',
+  'subtitle'
+])
 
-<div {{ $attributes->merge(['class' => 'mb-12 space-y-1']) }}>
-  <h1 class="text-3xl font-black text-gray-900 md:text-4xl lg:text-5xl">{{ $title }}</h1>
+<div {{ $attributes->merge(['class' => 'space-y-1']) }}>
+  <h1 class="text-2xl font-black text-gray-800 md:text-3xl lg:text-4xl">{{ $title }}</h1>
   <p class="text-gray-600">{{ $subtitle }}</p>
 </div>
