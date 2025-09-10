@@ -84,10 +84,10 @@
       <x-ui.tab-container :default-tab="$isOwnProfile ? 'data' : 'posts'" class="space-y-2 md:col-span-2">
         <x-slot:tabs>
           @if($isOwnProfile)
-            <x-ui.tab value="data" x-model="tab">Dados</x-ui.tab>
-            <x-ui.tab value="read" x-model="tab">Lidos ({{ $user->readPosts->count() }})</x-ui.tab>
-            <x-ui.tab value="saved" x-model="tab">Salvos ({{ $user->savedPosts->count() }})</x-ui.tab>
-            <x-ui.tab value="preferences" x-model="tab">Preferências</x-ui.tab>
+            <x-ui.tab value="data" x-model="tab" icon="user-data">Dados</x-ui.tab>
+            <x-ui.tab value="read" x-model="tab" icon="eye">Lidos ({{ $user->readPosts->count() }})</x-ui.tab>
+            <x-ui.tab value="saved" x-model="tab" icon="save">Salvos ({{ $user->savedPosts->count() }})</x-ui.tab>
+            <x-ui.tab value="preferences" x-model="tab" icon="preferences">Preferências</x-ui.tab>
           @else
             <x-ui.tab value="posts" x-model="tab">Posts</x-ui.tab>
             <x-ui.tab value="activity" x-model="tab">Atividade</x-ui.tab>

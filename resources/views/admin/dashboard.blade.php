@@ -9,9 +9,9 @@
         
         <x-ui.tab-container default-tab="overview" class="space-y-2">
           <x-slot:tabs>
-            <x-ui.tab value="overview" x-model="tab">Visão</x-ui.tab>
-            <x-ui.tab value="posts" x-model="tab">Posts</x-ui.tab>
-            <x-ui.tab value="drafts" x-model="tab">Rascunhos</x-ui.tab>
+            <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
+            <x-ui.tab value="posts" x-model="tab" icon="docs">Meus posts</x-ui.tab>
+            <x-ui.tab value="drafts" x-model="tab" icon="doc">Rascunhos</x-ui.tab>
           </x-slot:tabs>
 
           <x-slot:content>
