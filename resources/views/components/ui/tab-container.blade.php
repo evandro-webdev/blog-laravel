@@ -1,5 +1,5 @@
 @props([
-  'defaultTab' => 'overview'
+  'defaultTab' => 'personal-feed'
 ])
 
 <div 
@@ -13,11 +13,12 @@
   }"
   x-init="updateUrl()"
   x-effect="updateUrl()"
-  {{ $attributes->merge(['class']) }}
+  {{ $attributes->merge(['class' => 'flex-1']) }}
 >
-  <div class="p-1 rounded-md border-1 border-gray-200 bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-1">
-    {{ $tabs }}
-  </div>
+  <div class="p-1 rounded-md border border-gray-200 bg-white flex flex-wrap gap-1">
+  {{ $tabs }}
+</div>
+
 
       
   <div>
