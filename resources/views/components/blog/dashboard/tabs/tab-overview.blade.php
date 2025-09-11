@@ -1,6 +1,6 @@
 <div x-show="tab === 'overview'" class="space-y-2">
   <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-    <x-ui.panel class="space-y-4">
+    <x-ui.panel class="space-y-4 hover:bg-gray-50">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Total Posts</span>
         <x-ui.icons.doc class="text-blue-600"/>
@@ -11,7 +11,7 @@
       </div>
     </x-ui.panel>
     
-    <x-ui.panel class="space-y-4">
+    <x-ui.panel class="space-y-4 hover:bg-gray-50">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Total Views</span>
         <x-ui.icons.eye class="text-blue-600"/>
@@ -22,7 +22,7 @@
       </div>
     </x-ui.panel>
 
-    <x-ui.panel class="space-y-4">
+    <x-ui.panel class="space-y-4 hover:bg-gray-50">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Inscrições</span>
         <x-ui.icons.users class="text-blue-600"/>
@@ -33,7 +33,7 @@
       </div>
     </x-ui.panel>
 
-    <x-ui.panel class="space-y-4">
+    <x-ui.panel class="space-y-4 hover:bg-gray-50">
       <div class="flex justify-between">
         <span class="font-medium text-gray-900">Engajamento</span>
         <x-ui.icons.arrow-trending class="text-blue-600"/>
