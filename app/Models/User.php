@@ -97,4 +97,11 @@ class User extends Authenticatable
   {
     return $this->followers()->where('users.id', $userId)->exists();
   }
+
+  public function notFollowing()
+  {
+    return User::query()
+      ->where('id', '!=', $this->id)
+      ->whereNotIn('id', $this->following()->pluck('users.id'));
+  }
 }
