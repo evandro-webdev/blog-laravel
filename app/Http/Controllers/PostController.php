@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PostPublished;
-use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
-use App\Services\PostTagService;
-use App\Traits\LogsActivity;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Traits\LogsActivity;
+use App\Events\PostPublished;
+use App\Services\PostService;
+use App\Services\PostTagService;
+use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
   use LogsActivity;
+
+  protected PostService $postService;
+
+  public function __construct(PostService $postService)
+  {
+    $this->postService = $postService;
+  }
 
   public function index()
   {
@@ -28,7 +36,7 @@ class PostController extends Controller
 
   public function show(Post $post){
     $post->increment('views');
-    $relatedPosts = $post->related();
+    $relatedPosts = $this->postService->getRelatedPosts($post, 3);
 
     return view('posts.show', compact('post', 'relatedPosts'));
   }
