@@ -2,25 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
-use App\Models\Post;
+use App\Models\User;
+use App\Services\PostService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
-  public function index()
+  protected PostService $postService;
+
+  public function __construct(PostService $postService)
   {
-    $recentPosts = Post::latest()
-      ->take(6)
-      ->get();
+    $this->postService = $postService;
+  }
 
-    $mostReadPosts = Post::orderBy('views', 'DESC')
-      ->take(4)
-      ->get();
+  public function index(Request $request)
+  {
+    $user = Auth::user();
+    $usersToFollow = $this->getUsersToFollow($user);
+    $sort = $this->resolveSort($request, $user);
 
-    $mostReadPostsThisWeek = Post::mostViewedThisWeek()->get();
-      
-    $tags = Tag::all();
+    $postsFromFollowing = $this->postService->getFeed($user, $sort);
+    $popularPosts = $this->postService->getFeed(null, $sort);
 
-    return view('home.index', compact('recentPosts', 'mostReadPosts', 'mostReadPostsThisWeek', 'tags'));
+    return view('home.index', [
+      'usersToFollow' => $usersToFollow,
+      'user' => $user,
+      'postsFromFollowing' => $postsFromFollowing,
+      'popularPosts' => $popularPosts,
+      'sort' => $sort
+    ]);
+  }
+
+  private function getUsersToFollow(?User $user, int $limit = 5){
+    return $user 
+      ? $user->notFollowing()->limit(5)->get() 
+      : User::limit(5)->get();
+  }
+
+  private function resolveSort(Request $request, ?User $user): string
+  {
+    $default = $user ? 'recent' : 'popular';
+    return $request->query('sort', $default);
   }
 }
