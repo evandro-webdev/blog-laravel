@@ -1,101 +1,84 @@
 <x-layout>
-  <section class="py-20 px-5 bg-blue-50">
-    <div class="max-w-[640px] mx-auto">
-      <div class="text-center space-y-4">
-        <h1 class="text-5xl font-black text-blue-950 md:text-6xl">Descubra o futuro da tecnologia</h1>
-        <p class="text-lg font-medium text-blue-800 md:text-xl">
-          Insights, tutorials, and news from the cutting edge of tech innovation
-        </p>
-      </div>
+  <div class="bg-gray-50">
+    <x-section>
+      <x-page-heading 
+        title="{{ $user ? 'Bem vindo de volta, ' . $user->name : 'Bem vindo' }} " 
+        subtitle="Veja o que acontece na área de tecnologia"
+        class="mb-4"
+      />
+
+      <div class="flex flex-col gap-6 lg:flex-row">
+        <x-ui.tab-container class="space-y-4" default-tab="{{ $user ? 'personal-feed' : 'trending-feed' }}">
+          <x-slot:tabs>
+            <x-ui.tab value="personal-feed" x-model="tab" icon="users">Seguindo</x-ui.tab>
+            <x-ui.tab value="trending-feed" x-model="tab" icon="world">Em alta</x-ui.tab>
+          </x-slot:tabs>
+
+          <x-slot:content>
+            @auth
+              <x-home.tabs.tab-personal-feed :$sort :$postsFromFollowing/>
+            @else
+              <div class="p-6 text-center border border-gray-200 rounded bg-white flex flex-col items-center gap-4" x-show="tab === 'personal-feed'">
+                <p class="text-gray-600">Faça login para ver os posts de quem você segue.</p>
+                <x-ui.forms.button href="/login" small>Entrar</x-ui.forms.button>
+                <p class="text-sm text-gray-500">
+                  Ainda não tem conta?
+                  <a href="/register" class="text-blue-600 hover:underline">Cadastre-se</a>
+                </p>
+              </div>
+            @endauth
+            <x-home.tabs.tab-trending-feed :$sort :$popularPosts/>
+          </x-slot:content>
+        </x-ui.tab-container>
+
+        <div class="flex flex-col gap-6 lg:min-w-xs sm:flex-row lg:flex-col">
+          @auth
+            <x-ui.panel class="flex-1 sm:flex-0">
+              <div class="mb-6 flex items-center justify-between">
+                <h2 class="text-lg font-bold text-gray-800">Seguindo</h2>
+                <a href="#" class="text-sm text-blue-600 hover:underline">Ver todos</a>
+              </div>
+    
+              <div class="space-y-2">
+                @foreach ($user->following as $following)
+                  <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                    <x-profile.avatar :user="$following" size="w-10 h-10"/>
+                    <div class="flex flex-col">
+                      <span class="text-sm font-medium text-gray-800">{{ $following->name }}</span>
+                      <span class="text-xs text-gray-500">{{ $following->posts->count() }} posts</span>
+                    </div>
+                  </a>
+                @endforeach
+              </div>
+            </x-ui.panel>
+          @endauth
   
-      <form action="" class="mt-8 mb-16 flex gap-2">
-        <x-ui.forms.input name="search" placeholder="Procure artigos, topicos, ou autores..." variant="blue" icon="search"/>
-        <x-ui.forms.button>Buscar</x-ui.forms.button>
-      </form>
+          <x-ui.panel class="flex-1 sm:flex-0">
+            <div class="mb-6 flex items-center justify-between">
+              <h2 class="text-lg font-bold text-gray-800">Sugerido para você</h2>
+              <a href="#" class="text-sm text-blue-600 hover:underline">Mais</a>
+            </div>
   
-      <div class="flex item-center flex-wrap justify-center gap-2">
-        <x-ui.badge variant="white">Mais de 1.000 artigos</x-ui.badge>
-        <x-ui.badge variant="white">Atualizado diariamente</x-ui.badge>
-        <x-ui.badge variant="white">Especialistas</x-ui.badge>
-      </div>
-    </div>
-  </section>
-
-  <x-section compact>
-    <x-section-heading>Tópicos mais acessados</x-section-heading>
-
-    <div class="flex item-center flex-wrap gap-3">
-      @foreach ($tags as $tag)
-        <x-ui.badge href="/tags/{{ strtolower($tag->name) }}">{{ $tag->name }}</x-ui.badge> 
-      @endforeach
-    </div>
-  </x-section>
-
-  <x-section class="border-t border-gray-200">
-    <x-section-heading link="#">Artigos recentes</x-section-heading>
-
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @foreach ($recentPosts as $post)
-        <x-blog.post.post-card :$post/>
-      @endforeach
-    </div>
-  </x-section>
-
-  <x-section compact class="border-t border-gray-200">
-    <x-section-heading>Mais lidos da semana</x-section-heading>
-
-    <div class="grid gap-6 sm:grid-cols-2">
-      @foreach ($mostReadPostsThisWeek as $index => $post)
-        <x-blog.post.post-list-item :$post :$index/>
-      @endforeach
-    </div>
-  </x-section>
-
-  <x-section class="border-t border-gray-200">
-    <x-section-heading link="#">Escolha do editor</x-section-heading>
-
-    <div class="grid gap-6 md:grid-cols-3">
-      @foreach ($recentPosts as $post)
-        <x-blog.post.post-card compact :$post/>
-      @endforeach
-    </div>
-  </x-section>
-
-  <x-section class="border-t border-gray-200">
-    <x-section-heading link="#">Noticias de tecnologia</x-section-heading>
-
-    <div class="grid gap-6">
-      <x-blog.news.news-card/>
-      <x-blog.news.news-card/>
-      <x-blog.news.news-card/>
-    </div>
-  </x-section>
-
-  <x-section class="border-t border-gray-200">
-    <x-section-heading link="#">Recursos gratuitos</x-section-heading>
-
-    <div class="grid gap-6 md:grid-cols-3">
-      <x-blog.resource.resource-card/>
-      <x-blog.resource.resource-card/>
-      <x-blog.resource.resource-card/>
-    </div>
-  </x-section>
-
-  <x-section>
-    <div class="p-10 rounded-xl text-center bg-blue-50">
-      <div class="max-w-xl mx-auto">
-        <div class="space-y-4">
-          <h2 class="text-3xl font-black text-blue-900">Fique por dentro</h2>
-          <p class="text-blue-800">Get the latest articles, tutorials, and tech news delivered straight to your inbox.</p>
+            <div class="space-y-2">
+              @foreach ($usersToFollow as $user)
+                <div class="p-2 rounded-md cursor-pointer flex items-center justify-between gap-2 hover:bg-gray-100 transition-colors">
+                  <a href="{{ route('profile.show', $user) }}" class="cursor-pointer flex items-center gap-2">
+                    <x-profile.avatar :user="$user" size="w-10 h-10"/>
+                    <div class="flex flex-col">
+                      <span class="text-sm font-medium text-gray-800">{{ $user->name }}</span>
+                      <span class="text-xs text-gray-500">{{ $user->posts->count() }} posts</span>
+                    </div>
+                  </a>
+                  <x-ui.follow-button :$user/>
+                </div>
+              @endforeach
+            </div>
+          </x-ui.panel>
         </div>
-
-        <form action="" class="mt-8 mb-4 flex flex-col gap-3 md:flex-row">
-          <x-ui.forms.input name="email" placeholder="Digite seu email" variant="blue"/>
-          <x-ui.forms.button>Inscrever</x-ui.forms.button>
-        </form>
-
-        <p class="text-xs text-blue-600">By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.</p>
       </div>
-    </div>
-  </x-section>
+
+    </x-section>
+  </div>
 </x-layout>
+
+<script src="{{ Vite::asset('resources/js/components/follow-button.js') }}"></script>

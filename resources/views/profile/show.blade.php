@@ -89,9 +89,8 @@
             <x-ui.tab value="saved" x-model="tab" icon="save">Salvos ({{ $user->savedPosts->count() }})</x-ui.tab>
             <x-ui.tab value="preferences" x-model="tab" icon="preferences">Preferências</x-ui.tab>
           @else
-            <x-ui.tab value="posts" x-model="tab">Posts</x-ui.tab>
-            <x-ui.tab value="activity" x-model="tab">Atividade</x-ui.tab>
-            <x-ui.tab value="about" x-model="tab">Sobre</x-ui.tab>
+            <x-ui.tab value="posts" x-model="tab" icon="doc">Posts</x-ui.tab>
+            <x-ui.tab value="activity" x-model="tab" icon="user">Atividade</x-ui.tab>
           @endif
         </x-slot:tabs>
 
