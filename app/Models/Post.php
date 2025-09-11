@@ -54,28 +54,4 @@ class Post extends Model
   {
     $this->readers()->detach($user->id);
   }
-
-  public function related(int $limit = 3)
-  {
-    return Post::query()
-      ->where(function($query) {
-        $query->whereHas('tags', function($q) {
-          $q->whereIn('tags.id', $this->tags->pluck('id'));
-        })
-        ->orWhere('category_id', $this->category_id);
-      })
-      ->where('id', '!=', $this->id)
-      ->where('published', true)
-      ->latest()
-      ->take($limit)
-      ->get();
-  }
-
-  public function scopeMostViewedThisWeek($query, int $limit = 4)
-  {
-    return $query->where('published', true)
-              ->whereBetween('created_at', [Carbon::now()->subDays(7), Carbon::now()])
-              ->orderByDesc('views')
-              ->take($limit);
-  }
 }
