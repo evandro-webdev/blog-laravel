@@ -1,5 +1,5 @@
 @props([
-  'defaultTab' => 'personal-feed'
+  'defaultTab'
 ])
 
 <div 
@@ -16,10 +16,14 @@
   {{ $attributes->merge(['class' => 'flex-1']) }}
 >
   <div class="p-1 rounded-md border border-gray-200 bg-white flex flex-wrap gap-1">
-  {{ $tabs }}
-</div>
+    {{ $tabs }}
+  </div>
 
-
+  @isset($middle)
+    <div>
+      {{ $middle }}
+    </div>
+  @endisset
       
   <div>
     {{ $content }}
