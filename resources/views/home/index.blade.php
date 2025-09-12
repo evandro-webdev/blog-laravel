@@ -8,28 +8,46 @@
       />
 
       <div class="flex flex-col gap-6 lg:flex-row">
-        <x-ui.tab-container class="space-y-4" default-tab="{{ $user ? 'personal-feed' : 'trending-feed' }}">
-          <x-slot:tabs>
-            <x-ui.tab value="personal-feed" x-model="tab" icon="users">Seguindo</x-ui.tab>
-            <x-ui.tab value="trending-feed" x-model="tab" icon="world">Em alta</x-ui.tab>
-          </x-slot:tabs>
+        <div class="flex-1">
+          <div class="mb-4 flex border-b border-gray-200">
+            <a 
+              href="{{ request()->url() }}?tab=personal-feed&sort=recent" 
+              class="px-4 py-2 -mb-px border-b-2 font-medium text-sm
+                {{ $tab === 'personal-feed' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}"
+            >
+              Seguindo
+            </a>
 
-          <x-slot:content>
-            @auth
-              <x-home.tabs.tab-personal-feed :$sort :$postsFromFollowing/>
-            @else
-              <div class="p-6 text-center border border-gray-200 rounded bg-white flex flex-col items-center gap-4" x-show="tab === 'personal-feed'">
-                <p class="text-gray-600">Faça login para ver os posts de quem você segue.</p>
-                <x-ui.forms.button href="/login" small>Entrar</x-ui.forms.button>
-                <p class="text-sm text-gray-500">
-                  Ainda não tem conta?
-                  <a href="/register" class="text-blue-600 hover:underline">Cadastre-se</a>
-                </p>
-              </div>
-            @endauth
-            <x-home.tabs.tab-trending-feed :$sort :$popularPosts/>
-          </x-slot:content>
-        </x-ui.tab-container>
+            <a 
+              href="{{ request()->url() }}?tab=trending-feed&sort=popular" 
+              class="px-4 py-2 -mb-px border-b-2 font-medium text-sm
+                {{ $tab === 'trending-feed' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}"
+            >
+              Em alta
+            </a>
+          </div>
+
+          <div>
+            @if ($tab === 'personal-feed')
+              @auth
+                <x-home.tabs.tab-personal-feed :$sort :$posts/>
+              @else
+                <x-ui.panel class="flex flex-col items-center gap-4">
+                  <p class="text-gray-600">Faça login para ver os posts de quem você segue.</p>
+                  <x-ui.forms.button href="/login" small>Entrar</x-ui.forms.button>
+                  <p class="text-sm text-gray-500">
+                    Ainda não tem conta?
+                    <a href="/register" class="text-blue-600 hover:underline">Cadastre-se</a>
+                  </p>
+                </x-ui.panel>
+              @endauth
+            @endif
+
+            @if ($tab === 'trending-feed')
+              <x-home.tabs.tab-trending-feed :$sort :$posts/>
+            @endif
+          </div>
+        </div>
 
         <div class="flex flex-col gap-6 lg:min-w-xs sm:flex-row lg:flex-col">
           @auth

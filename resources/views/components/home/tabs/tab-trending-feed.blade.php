@@ -7,14 +7,14 @@
       </div>
       <x-ui.forms.select-filter 
         :$sort 
-        :options="['recent', 'popular', 'commented']"
+        :options="['popular', 'recent', 'commented']"
       />
     </div>
-    <span class="text-gray-600">{{ $popularPosts->count() }} posts</span>
+    <span class="text-gray-600">{{ $posts->count() }} posts</span>
   </div>
 
   <div class="space-y-4">
-    @foreach ($popularPosts as $post)
+    @foreach ($posts as $post)
       <div class="rounded-md overflow-hidden flex flex-col sm:flex-row ">
         <x-blog.post.post-thumbnail :link="$post->image" class="sm:w-1/3 sm:aspect-[4/3] object-cover"/>
         
