@@ -18,6 +18,18 @@
 
         @auth
           <div class="hidden md:flex items-center gap-2">
+            <button 
+              x-data="{ 
+                dark: false,
+                toggleTheme(){
+                  document.documentElement.classList.toggle('dark')
+                }
+              }" class="p-2 rounded-full cursor-pointer bg-blue-50"
+              @click="dark = !dark; toggleTheme()"
+            >
+              <x-ui.icons.sun class="w-6 h-6 text-blue-600" x-show="!dark"/>
+              <x-ui.icons.moon class="w-6 h-6 text-blue-600" x-show="dark"/>
+            </button>
             <x-nav.notifications.notifications-dropdown/>
             <x-nav.user-dropdown/>
           </div>
@@ -25,8 +37,8 @@
 
         @guest
           <div class="items-center gap-2 hidden md:flex">
-            <x-ui.forms.button href="/login">Entrar</x-ui.forms.button>
-            <x-ui.forms.button href="/register" outline>Criar conta</x-ui.forms.button>
+            <x-ui.forms.button href="/login" icon="enter" size="sm">Entrar</x-ui.forms.button>
+            <x-ui.forms.button href="/register" outline icon="user-plus" size="sm">Criar conta</x-ui.forms.button>
           </div>
         @endguest
 
