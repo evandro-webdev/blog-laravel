@@ -7,15 +7,15 @@
 
   <x-profile.avatar :user="$comment->user"/>
 
-  <article id="comment-{{ $comment->id }}" class="p-4 rounded-md bg-gray-50 border border-gray-200 flex-1 space-y-3">
+  <article id="comment-{{ $comment->id }}" class="p-4 space-y-3 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-1">
 
     <header class="flex items-center justify-between">
       <div class="flex items-center gap-2">
         <a href="{{ route('profile.show', $comment->user) }}" 
-           class="font-medium text-gray-800 hover:underline">
+           class="font-medium text-gray-800 dark:text-white">
           {{ $comment->user->name }}
         </a>
-        <time class="text-xs text-gray-600" datetime="{{ $comment->created_at }}">
+        <time class="text-xs text-gray-600 dark:text-gray-300" datetime="{{ $comment->created_at }}">
           {{ $comment->created_at->diffForHumans() }}
         </time>
       </div>
@@ -25,7 +25,7 @@
           <button @click="menuOpen=!menuOpen" 
             class="p-1 rounded hover:bg-gray-100" 
             aria-label="Opções do comentário">
-              <x-ui.icons.ellipsis class="text-gray-700"/>
+              <x-ui.icons.ellipsis class="text-gray-700 dark:text-gray-100"/>
           </button>
 
           <div x-show="menuOpen" x-cloak 
@@ -51,7 +51,7 @@
     </header>
 
     <div>
-      <p class="text-gray-700 text-sm leading-relaxed" 
+      <p class="text-sm text-gray-700 dark:text-gray-100 leading-relaxed" 
         x-show="!editing" 
         x-text="content"></p>
 

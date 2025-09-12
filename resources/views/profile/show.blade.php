@@ -1,9 +1,9 @@
-<x-layout>
+<x-layout class="dark:bg-gray-950">
   <x-section>
     <div class="grid md:grid-cols-3 gap-2">
       <div class="space-y-2 md:col-span-1">
         <x-ui.panel>
-          <div class="space-y-3 flex flex-col items-center">
+          <div class="space-y-4 flex flex-col items-center">
   
             <div class="relative">
               <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
@@ -22,22 +22,22 @@
             </div>
             
             <div class="space-y-1 text-center">
-              <h3 class="text-2xl font-bold text-gray-800">{{ $user->name }}</h3>
+              <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $user->name }}</h3>
               <x-ui.badge small variant="white">Desde {{ $user->created_at->year }}</x-ui.badge>
             </div>
 
             <div class="w-full flex justify-around">
               <div class="text-center">
-                <span class="text-xl font-bold text-blue-600">{{ $user->getFollowersCount() }}</span>
-                <p class="text-sm text-gray-500">Seguidores</p>
+                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->getFollowersCount() }}</span>
+                <p class="text-sm text-gray-500 dark:text-gray-100">Seguidores</p>
               </div>
               <div class="text-center">
-                <span class="text-xl font-bold text-blue-600">{{ $user->getFollowingCount() }}</span>
-                <p class="text-sm text-gray-500">Seguindo</p>
+                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->getFollowingCount() }}</span>
+                <p class="text-sm text-gray-500 dark:text-gray-100">Seguindo</p>
               </div>
               <div class="text-center">
-                <span class="text-xl font-bold text-blue-600">{{ $user->posts()->count() }}</span>
-                <p class="text-sm text-gray-500">Publicações</p>
+                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->posts()->count() }}</span>
+                <p class="text-sm text-gray-500 dark:text-gray-100">Publicações</p>
               </div>
             </div>
   
@@ -53,10 +53,10 @@
 
         @if (!$user->is_private || $isOwnProfile)
           <x-ui.panel>
-            <h3 class="mb-4 font-bold text-gray-800">Sobre</h3>
+            <h3 class="mb-4 font-bold text-gray-800 dark:text-white">Sobre</h3>
 
             <div class="space-y-4">
-              <p class="text-sm text-gray-800">{{ $user->bio }}</p>
+              <p class="text-sm text-gray-800 dark:text-gray-100">{{ $user->bio }}</p>
               <div class="space-y-3">
                 <x-ui.icon-item icon="local" label="{{ $user->city ?? 'Não informado' }}"/>
                 <x-ui.icon-item icon="calendar" label="Entrou em {{ $user->created_at->translatedFormat('d \d\e F, Y') }}"/>

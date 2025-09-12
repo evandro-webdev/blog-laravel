@@ -3,7 +3,7 @@
   'size' => 'w-10 h-10'
 ])
 
-<div class="{{ $size }} rounded-full border-1 border-blue-400 shrink-0 bg-blue-50 flex items-center justify-center text-blue-400 font-bold overflow-hidden">
+<div class="{{ $size }} rounded-full shrink-0 font-bold text-white overflow-hidden flex items-center justify-center bg-blue-500">
   @if(!empty($user->profile_pic))
     <img 
       src="{{ asset('storage/' . $user->profile_pic) }}" 

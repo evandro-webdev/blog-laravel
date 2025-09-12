@@ -1,17 +1,17 @@
-<x-layout>
+<x-layout class="dark:bg-gray-950">
   <section class="max-w-[960px] py-16 px-5 mx-auto">
   
     <header class="text-center max-w-[720px] mx-auto">
-      <time datetime="{{ $post->created_at }}" class="block mb-1 text-sm text-gray-500">
+      <time datetime="{{ $post->created_at }}" class="block mb-1 text-sm text-gray-500 dark:text-gray-300">
         Publicado em {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
       </time>
 
-      <h1 class="text-4xl font-bold text-gray-900 leading-tight">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
         {{ $post->title }}
       </h1>
 
       @if($post->excerpt)
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+        <p class="mt-4 text-lg text-gray-700 dark:text-gray-100 leading-relaxed">
           {{ $post->excerpt }}
         </p>
       @endif
@@ -19,7 +19,7 @@
       @if($post->tags->count())
         <div class="flex justify-center flex-wrap gap-2 mt-5">
           @foreach ($post->tags as $tag)
-            <x-ui.badge>{{ $tag->name }}</x-ui.badge>
+            <x-ui.badge small>{{ $tag->name }}</x-ui.badge>
           @endforeach
         </div>
       @endif
@@ -36,11 +36,11 @@
       </figure>
     @endif
 
-    <article class="max-w-[720px] mx-auto prose prose-lg prose-gray">
+    <article class="max-w-[720px] mx-auto prose prose-lg prose-gray dark:text-gray-100">
       {!! $post->content !!}
     </article>
 
-    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200 flex items-center gap-2">
+    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200 dark:border-gray-800 flex items-center gap-2">
       @auth
         <x-ui.read-button :$post/>
         <x-ui.save-button :$post/>
@@ -58,7 +58,7 @@
         Comentários (<span x-text="count"></span>)
       </x-section-heading>
 
-      <div class="p-6 rounded-md border border-gray-200 flex gap-3">
+      <x-ui.panel class="flex gap-2">
 
         <x-profile.avatar :user="Auth::user()"/>
 
@@ -84,14 +84,14 @@
           <x-ui.forms.input x-ref="content" name="content" as="textarea" placeholder="Compartilhe sua opinião"/>
 
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <span class="text-xs text-gray-500">
+            <span class="text-xs text-gray-500 dark:text-gray-200">
               Seja respeitoso e construtivo em seus comentários
             </span>
-            <x-ui.forms.button>Postar</x-ui.forms.button>
+            <x-ui.forms.button size="sm">Postar</x-ui.forms.button>
           </div>
         </form>
 
-      </div>
+      </x-ui.panel>
 
       <div 
         x-data 

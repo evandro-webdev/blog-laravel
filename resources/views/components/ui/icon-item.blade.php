@@ -8,7 +8,7 @@
   'stroke' => '1.5'
 ])
 
-<div {{ $attributes->merge(['class' =>  'flex items-center justify-between text-gray-600']) }}>
+<div {{ $attributes->merge(['class' =>  'flex items-center justify-between text-gray-600 dark:text-gray-300']) }}>
   <div class="flex items-center gap-2">
     <x-dynamic-component 
       :component="'ui.icons.' . $icon"

@@ -17,11 +17,11 @@
       break;
 
     case 'white':
-      $style = ' border border-blue-100 bg-white text-blue-600';
+      $style = ' border border-blue-200 dark:border-blue-500 text-blue-500 dark:text-blue-400 bg-white dark:bg-gray-900';
       break;
 
     default:
-      $style = ' bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors duration-300';
+      $style = ' bg-blue-50 hover:bg-blue-100 dark:bg-blue-900 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 transition-colors duration-300';
       break;
   }
 

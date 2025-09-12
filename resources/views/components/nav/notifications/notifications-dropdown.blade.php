@@ -34,7 +34,7 @@
         {{ $unreadCount }}
       </span>
     </template>
-    <x-ui.icons.bell class="w-6 h-6 text-blue-600"/>
+    <x-ui.icons.bell class="w-6 h-6 text-blue-600 dark:text-blue-400"/>
   </button>
 
   <div 
