@@ -19,19 +19,28 @@ class BlogController extends Controller
   public function index(Request $request)
   {
     $user = Auth::user();
+    $tab = $request->query('tab', $user ? 'personal-feed' : 'trending-feed');
+    $sort = $this->resolveSort($request, $tab);
+
+    $posts = $this->getFilteredPosts($tab, $sort, $user);
+
     $usersToFollow = $this->getUsersToFollow($user);
-    $sort = $this->resolveSort($request, $user);
-
-    $postsFromFollowing = $this->postService->getFeed($user, $sort);
-    $popularPosts = $this->postService->getFeed(null, $sort);
-
+      
     return view('home.index', [
-      'usersToFollow' => $usersToFollow,
       'user' => $user,
-      'postsFromFollowing' => $postsFromFollowing,
-      'popularPosts' => $popularPosts,
-      'sort' => $sort
+      'posts' => $posts,
+      'sort' => $sort,
+      'tab' => $tab,
+      'usersToFollow' => $usersToFollow,
     ]);
+  }
+
+  private function getFilteredPosts(string $tab, string $sort, ?User $user){
+    if($tab === 'personal-feed' && $user){
+      return $this->postService->getFeed($user, $sort);
+    } else {
+      return $this->postService->getFeed(null, $sort);
+    }
   }
 
   private function getUsersToFollow(?User $user, int $limit = 5){
@@ -40,9 +49,9 @@ class BlogController extends Controller
       : User::limit(5)->get();
   }
 
-  private function resolveSort(Request $request, ?User $user): string
+  private function resolveSort(Request $request, string $tab): string
   {
-    $default = $user ? 'recent' : 'popular';
+    $default = $tab === 'trending-feed' ? 'popular' : 'recent';
     return $request->query('sort', $default);
   }
 }
