@@ -14,7 +14,7 @@
   @if ($icon)
     <x-dynamic-component 
       :component="'ui.icons.' . $icon"
-      class="text-blue-600 absolute transform -translate-y-1/2 left-3 top-1/2"
+      class="text-blue-600 dark:text-blue-400 absolute transform -translate-y-1/2 left-3 top-1/2"
     />
   @endif
 

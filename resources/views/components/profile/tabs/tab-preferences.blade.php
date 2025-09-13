@@ -1,6 +1,6 @@
 <div x-show="tab === 'preferences'" class="space-y-6">
   <x-ui.panel>
-    <h2 class="text-2xl font-bold text-gray-800">Edite suas preferencias</h2>
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Edite suas preferencias</h2>
 
     <form action="{{ route('settings.updatePreferences') }}" method="POST" class="mt-6 space-y-4">
       @csrf
@@ -26,7 +26,7 @@
     id="seguranca"
   >
     <div class="flex items-center justify-between">
-      <h2 class="text-2xl font-bold text-gray-800">Segurança</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Segurança</h2>
   
       <x-ui.forms.button
         @click="show=!show"

@@ -5,7 +5,7 @@
 
     <x-ui.panel>
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold text-gray-800">Informações pessoais</h2>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Informações pessoais</h2>
         <x-ui.forms.button size="sm">Salvar</x-ui.forms.button>
       </div>
       <div class="mt-6 space-y-4">
@@ -17,7 +17,7 @@
     </x-ui.panel>
 
     <x-ui.panel>
-      <h2 class="text-2xl font-bold text-gray-800">Redes sociais</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Redes sociais</h2>
       
       <div class="mt-6 space-y-4">
         <x-ui.forms.input 

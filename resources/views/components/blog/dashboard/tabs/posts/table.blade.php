@@ -1,7 +1,7 @@
-<div class="mb-4 rounded border border-gray-200 overflow-x-auto">
+<div class="mb-4 rounded border border-gray-200 dark:border-gray-700 overflow-x-auto">
   <table class="w-full text-sm table-auto">
-    <thead class="border-b border-gray-200">
-      <tr class="text-left text-gray-600">
+    <thead class="border-b border-gray-200 dark:border-gray-700">
+      <tr class="text-left text-gray-600 dark:text-white">
         <th class="px-3 py-5">Título</th>
         <th class="px-3 py-5 hidden md:table-cell">Categoria</th>
         <th class="px-3 py-5 hidden sm:table-cell">Data</th>
