@@ -52,8 +52,35 @@
   </x-section>
   
   @push('scripts')
-    <script src="https://cdn.tiny.cloud/1/3qqrdxghokajgnwrpufmupg41lyo1e5llr6bymftc3btdx6v/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type="module" src="{{ Vite::asset('resources/js/editors/tinymce.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/3qqrdxghokajgnwrpufmupg41lyo1e5llr6bymftc3btdx6v/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      function initTinymce(isDark){
+        tinymce.remove()
+        
+        tinymce.init({
+          selector: '#content',
+          language: 'pt_BR',
+          language_url: '/js/lang/pt_BR.js',
+          menubar: false,
+          plugins: [
+            'fullscreen', 'placeholder', 'anchor', 'autolink', 'charmap', 'codesample',
+            'emoticons', 'lists', 'image', 'link', 'media', 'searchreplace',
+            'table', 'visualblocks', 'wordcount'
+          ],
+          placeholder: 'Escreva aqui o conteúdo do post...',
+          toolbar: 'styles | bold italic underline strikethrough | numlist bullist | outdent indent | fullscreen link image ',
+          branding: false,
+          skin: isDark ? 'oxide-dark' : 'oxide',
+          content_css: isDark ? 'dark' : 'default'
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const isDark = localStorage.getItem('theme') === 'dark'
+        if (isDark) document.documentElement.classList.add('dark')
+        initTinymce(isDark)
+      })
+    </script>
   @endpush
 </x-layout>
 

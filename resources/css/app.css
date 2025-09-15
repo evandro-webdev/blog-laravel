@@ -11,9 +11,17 @@
   border: 1px solid #d1d5dc !important;
 }
 
+.dark .tox-tinymce {
+  border: 1px solid #374151 !important;
+}
+
 .tox-editor-header{
   border-bottom: 1px solid #d1d5dc !important;
   box-shadow: none !important;
+}
+
+.dark .tox-editor-header{
+  border-bottom: 1px solid #374151 !important;
 }
 
 .tox-statusbar{
