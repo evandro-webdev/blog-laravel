@@ -2,61 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentAdded;
-use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Comment;
+use App\Events\CommentAdded;
+use App\Http\Requests\CommentRequest;
+use App\Services\CommentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CommentController extends Controller
 {
-  public function store(Post $post)
+  use AuthorizesRequests;
+
+  private CommentService $commentService;
+
+  public function __construct(CommentService $commentService)
   {
-    $attributes = request()->validate([
-      'content' => ['required', 'string', 'max:1000']
-    ]);
-
-    $comment = $post->comments()->create([
-      'user_id' => Auth::id(),
-      'content' => $attributes['content']
-    ]);
-
-    event(new CommentAdded($comment));
-    
-    $html = view('components.blog.comments.comment-item', compact('comment'))->render();
-    
-    return response()->json([
-      'html' => $html,
-      'id' => $comment->id
-    ]);
+    $this->commentService = $commentService; 
   }
 
-  public function update(Comment $comment)
+  public function store(Post $post, CommentRequest $request)
   {
-    if(Auth::id() !== $comment->user_id){
-      abort(403, 'Ação não autorizada.');
-    }
-    
-    $attributes = request()->validate([
-      'content' => ['required', 'string', 'max:1000']
-    ]);
-    
-    $comment->update($attributes);
+    $comment = $this->commentService->createComment($post, Auth::user(), $request->validated());
+
+    $html = view('components.blog.comments.comment-item', compact('comment'))->render();
 
     return response()->json([
-      'message' => 'Comentário atualizado com sucesso!',
-      'content' => $comment->content
-    ]);
+      'status' => 'success',
+      'data' => [
+        'id' => $comment->id,
+        'message' => 'Comentário adicionado com sucesso!',
+        'html' => $html
+      ]
+    ], 201);
+  }
+
+  public function update(Comment $comment, CommentRequest $request)
+  {
+    $this->authorize('update', $comment);
+  
+    $updatedComment = $this->commentService->updateComment($comment, $request->validated());
+
+    return response()->json([
+      'status' => 'success',
+      'data' => [ 
+        'id' => $updatedComment->id,
+        'message' => 'Comentário atualizado com sucesso!'
+      ]
+    ], 201);
   }
 
   public function destroy(Comment $comment)
   {
-    if(Auth::id() !== $comment->user_id){
-      abort(403, 'Ação não autorizada.');
-    }
+    $this->authorize('delete', $comment);
 
-    $post = $comment->post;
-    $comment->delete();
+    $this->commentService->deleteComment($comment);
 
     return response()->json([
       'message' => 'Comentário deletado com sucesso',
