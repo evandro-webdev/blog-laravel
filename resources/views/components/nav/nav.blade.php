@@ -18,41 +18,7 @@
 
         @auth
           <div class="hidden md:flex items-center gap-2">
-            <button 
-              x-data="{ 
-                dark: false,
-                toggleTheme(){
-                  document.documentElement.classList.toggle('dark')
-                }
-              }" 
-              class="p-2 rounded-full cursor-pointer"
-              @click="dark = !dark; toggleTheme()"
-            >
-              <x-ui.icons.sun 
-                class="w-6 h-6 text-blue-600"
-                x-show="!dark"
-                x-cloak
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 scale-75 rotate-90"
-                x-transition:enter-end="opacity-100 scale-100 rotate-0"
-                x-transition:leave="transition ease-in duration-200 absolute"
-                x-transition:leave-start="opacity-100 scale-100 rotate-0"
-                x-transition:leave-end="opacity-0 scale-75 rotate-90"
-              />
-
-              <x-ui.icons.moon 
-                class="w-6 h-6 text-blue-400"
-                x-show="dark"
-                x-cloak
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 scale-75 -rotate-90"
-                x-transition:enter-end="opacity-100 scale-100 rotate-0"
-                x-transition:leave="transition ease-in duration-200 absolute"
-                x-transition:leave-start="opacity-100 scale-100 rotate-0"
-                x-transition:leave-end="opacity-0 scale-75 -rotate-90"
-              />
-            </button>
-
+            <x-ui.toggle-theme-button/>
             <x-nav.notifications.notifications-dropdown/>
             <x-nav.user-dropdown/>
           </div>

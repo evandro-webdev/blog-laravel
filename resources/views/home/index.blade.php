@@ -65,7 +65,7 @@
     
               <div class="space-y-2">
                 @foreach ($user->following as $following)
-                  <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                  <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                     <x-profile.avatar :user="$following" size="w-10 h-10"/>
                     <div class="flex flex-col">
                       <span class="text-sm font-medium text-gray-800 dark:text-white">{{ $following->name }}</span>
@@ -85,7 +85,7 @@
   
             <div class="space-y-2">
               @foreach ($usersToFollow as $user)
-                <div class="p-2 rounded-md cursor-pointer flex items-center justify-between gap-2 hover:bg-gray-100 transition-colors">
+                <div class="p-2 rounded-md cursor-pointer flex items-center justify-between gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                   <a href="{{ route('profile.show', $user) }}" class="cursor-pointer flex items-center gap-2">
                     <x-profile.avatar :user="$user" size="w-10 h-10"/>
                     <div class="flex flex-col">

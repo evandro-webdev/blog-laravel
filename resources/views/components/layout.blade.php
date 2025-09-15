@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,5 +17,15 @@
   </main>
 
   <x-footer/>
+  
+  <script>
+    if(localStorage.theme === 'dark'){
+      document.documentElement.classList.add('dark')
+    }else{
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+
+  
 </body>
 </html>
