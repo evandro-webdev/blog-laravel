@@ -110,12 +110,11 @@
             })
             .catch(() => $dispatch('notify', 'Erro ao excluir comentário'));
         "
-        id="comments-list"
         x-ref="commentsList"
         class="space-y-6"
       >
         @foreach ($post->comments as $comment)
-          <x-blog.comments.comment-item :$comment/>
+          <x-blog.comment.comment-item :$comment/>
         @endforeach
       </div>
 
