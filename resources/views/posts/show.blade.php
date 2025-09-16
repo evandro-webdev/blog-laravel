@@ -6,7 +6,7 @@
         Publicado em {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
       </time>
 
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
+      <h1 class="mb-1 text-4xl font-bold text-gray-900 dark:text-white leading-tight">
         {{ $post->title }}
       </h1>
 
@@ -63,18 +63,20 @@
         <x-profile.avatar :user="Auth::user()"/>
 
         <form 
-          x-data
           @submit.prevent="
             axios.post('{{ route('comments.store', $post) }}', {
               content: $refs.content.value
             })
-            .then(res => {
+            .then((res) => {
               $refs.content.value = '';
-              document.querySelector('#comments-list').insertAdjacentHTML('afterbegin', res.data.html);
+              $refs.commentsList.insertAdjacentHTML('afterbegin', res.data.data.html);
               count++;
               $dispatch('notify', 'Comentário adicionado!');
             })
-            .catch(() => $dispatch('notify', 'Erro ao enviar comentário'));
+            .catch((err) => {
+              console.error('Erro completo:', err.response ?? err);
+              $dispatch('notify', 'Erro ao enviar comentário');
+            });
           "
           class="flex-1 space-y-4"
         >
@@ -94,7 +96,6 @@
       </x-ui.panel>
 
       <div 
-        x-data 
         @update-comment.window="
           axios.put('/comments/' + $event.detail.id, { content: $event.detail.content })
             .then(() => $dispatch('notify', 'Comentário atualizado!'))
@@ -110,6 +111,7 @@
             .catch(() => $dispatch('notify', 'Erro ao excluir comentário'));
         "
         id="comments-list"
+        x-ref="commentsList"
         class="space-y-6"
       >
         @foreach ($post->comments as $comment)

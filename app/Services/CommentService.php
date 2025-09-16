@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
+use App\Events\CommentAdded;
 
 class CommentService
 {

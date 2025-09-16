@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Comment;
-use App\Events\CommentAdded;
 use App\Http\Requests\CommentRequest;
 use App\Services\CommentService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
