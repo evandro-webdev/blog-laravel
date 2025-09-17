@@ -16,6 +16,7 @@ class SavedPostController extends Controller
     event(new PostSaved($post, Auth::user()));
 
     return response()->json([
+      'success' => true,
       'message' => 'Post salvo',
       'saved' => true
     ]);
@@ -26,6 +27,7 @@ class SavedPostController extends Controller
     Auth::user()->unsavePost($post);
 
     return response()->json([
+      'success' => true,
       'message' => 'Post marcado como não salvo',
       'saved' => false
     ]);

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Comment;
-use App\Http\Requests\CommentRequest;
 use App\Services\CommentService;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -27,7 +27,7 @@ class CommentController extends Controller
     $html = view('components.blog.comment.comment-item', compact('comment'))->render();
 
     return response()->json([
-      'status' => 'success',
+      'success' => true,
       'data' => [
         'id' => $comment->id,
         'message' => 'Comentário adicionado com sucesso!',
@@ -43,7 +43,7 @@ class CommentController extends Controller
     $updatedComment = $this->commentService->updateComment($comment, $request->validated());
 
     return response()->json([
-      'status' => 'success',
+      'success' => true,
       'data' => [ 
         'id' => $updatedComment->id,
         'message' => 'Comentário atualizado com sucesso!'
@@ -58,8 +58,11 @@ class CommentController extends Controller
     $this->commentService->deleteComment($comment);
 
     return response()->json([
-      'message' => 'Comentário deletado com sucesso',
-      'content' => $comment->content
+      'success' => true,
+      'data' => [
+        'content' => $comment->content,
+        'message' => 'Comentário deletado com sucesso'
+      ]
     ]);
   }
 }

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use App\Traits\LogsActivity;
-use App\Events\PostPublished;
 use App\Services\PostService;
 use App\Services\PostTagService;
-use App\Http\Requests\PostRequest;
+use App\Traits\LogsActivity;
+use App\Events\PostPublished;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {

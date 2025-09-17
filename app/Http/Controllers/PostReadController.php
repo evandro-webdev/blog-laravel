@@ -13,6 +13,7 @@ class PostReadController extends Controller
     $post->markAsRead(Auth::user());
 
     return response()->json([
+      'success' => true,
       'message' => 'Post marcado como lido',
       'read' => true
     ]);
@@ -23,6 +24,7 @@ class PostReadController extends Controller
     $post->markAsUnread(Auth::user());
 
     return response()->json([
+      'success' => true,
       'message' => 'Post marcado como não lido',
       'read' => false
     ]);
