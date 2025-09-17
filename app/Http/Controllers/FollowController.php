@@ -2,28 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserFollowed;
 use App\Models\User;
+use App\Services\FollowService;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
+  protected FollowService $followService;
+
+  public function __construct(FollowService $followService)
+  {
+    $this->followService = $followService;
+  }
+
   public function store(User $user)
   {
-    $currentUser = Auth::user();
-
-    if($currentUser->id === $user->id){
-      return response()->json(['error' => 'Você não pode seguir a si mesmo'], 400);
-    }
-
-    if($currentUser->isFollowing($user->id)){
-      return response()->json(['error' => 'Você já segue esse usuário'], 400);
-    }
-
-    $currentUser->following()->attach($user->id);
-    event(new UserFollowed($currentUser, $user));
+    $this->followService->followUser(Auth::user(), $user);
 
     return response()->json([
+      'success' => true,
       'message' => 'Usuário seguido com sucesso',
       'following' => true
     ]);
@@ -31,15 +28,10 @@ class FollowController extends Controller
 
   public function destroy(User $user)
   {
-    $currentUser = Auth::user();
-
-    if(!$currentUser->isFollowing($user->id)){
-      return response()->json(['error' => 'Você não segue esse usuário'], 400);
-    }
-
-    $currentUser->following()->detach($user->id);
+    $this->followService->unfollowUser(Auth::user(), $user);
 
     return response()->json([
+      'success' => true,
       'message' => 'Você deixou de seguir esse usuário',
       'following' => false
     ]);
