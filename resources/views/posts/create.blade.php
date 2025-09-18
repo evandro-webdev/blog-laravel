@@ -1,7 +1,7 @@
 <x-layout class="dark:bg-gray-900">
   <x-section>
     <div class="mb-12 space-y-2">
-      <h1 class="text-3xl font-black text-gray-900 dark:text-white md:text-4xl lg:text-5xl">Criar novo post</h1>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">Criar novo post</h1>
       <p class="text-gray-600 dark:text-gray-100">Preencha os campos abaixo para publicar um novo post.</p>
     </div>
 

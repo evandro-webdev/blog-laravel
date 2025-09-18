@@ -1,8 +1,8 @@
-<x-layout>
+<x-layout class="dark:bg-gray-900">
   <x-section>
     <div class="mb-12 space-y-2">
-      <h1 class="text-3xl font-black text-gray-900 md:text-4xl lg:text-5xl">Editar post</h1>
-      <p class="text-gray-600">Preencha os campos abaixo para publicar um novo post.</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white ">Editar post</h1>
+      <p class="text-gray-600 dark:text-gray-100">Preencha os campos abaixo para publicar um novo post.</p>
     </div>
 
     <form action="/admin/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data" class="space-y-8">
@@ -73,7 +73,34 @@
   </x-section>
 
   @push('scripts')
-    <script src="https://cdn.tiny.cloud/1/3qqrdxghokajgnwrpufmupg41lyo1e5llr6bymftc3btdx6v/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type="module" src="{{ Vite::asset('resources/js/editors/tinymce.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/3qqrdxghokajgnwrpufmupg41lyo1e5llr6bymftc3btdx6v/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      function initTinymce(isDark){
+        tinymce.remove()
+        
+        tinymce.init({
+          selector: '#content',
+          language: 'pt_BR',
+          language_url: '/js/lang/pt_BR.js',
+          menubar: false,
+          plugins: [
+            'fullscreen', 'placeholder', 'anchor', 'autolink', 'charmap', 'codesample',
+            'emoticons', 'lists', 'image', 'link', 'media', 'searchreplace',
+            'table', 'visualblocks', 'wordcount'
+          ],
+          placeholder: 'Escreva aqui o conteúdo do post...',
+          toolbar: 'styles | bold italic underline strikethrough | numlist bullist | outdent indent | fullscreen link image ',
+          branding: false,
+          skin: isDark ? 'oxide-dark' : 'oxide',
+          content_css: isDark ? 'dark' : 'default'
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const isDark = localStorage.getItem('theme') === 'dark'
+        if (isDark) document.documentElement.classList.add('dark')
+        initTinymce(isDark)
+      })
+    </script>
   @endpush
 </x-layout>
