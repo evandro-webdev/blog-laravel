@@ -27,7 +27,9 @@ class PostRequest extends FormRequest
         'excerpt' => ['nullable'],
         'category_id' => ['required'],
         'tags' => ['required', 'string', 'regex:/^[a-zA-Z0-9áéíóúãõâêôçÁÉÍÓÚÃÕÂÊÔÇ\-\s,]+$/'],
-        'content' => ['required']
+        'content' => ['required'],
+        'published' => ['sometimes'],
+        'featured' => ['sometimes'],
       ];
 
       if(request()->isMethod('post')){

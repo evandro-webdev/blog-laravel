@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
-use App\Services\PostService;
-use App\Services\PostTagService;
 use App\Traits\LogsActivity;
-use App\Events\PostPublished;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Services\PostService;
+use App\Services\PostActionService;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -19,12 +15,17 @@ class PostController extends Controller
   use LogsActivity;
 
   protected PostService $postService;
+  protected PostActionService $postActionService;
 
-  public function __construct(PostService $postService)
-  {
+  public function __construct(
+    PostService $postService, 
+    PostActionService $postActionService
+  ){
     $this->postService = $postService;
+    $this->postActionService = $postActionService;
   }
 
+  // refatorar
   public function index()
   {
     $posts = Post::latest()
@@ -34,7 +35,8 @@ class PostController extends Controller
     return view('posts.index', compact('posts'));
   }
 
-  public function show(Post $post){
+  public function show(Post $post)
+  {
     $post->increment('views');
     $relatedPosts = $this->postService->getRelatedPosts($post, 3);
 
@@ -47,18 +49,13 @@ class PostController extends Controller
     return view('posts.create', compact('categories'));
   }
 
-  /**
-    * @param \Illuminate\Http\Request $request
-  */
-  public function store(PostTagService $postTagService, PostRequest $request){
-    $attributes = $this->prepareAttributes($request);
-
-    $post = Auth::user()->posts()->create(Arr::except($attributes, 'tags'));
-    $postTagService->addTags($post, $request->tags);
-
-    if($post->published){
-      event(new PostPublished($post));
-    }
+  public function store(PostRequest $request)
+  {
+    $post = $this->postActionService->createPost(
+      Auth::user(),
+      $request->validated(),
+      $request->validated()['tags']
+    );
 
     $this->logActivity('Post publicado', $post);
 
@@ -71,19 +68,13 @@ class PostController extends Controller
     return view('posts.edit', ['post' => $post, 'categories' => $categories]);
   }
 
-  /**
-    * @param \Illuminate\Http\Request $request
-  */
-  public function update(PostTagService $postTagService, PostRequest $request, Post $post)
+  public function update(PostRequest $request, Post $post)
   {
-    $attributes = $this->prepareAttributes($request, $post);
-
-    $post->update(Arr::except($attributes, 'tags'));
-    $postTagService->syncTags($post, $request->tags);
-
-    if($post->published){
-      event(new PostPublished($post));
-    }
+    $post = $this->postActionService->updatePost(
+      $request->validated(),
+      $request->validated()['tags'],
+      $post
+    );
 
     $this->logActivity('Post atualizado', $post);
 
@@ -92,46 +83,10 @@ class PostController extends Controller
 
   public function destroy(Post $post)
   {
-    $post->delete();
-    Storage::disk('public')->delete($post->image);
+    $this->postActionService->deletePost($post);
 
     $this->logActivity('Post deletado', $post);
 
     return redirect('/admin/dashboard?tab=posts');
-  }
-
-  /**
-    * @param \Illuminate\Http\Request $request
-  */
-  private function prepareAttributes(PostRequest $request, ?Post $post = null)
-  {
-    $attributes = $request->validated();
-    
-    $attributes['slug'] = Str::slug($attributes['title']);
-
-    $attributes['published'] = $request->has('published');
-    $attributes['featured'] = $request->has('featured');
-    $attributes['image'] = $this->handleImageUpload($request, $post);
-
-    if (empty($attributes['excerpt'])) {
-      $attributes['excerpt'] = Str::limit(strip_tags($attributes['content']), 150);
-    }
-
-    return $attributes;
-  }
-
-  /**
-    * @param \Illuminate\Http\Request $request
-  */
-  private function handleImageUpload(PostRequest $request, ?Post $post = null){
-    if($request->hasFile('image')){
-      if($post && $post->image){
-        Storage::disk('public')->delete($post->image);
-      }
-
-      return $request->file('image')->store('posts', 'public');
-    }
-
-    return $post->image ?? null;
   }
 }
