@@ -9,7 +9,7 @@
               <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
 
               @if ($isOwnProfile)
-                <form id="uploadForm" action="{{ route('profile.updatePicture') }}" method="POST" enctype="multipart/form-data">
+                <form id="uploadForm" action="{{ route('profile.updatePicture', $user) }}" method="POST" enctype="multipart/form-data">
                   @method('PATCH')
                   @csrf
                   <input id="profile_pic" type="file" name="profile_pic" hidden  onchange="submitForm()">
@@ -23,7 +23,7 @@
             
             <div class="space-y-1 text-center">
               <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $user->name }}</h3>
-              <x-ui.badge small variant="white">Desde {{ $user->created_at->year }}</x-ui.badge>
+              <x-ui.badge small variant="white">{{ '@' . $user->username }}</x-ui.badge>
             </div>
 
             <div class="w-full flex justify-around">

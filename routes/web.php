@@ -17,7 +17,7 @@ use App\Http\Controllers\SavedPostController;
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
 
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterUserController::class, 'create']);
@@ -26,12 +26,11 @@ Route::middleware('guest')->group(function () {
   Route::post('/login', [SessionController::class, 'store']);
 });
 
-Route::delete('/logout', [SessionController::class, 'destroy']);
+Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-  Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.myProfile');
-  Route::put('/profile', [ProfileController::class, 'update']);
-  Route::patch('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
+  Route::put('/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
+  Route::patch('/{user:username}/picture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
   
   Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
   Route::patch('/settings/preferences', [SettingsController::class, 'updatePreferences'])->name('settings.updatePreferences');
@@ -53,6 +52,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
-  Route::get('/dashboard', [AdminController::class, 'dashboard']);
+  Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
