@@ -17,7 +17,6 @@ use App\Http\Controllers\SavedPostController;
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
 
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterUserController::class, 'create']);
@@ -55,3 +54,5 @@ Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
   Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
+
+Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
