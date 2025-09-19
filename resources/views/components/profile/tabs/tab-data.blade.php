@@ -1,5 +1,5 @@
 <div x-show="tab === 'data'" class="space-y-6">
-  <form action="/profile" method="POST" class="space-y-6">
+  <form action="{{ route('profile.update', $user) }}" method="POST" class="space-y-6">
     @csrf
     @method('PUT')
 
@@ -10,6 +10,7 @@
       </div>
       <div class="mt-6 space-y-4">
         <x-ui.forms.input name="name" value="{{ $user->name }}" label="Nome" placeholder="Nome"/>
+        <x-ui.forms.input name="username" value="{{ $user->username }}" label="Nome de usuário" placeholder="Nome de usuário"/>
         <x-ui.forms.input name="email" value="{{ $user->email }}" type="email" label="Email" placeholder="Email"/>
         <x-ui.forms.input name="bio" value="{{ $user->bio }}" label="Bio" placeholder="Bio" as="textarea"/>
         <x-ui.forms.input name="city" value="{{ $user->city }}" label="Cidade" placeholder="Cidade"/>
