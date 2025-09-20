@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SessionRequest;
+use App\Services\SessionService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
@@ -13,19 +13,9 @@ class SessionController extends Controller
     return view('auth.login');
   }
 
-  public function store(Request $request)
+  public function store(SessionService $sessionService, SessionRequest $request)
   {
-    $attibutes = $request->validate([
-      'email' => ['required', 'email', 'exists:users,email'],
-      'password' => ['required']
-    ]);
-
-    if(!Auth::attempt($attibutes)){
-      throw ValidationException::withMessages([
-        'email' => 'Dados incorretos'
-      ]);
-    }
-
+    $sessionService->attemptLogin($request->validated());
     request()->session()->regenerate();
 
     return redirect('/');
