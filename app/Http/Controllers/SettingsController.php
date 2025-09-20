@@ -2,61 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PreferencesRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class SettingsController extends Controller
 {
-  public function updatePassword()
+  private SettingsService $settingsService;
+
+  public function __construct(SettingsService $settingsService)
   {
-    $user = Auth::user();
-    $key = Str::lower($user->email) . '|password-update';
-
-    if(RateLimiter::tooManyAttempts($key, 3)){
-      $seconds = RateLimiter::availableIn($key);
-      return back()
-        ->withErrors([
-          'current_password' => "Você excedeu o número de tentativas. Tente novamente em {$seconds} segundos.",
-        ])
-        ->withFragment('seguranca');
-    }
-
-    $attributes = Validator::make(request()->all(), [
-      'current_password' => ['required', 'current_password',],
-      'password' => ['required', Password::min(6), 'confirmed', 'different:current_password']
-    ]);
-
-    if($attributes->fails()){
-      RateLimiter::hit($key, 3600);
-      return back()
-        ->withErrors($attributes)
-        ->withFragment('seguranca');
-    }
-
-    $user->update([
-      'password' => Hash::make($attributes->validated()['password'])
-    ]);
-
-    RateLimiter::clear($key);
-
-    return redirect()
-      ->back()
-      ->with('success', 'Senha atualizada com sucesso!');
+    $this->settingsService = $settingsService;
   }
 
-  public function updatePreferences(Request $request)
+  public function updatePassword(UpdatePasswordRequest $request)
   {
-    $attributes = $request->validate([
-      'is_private' => ['required', 'boolean']
-    ]);
+    $user = Auth::user();
 
-    $user = $request->user();
-    $user->update($attributes);
+    try {
+      $this->settingsService->updatePassword($user, $request->validated());
+
+      return redirect()
+      ->back()
+      ->with('success', 'Senha atualizada com sucesso!');
+    } catch (ValidationException $e) {
+      RateLimiter::hit($this->settingsService->getPasswordUpdateKey($user), 3600);
+
+      return back()
+        ->withErrors($e->errors())
+        ->withFragment('seguranca');
+    }
+  }
+
+  public function updatePreferences(PreferencesRequest $request)
+  {
+    $this->settingsService->updatePreferences(Auth::user(), $request->validated());
 
     return back()->with('status', 'Preferências atualizadas com sucesso.');
   }
