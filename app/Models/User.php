@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUserStats;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,14 +47,14 @@ class User extends Authenticatable
     return $this->belongsToMany(Post::class, 'saved_posts');
   }
 
-  public function savePost(Post $post)
+  public function savePost(Post $post): void
   {
-    return $this->savedPosts()->syncWithoutDetaching([$post->id]);
+    $this->savedPosts()->syncWithoutDetaching([$post->id]);
   }
 
-  public function unsavePost(Post $post)
+  public function unsavePost(Post $post): void
   {
-    return $this->savedPosts()->detach($post->id);
+    $this->savedPosts()->detach($post->id);
   }
 
   public function comments(): HasMany
@@ -93,17 +94,17 @@ class User extends Authenticatable
                 ->withPivot('created_at');
   }
 
-  public function isFollowing($userId)
+  public function isFollowing($userId): bool
   {
     return $this->following()->where('users.id', $userId)->exists();
   }
 
-  public function isFollowedBy($userId)
+  public function isFollowedBy($userId): bool
   {
     return $this->followers()->where('users.id', $userId)->exists();
   }
 
-  public function notFollowing()
+  public function notFollowing(): User
   {
     return User::query()
       ->where('id', '!=', $this->id)
