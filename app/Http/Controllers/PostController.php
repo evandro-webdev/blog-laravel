@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\PostService;
 use App\Services\PostActionService;
 use App\Http\Requests\PostRequest;
+use App\Models\PostView;
 
 class PostController extends Controller
 {
@@ -37,7 +38,7 @@ class PostController extends Controller
 
   public function show(Post $post)
   {
-    $post->increment('views');
+    PostView::recordView($post, Auth::user());
     $relatedPosts = $this->postService->getRelatedPosts($post, 3);
 
     return view('posts.show', compact('post', 'relatedPosts'));
