@@ -33,6 +33,18 @@ class Post extends Model
     return $this->hasMany(Comment::class)->latest();
   }
 
+  public function postViews(): HasMany
+  {
+    return $this->hasMany(PostView::class);
+  }
+
+  public function viewsInPeriod(int $days): int
+  {
+    return $this->postViews()
+      ->where('viewed_at', '>=', now()->subDays($days))
+      ->count();
+  }
+
   public function readers(): BelongsToMany
   {
     return $this->belongsToMany(User::class, 'read_posts')->withPivot('created_at');
@@ -43,14 +55,14 @@ class Post extends Model
     return $this->belongsToMany(User::class, 'saved_posts');
   }
 
-  public function markAsRead(User $user)
+  public function markAsRead(User $user): void
   {
     $this->readers()->syncWithoutDetaching([
       $user->id => ['created_at' => now()]
     ]);
   }
 
-  public function markAsUnread(User $user)
+  public function markAsUnread(User $user): void
   {
     $this->readers()->detach($user->id);
   }

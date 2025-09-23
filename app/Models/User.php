@@ -66,6 +66,11 @@ class User extends Authenticatable
     return $this->hasMany(Notification::class, 'user_id')->latest();
   }
 
+  public function postViews(): HasMany
+  {
+    return $this->hasMany(PostView::class);
+  }
+
   public function unreadNotifications(): HasMany
   {
     return $this->notifications()->whereNull('read_at'); 
