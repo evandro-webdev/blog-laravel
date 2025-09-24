@@ -8,13 +8,14 @@
   <button
     @click="toggleSave"
     :disabled="loading"
-    class="px-3 py-2 rounded-md font-medium cursor-pointer flex items-center gap-2 transition-colors duration-200"
+    class="px-4 py-2 border rounded-lg font-medium cursor-pointer flex items-center gap-2 
+           transition-colors duration-200"
     :class="isSaved 
-      ? 'border border-blue-600 bg-blue-600 text-white hover:bg-blue-700' 
-      : 'border border-blue-600 text-blue-600 hover:bg-blue-100'"
+      ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' 
+      : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-500 dark:hover:text-white'"
   >
     <template x-if="!loading">
-      <x-ui.icons.save class="isSaved ? 'text-blue-600' : 'text-white'"/>
+      <x-ui.icons.save class="w-5 h-5 text-inherit"/>
     </template>
 
     <x-ui.spinner x-show="loading" class="w-4 h-4"/>
