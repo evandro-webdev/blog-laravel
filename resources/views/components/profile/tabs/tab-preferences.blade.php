@@ -1,12 +1,20 @@
 <div x-show="tab === 'preferences'" class="space-y-6">
   <x-ui.panel>
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Edite suas preferencias</h2>
+    <x-section-heading
+      title="Preferências"
+      desc="Confira ou edite suas preferências"
+      class="mb-6"
+    />
 
-    <form action="{{ route('settings.updatePreferences') }}" method="POST" class="mt-6 space-y-4">
+    <form 
+      action="{{ route('settings.updatePreferences') }}" 
+      method="POST" 
+      class="space-y-4"
+    >
       @csrf
       @method('PATCH')
 
-      <div>
+      <div class="border-b-1 border-b-gray-200 dark:border-b-gray-700">
         <x-ui.toggle label="Perfil privado" name="is_private" :checked="$user->is_private"/>
       </div>
 

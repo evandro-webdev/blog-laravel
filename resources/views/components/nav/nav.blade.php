@@ -16,20 +16,17 @@
           </div>
         </div>
 
-        @auth
-          <div class="hidden md:flex items-center gap-2">
-            <x-ui.toggle-theme-button/>
+        <div class="hidden md:flex items-center gap-4">
+          <x-ui.toggle-theme-button/>
+          @auth
             <x-nav.notifications.notifications-dropdown/>
             <x-nav.user-dropdown/>
-          </div>
-        @endauth
-
-        @guest
-          <div class="items-center gap-2 hidden md:flex">
+          @endauth
+          @guest
             <x-ui.forms.button href="/login" icon="enter" size="sm">Entrar</x-ui.forms.button>
             <x-ui.forms.button href="/register" outline icon="user-plus" size="sm">Criar conta</x-ui.forms.button>
-          </div>
-        @endguest
+          @endguest
+        </div>
 
         <x-nav.mobile-button/>
       </div>

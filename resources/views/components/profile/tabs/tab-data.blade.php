@@ -4,11 +4,14 @@
     @method('PUT')
 
     <x-ui.panel>
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Informações pessoais</h2>
+      <div class="mb-8 flex items-center justify-between">
+        <x-section-heading
+          title="Informações pessoais"
+          desc="Confira ou atualize suas informações pessoais"
+        />
         <x-ui.forms.button size="sm">Salvar</x-ui.forms.button>
       </div>
-      <div class="mt-6 space-y-4">
+      <div class="space-y-4">
         <x-ui.forms.input name="name" value="{{ $user->name }}" label="Nome" placeholder="Nome"/>
         <x-ui.forms.input name="username" value="{{ $user->username }}" label="Nome de usuário" placeholder="Nome de usuário"/>
         <x-ui.forms.input name="email" value="{{ $user->email }}" type="email" label="Email" placeholder="Email"/>
@@ -18,7 +21,11 @@
     </x-ui.panel>
 
     <x-ui.panel>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Redes sociais</h2>
+      <x-section-heading
+        title="Redes sociais"
+        desc="Conecte-se com seus seguidores pelas redes sociais"
+        class="mb-8"
+      />
       
       <div class="mt-6 space-y-4">
         <x-ui.forms.input 

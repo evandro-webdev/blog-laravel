@@ -1,5 +1,5 @@
 <tr class="odd:bg-gray-50 dark:odd:bg-gray-800">
-  <td class="px-3 py-5 truncate text-gray-800 dark:text-white">
+  <td class="max-w-[50ch] px-3 py-5 truncate text-gray-800 dark:text-white" title="{{ $post->title }}">
     {{ $post->title }}
   </td>
   <th class="px-3 py-3 hidden font-medium text-left text-gray-600 dark:text-gray-100 md:table-cell">{{ $post->category->name }}</th>
@@ -7,7 +7,7 @@
     {{ $post->created_at->format('d/m/Y') }}
   </td>
   <td class="px-3 py-5 hidden lg:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
-    {{ $post->views }}
+    {{ $post->views->count() }}
   </td>
   <td class="px-3 py-5 whitespace-nowrap">
     @if ($post->featured)

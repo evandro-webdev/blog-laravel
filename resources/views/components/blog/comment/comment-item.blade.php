@@ -30,7 +30,7 @@
 >
   <x-profile.avatar :user="$comment->user"/>
 
-  <article class="p-4 space-y-3 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-1">
+  <article class="p-4 space-y-3 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex-1">
     <x-blog.comment.comment-header :$comment />
 
     <div>
