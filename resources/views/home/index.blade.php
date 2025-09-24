@@ -55,14 +55,16 @@
           </div>
         </div>
 
-        <div class="flex flex-col gap-6 sm:flex-row lg:flex-col lg:min-w-xs">
+        <div class="flex flex-col gap-6 sm:flex-row lg:flex-col lg:min-w-xs lg:max-w-3">
           @auth
             <x-ui.panel class="flex-1 lg:flex-0">
-              <div class="mb-6 flex items-center justify-between">
-                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Seguindo</h2>
-                <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver todos</a>
-              </div>
-    
+              <x-section-heading
+                title="Seguindo"
+                link="#"
+                size="sm"
+                class="mb-6"
+              />
+      
               <div class="space-y-2">
                 @foreach ($user->following as $following)
                   <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -78,10 +80,12 @@
           @endauth
   
           <x-ui.panel class="flex-1 lg:flex-0">
-            <div class="mb-6 flex items-center justify-between">
-              <h2 class="text-lg font-bold text-gray-800 dark:text-white">Sugerido para você</h2>
-              <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Mais</a>
-            </div>
+            <x-section-heading
+              title="Sugerido para você"
+              link="#"
+              size="sm"
+              class="mb-6"
+            />
   
             <div class="space-y-2">
               @foreach ($usersToFollow as $user)
@@ -98,7 +102,34 @@
               @endforeach
             </div>
           </x-ui.panel>
-          
+
+          <div>
+            <x-section-heading
+              title="Top posts deste mês"
+              link="#"
+              size="sm"
+              class="mb-6"
+            />
+
+            <div class="space-y-4">
+              @foreach ($trendingPostsThisMonth as $post)
+                <div class="flex items-center gap-3">
+                  
+                  <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-full 
+                              bg-blue-600 text-white text-sm font-bold">
+                    {{ $loop->iteration }}
+                  </div>
+
+                  <h3 class="text-gray-800 dark:text-white font-medium hover:underline line-clamp-2">
+                    <a href="{{ route('posts.show', $post) }}">
+                      {{ $post->title }}
+                    </a>
+                  </h3>
+                </div>
+              @endforeach
+            </div>
+          </div>
+
         </div>
       </div>
 
