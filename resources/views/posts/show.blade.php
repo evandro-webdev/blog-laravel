@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-gray-950">
+<x-layout class="dark:bg-gray-800">
   <section class="max-w-[960px] py-16 px-5 mx-auto">
   
     <header class="text-center max-w-[720px] mx-auto">
@@ -40,60 +40,64 @@
       {!! $post->content !!}
     </article>
 
-    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200 dark:border-gray-800 flex items-center gap-2">
+    <div class="max-w-[720px] mx-auto mt-6 py-6 border-y-1 border-gray-200 dark:border-gray-700 flex items-center gap-2">
       @auth
         <x-ui.read-button :$post/>
         <x-ui.save-button :$post/>
+      @else
+        <p class="text-lg text-gray-700">
+          <a href="{{ route('login') }}" class="text-blue-600">Entre</a> ou 
+          <a href="{{ route('register') }}" class="text-blue-600">crie uma conta</a> para interagir com a publicação
+        </p>
       @endauth
     </div>
   </section>
 
-  <section class="w-full max-w-[960px] py-20 px-5 mx-auto" aria-label="Seção de comentários">
-    <div 
+  <section class="w-full max-w-[960px] py-4 px-5 mx-auto" aria-label="Seção de comentários">
+    <div
       x-data="{ count: {{ $post->comments->count() }} }"
       class="max-w-[700px] mx-auto space-y-6"
     >
-      
-      <x-section-heading>
-        Comentários (<span x-text="count"></span>)
-      </x-section-heading>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Comentários (<span x-text="count"></span>)</h2>
 
-      <x-ui.panel class="flex gap-2">
+      @auth
+        <x-ui.panel class="flex gap-2">
 
-        <x-profile.avatar :user="Auth::user()"/>
+          <x-profile.avatar :user="Auth::user()"/>
 
-        <form 
-          @submit.prevent="
-            axios.post('{{ route('comments.store', $post) }}', {
-              content: $refs.content.value
-            })
-            .then((res) => {
-              $refs.content.value = '';
-              $refs.commentsList.insertAdjacentHTML('afterbegin', res.data.data.html);
-              count++;
-              $dispatch('notify', 'Comentário adicionado!');
-            })
-            .catch((err) => {
-              console.error('Erro completo:', err.response ?? err);
-              $dispatch('notify', 'Erro ao enviar comentário');
-            });
-          "
-          class="flex-1 space-y-4"
-        >
-          @csrf
+          <form 
+            @submit.prevent="
+              axios.post('{{ route('comments.store', $post) }}', {
+                content: $refs.content.value
+              })
+              .then((res) => {
+                $refs.content.value = '';
+                $refs.commentsList.insertAdjacentHTML('afterbegin', res.data.data.html);
+                count++;
+                $dispatch('notify', 'Comentário adicionado!');
+              })
+              .catch((err) => {
+                console.error('Erro completo:', err.response ?? err);
+                $dispatch('notify', 'Erro ao enviar comentário');
+              });
+            "
+            class="flex-1 space-y-4"
+          >
+            @csrf
 
-          <label for="content" class="sr-only">Comentário</label>
-          <x-ui.forms.input x-ref="content" name="content" as="textarea" placeholder="Compartilhe sua opinião"/>
+            <label for="content" class="sr-only">Comentário</label>
+            <x-ui.forms.input x-ref="content" name="content" as="textarea" placeholder="Compartilhe sua opinião"/>
 
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <span class="text-xs text-gray-500 dark:text-gray-200">
-              Seja respeitoso e construtivo em seus comentários
-            </span>
-            <x-ui.forms.button size="sm">Postar</x-ui.forms.button>
-          </div>
-        </form>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <span class="text-xs text-gray-500 dark:text-gray-200">
+                Seja respeitoso e construtivo em seus comentários
+              </span>
+              <x-ui.forms.button size="sm">Postar</x-ui.forms.button>
+            </div>
+          </form>
 
-      </x-ui.panel>
+        </x-ui.panel>
+      @endauth
 
       <div 
         @update-comment.window="
@@ -117,6 +121,14 @@
           <x-blog.comment.comment-item :$comment/>
         @endforeach
       </div>
+
+      <x-ui.panel x-show="count === 0">
+        @auth
+          <p class="text-gray-700 dark:text-gray-100">Nenhum comentário adicionado, seja o primeiro a comentar!</p>
+        @else
+          <p class="text-gray-700 dark:text-gray-100">Entre ou crie uma conta para ser o primeiro a comentar!</p>
+        @endauth
+      </x-ui.panel>
 
       <x-ui.toast/>
     </div>
