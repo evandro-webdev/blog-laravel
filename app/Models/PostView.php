@@ -29,7 +29,7 @@ class PostView extends Model
     if(!$recentView){
       static::create([
         'post_id' => $post->id,
-        'user_id' => $user->id,
+        'user_id' => $user?->id,
         'ip_address' => $ipAddress,
         'viewed_at' => now()
       ]);

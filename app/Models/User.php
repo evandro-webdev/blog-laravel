@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\HasUserStats;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -94,20 +96,21 @@ class User extends Authenticatable
                 ->withPivot('created_at');
   }
 
-  public function isFollowing($userId): bool
+  public function isFollowing(int $userId): bool
   {
     return $this->following()->where('users.id', $userId)->exists();
   }
 
-  public function isFollowedBy($userId): bool
+  public function isFollowedBy(int $userId): bool
   {
     return $this->followers()->where('users.id', $userId)->exists();
   }
 
-  public function notFollowing(): User
+  public function notFollowing(): EloquentBuilder
   {
     return User::query()
       ->where('id', '!=', $this->id)
-      ->whereNotIn('id', $this->following()->pluck('users.id'));
+      ->whereNotIn('id', $this->following()->pluck('users.id'))
+      ->inRandomOrder();
   }
 }

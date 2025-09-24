@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostReadController;
 use App\Http\Controllers\ProfileController;
@@ -19,7 +19,7 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('guest')->group(function () {
-  Route::get('/register', [RegisterUserController::class, 'create']);
+  Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
   Route::post('/register', [RegisterUserController::class, 'store']);
   Route::get('/login', [SessionController::class, 'create'])->name('login');
   Route::post('/login', [SessionController::class, 'store']);
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
-  Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
 

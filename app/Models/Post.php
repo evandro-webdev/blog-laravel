@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,7 +32,7 @@ class Post extends Model
     return $this->hasMany(Comment::class)->latest();
   }
 
-  public function postViews(): HasMany
+  public function views(): HasMany
   {
     return $this->hasMany(PostView::class);
   }
