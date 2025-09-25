@@ -17,7 +17,8 @@ class DashboardService
       'groupedActivities' => $this->getGroupedActivitiesByDate($this->getPaginatedActivities($user)->getCollection()),
       'statistics' => $this->getStatistics($user),
       'followers' => $this->getFollowers($user),
-      'trendingPosts' => $this->getTrendingPosts($user)
+      'mostViewedPosts' => $this->getMostViewedPosts($user),
+      'mostCommentedPosts' => $this->getMostCommentedPosts($user)
     ];
   }
 
@@ -74,11 +75,18 @@ class DashboardService
     return $user->followers();
   }
 
-  private function getTrendingPosts(User $user)
+  private function getMostViewedPosts(User $user)
   {
     return $user->posts()->withCount('views')
       ->where('published', true)
       ->orderByDesc('views_count')
       ->paginate(5);
+  }
+
+  private function getMostCommentedPosts(User $user){
+    return $user->posts()->withCount('comments')
+      ->where('published', true)
+      ->orderByDesc('comments_count')
+      ->paginate(5);;
   }
 }
