@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -69,9 +70,9 @@ class User extends Authenticatable
     return $this->hasMany(Notification::class, 'user_id')->latest();
   }
 
-  public function postViews(): HasMany
+  public function postViews(): HasManyThrough
   {
-    return $this->hasMany(PostView::class);
+    return $this->hasManyThrough(PostView::class, Post::class, 'user_id', 'post_id', 'id', 'id');
   }
 
   public function unreadNotifications(): HasMany
