@@ -22,7 +22,7 @@
     </h2>
 
     @if ($desc)
-      <p class="{{ $sizes[$size]['desc'] }} text-gray-700 dark:text-gray-100">
+      <p class="{{ $sizes[$size]['desc'] }} text-gray-700 dark:text-gray-300">
         {{ $desc }}
       </p>
     @endif

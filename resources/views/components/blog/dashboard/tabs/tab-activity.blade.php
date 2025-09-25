@@ -16,7 +16,7 @@
         </div>
       @endforeach
 
-      {{ $activities->appends(['tab' => 'overview'])->links() }}
+      {{ $activities->appends(['tab' => 'activity'])->links() }}
     </div>
   </x-ui.panel>
 </div>

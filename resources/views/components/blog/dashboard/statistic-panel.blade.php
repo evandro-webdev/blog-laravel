@@ -11,6 +11,6 @@
   </div>
   <div>
     <span class="text-3xl font-bold text-gray-800 dark:text-white">{{ $statistic['total'] }}</span>
-    <p class="text-sm text-gray-700 dark:text-gray-200">+{{ $statistic['last_30_days'] }} no ultimo mês</p>
+    <p class="text-sm text-gray-700 dark:text-gray-300">+{{ $statistic['last_30_days'] }} no ultimo mês</p>
   </div>
 </x-ui.panel>
