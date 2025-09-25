@@ -13,12 +13,16 @@
         <x-ui.tab-container default-tab="overview" class="space-y-2">
           <x-slot:tabs>
             <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
-            <x-ui.tab value="posts" x-model="tab" icon="docs">Meus posts</x-ui.tab>
+            <x-ui.tab value="posts" x-model="tab" icon="docs">Posts</x-ui.tab>
             <x-ui.tab value="activity" x-model="tab" icon="doc-list">Atividade</x-ui.tab>
           </x-slot:tabs>
 
           <x-slot:content>
-            <x-blog.dashboard.tabs.tab-overview :statistics="$dashboardData['statistics']" :trendingPosts="$dashboardData['trendingPosts']"/>
+            <x-blog.dashboard.tabs.tab-overview 
+              :statistics="$dashboardData['statistics']" 
+              :mostViewedPosts="$dashboardData['mostViewedPosts']"
+              :mostCommentedPosts="$dashboardData['mostCommentedPosts']"
+            />
             <x-blog.dashboard.tabs.tab-posts :posts="$dashboardData['posts']"/>
             <x-blog.dashboard.tabs.tab-activity :groupedActivities="$dashboardData['groupedActivities']" :activities="$dashboardData['activities']"/>
           </x-slot:content>
