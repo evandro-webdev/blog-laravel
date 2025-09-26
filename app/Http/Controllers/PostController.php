@@ -40,8 +40,9 @@ class PostController extends Controller
   {
     PostView::recordView($post, Auth::user());
     $relatedPosts = $this->postService->getRelatedPosts($post, 3);
+    $trendingPosts = $this->postService->getTrendingPostsInPeriod(7);
 
-    return view('posts.show', compact('post', 'relatedPosts'));
+    return view('posts.show', compact('post', 'relatedPosts', 'trendingPosts'));
   }
 
   public function create()
