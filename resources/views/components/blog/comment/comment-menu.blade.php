@@ -1,30 +1,23 @@
 <div 
-  x-show="menuOpen" 
-  x-cloak
-  x-transition:enter="transition ease-out duration-200"
-  x-transition:enter-start="opacity-0 scale-95"
-  x-transition:enter-end="opacity-100 scale-100"
-  x-transition:leave="transition ease-in duration-75"
-  x-transition:leave-start="opacity-100 scale-100"
-  x-transition:leave-end="opacity-0 scale-95"
-  class="w-32 mt-2 rounded-md absolute right-0 bg-white dark:bg-gray-800 border 
-        border-gray-200 dark:border-gray-700 shadow-lg z-10 overflow-hidden"
+  x-show="open" @click.away="open = false" 
+  x-transition
+  class="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 min-w-[120px] z-10"
 >
   @can('update', $comment)
-    <x-blog.comment.menu-item
-      action="editing=true; menuOpen=false"
-      icon="edit"
-      text="Editar"
-      class="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-900"
-    />
+    <button 
+      @click="updateComment({{ $comment->id }}); open = false; editing = true" 
+      class="block w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      Editar
+    </button>
   @endcan
 
-  @can('delete', $comment)
-    <x-blog.comment.menu-item
-      :action="'deleteComment(' . $comment->id . ')'"
-      icon="trash"
-      text="Excluir"
-      class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-900"
-    />
+  @can('update', $comment)
+    <button 
+      @click="deleteComment({{ $comment->id }}); open = false" 
+      class="block w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      Excluir
+    </button>
   @endcan
 </div>
