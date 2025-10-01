@@ -1,6 +1,7 @@
 <form 
   x-show="editing" 
   x-cloak
+  x-collapse
   @submit.prevent="updateComment({{ $comment->id }})"
   class="space-y-3"
 >

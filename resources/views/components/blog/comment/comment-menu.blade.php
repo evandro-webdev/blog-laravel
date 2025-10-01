@@ -5,7 +5,7 @@
 >
   @can('update', $comment)
     <button 
-      @click="updateComment({{ $comment->id }}); open = false; editing = true" 
+      @click="open = false; editing = true" 
       class="block w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
     >
       Editar

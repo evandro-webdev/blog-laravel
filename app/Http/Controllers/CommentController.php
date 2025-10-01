@@ -24,7 +24,7 @@ class CommentController extends Controller
   {
     $comment = $this->commentService->createComment($post, Auth::user(), $request->validated());
 
-    $html = view('components.blog.comment.comment-item', compact('comment'))->render();
+    $html = view('components.blog.comment.comment-item', compact('comment', 'post'))->render();
 
     return response()->json([
       'success' => true,
