@@ -1,4 +1,19 @@
 <x-layout>
+  <div 
+    class="fixed top-0 left-0 h-1 bg-blue-600 z-50 transition-all duration-300" 
+    x-data="{ width: '0%' }"
+    x-init="
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.offsetHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        width = Math.min(scrollPercent, 100) + '%';
+      })
+    "
+    :style="`width: ${width}`"
+  >
+  </div>
+
   <main class="min-h-screen">
     <header class="relative bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16">
