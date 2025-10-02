@@ -8,17 +8,16 @@
   <button
     @click="toggleRead"
     :disabled="loading"
-    class="px-4 py-2 border rounded-lg font-medium cursor-pointer flex items-center gap-2 
-           transition-colors duration-200"
+    class="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer flex items-center gap-2 transition-colors duration-200"
     :class="isRead
-      ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
-      : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-500 dark:hover:text-white'"
+      ? 'text-white bg-blue-600 hover:bg-blue-700' 
+      : 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'"
   >
     <template x-if="!loading">
-      <x-ui.icons.eye class="w-5 h-5 text-inherit"/>
+      <x-ui.icons.check size="w-4 h-4" stroke="2" class="text-inherit"/>
     </template>
 
-    <x-ui.spinner x-show="loading" class="w-4 h-4"/>
+    <x-ui.spinner x-show="loading"/>
 
     <span x-text="isRead ? 'Lido' : 'Marcar como lido'"></span>
   </button>

@@ -1,6 +1,5 @@
 <svg 
-  x-show="loading" 
-  class="animate-spin h-4 w-4 text-white" 
+  {{ $attributes->merge(['class' => 'h-4 w-4 animate-spin']) }}
   fill="none" 
   viewBox="0 0 24 24"
 >
