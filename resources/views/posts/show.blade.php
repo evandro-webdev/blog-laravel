@@ -30,9 +30,10 @@
 
           <div class="flex items-center gap-1">
             <x-ui.icons.calendar size="w-4 h-4" stroke="2"/>
-            <time datetime="{{ $post->created_at }}">
-              {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
-            </time>
+            <x-ui.datetime
+              :date="$post->created_at" 
+              format="d \d\e F, Y"
+            />
           </div>
 
           <div class="flex items-center gap-1">
@@ -108,9 +109,12 @@
 
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 @if($post->updated_at != $post->created_at)
-                  <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Última atualização: {{ $post->updated_at->translatedFormat('d \d\e F, Y \à\s H:i') }}
-                  </p>
+                  <x-ui.datetime
+                    :date="$post->updated_at"
+                    prefix="Ultima atualização: "
+                    format="d \d\e F, Y \à\s H:i"
+                    class="text-sm text-gray-500 dark:text-gray-400"
+                  />
                 @endif
 
                 <div class="flex gap-2">
@@ -137,7 +141,7 @@
           <aside class="lg:col-span-1">
             <div class="sticky top-4 space-y-8">
               <div class="p-4 rounded-xl bg-gray-50 dark:bg-gray-700">
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Índice</h3>
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Índice</h3>
                 <nav class="space-y-2">
                   <a href="#introducao" class="block text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Introdução</a>
                   <a href="#desenvolvimento" class="block text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Desenvolvimento</a>
@@ -147,7 +151,7 @@
 
               <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-900">
                 <div class="mb-4 space-y-2">
-                  <h3 class="font-semibold text-gray-900 dark:text-white">Newsletter</h3>
+                  <h3 class="font-semibold text-gray-800 dark:text-white">Newsletter</h3>
                   <p class="text-sm text-gray-600 dark:text-gray-300">Receba os melhores conteúdos direto no seu email</p>
                 </div>
 
@@ -167,24 +171,25 @@
               </div>
 
               <div class="p-4 rounded-xl bg-gray-50 dark:bg-gray-700">
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Posts Populares</h3>
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Posts Populares</h3>
                 <div class="space-y-4">
-                  @foreach ($trendingPosts as $post)
+                  @foreach ($trendingPosts as $trendingPost)
                     <a href="{{ route('posts.show', $post) }}" class="block">
                       <h4
                         title="{{ $post->title }}"
-                        class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2"
+                        class="text-sm font-medium text-gray-700 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2"
                       >
                         {{ $post->title }}
                       </h4>
-                      <time datetime="{{ $post->created_at }}" class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
-                      </time>
+                      <x-ui.datetime
+                        :date="$post->created_at" 
+                        format="d \d\e F, Y"
+                        class="mt-1 text-xs text-gray-500 dark:text-gray-400"
+                      />
                     </a>
                   @endforeach
                 </div>
               </div>
-
             </div>
           </aside>
         </div>
@@ -196,8 +201,9 @@
         <div x-data="{ count: {{ $post->comments->count() }} }" class="space-y-8">
           <div class="flex items-center justify-between">
             <h2 
-              class="text-2xl font-bold text-gray-900 dark:text-white"
-              x-text="count === 0 ? 'Seja o primeiro a comentar' : 'Comentários (' + count + ')'">
+              x-text="count === 0 ? 'Seja o primeiro a comentar' : 'Comentários (' + count + ')'"
+              class="text-2xl font-bold text-gray-800 dark:text-white"
+            >
             </h2>
             <button class="text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
               Ordenar por: Mais recentes
