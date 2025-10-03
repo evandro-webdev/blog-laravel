@@ -27,7 +27,7 @@
   "
   x-show="show"
   id="toast"
-  class="w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white bg-white dark:bg-gray-800 shadow-sm
+  class="w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white bg-white dark:bg-gray-700 shadow-sm
         flex items-center justify-between z-50" 
   role="alert"
   x-transition:enter="transform ease-out duration-300 transition"
@@ -49,8 +49,8 @@
 
   <button 
     type="button"
-    class="h-8 w-8 p-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 bg-white dark:bg-gray-900 
-        hover:bg-gray-100 dark:hover:bg-gray-700 inline-flex items-center justify-center transition-colors" 
+    class="h-8 w-8 p-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 bg-white dark:bg-gray-800 
+        hover:bg-gray-100 dark:hover:bg-gray-900 inline-flex items-center justify-center transition-colors" 
     data-dismiss-target="#toast"
     aria-label="Fechar"
     @click="show=false"

@@ -7,7 +7,7 @@
         : "https://ui-avatars.com/api/?name=" . urlencode($user->name) . "&background=37474f&color=fff";
   @endphp
 
-  <div class="{{ $size }} rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+  <div class="{{ $size }} rounded-full overflow-hidden bg-gray-300 flex items-center justify-center shrink-0">
     <img 
       src="{{ $avatar }}" 
       alt="{{ $user->name }}"

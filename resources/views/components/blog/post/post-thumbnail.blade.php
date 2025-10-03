@@ -1,18 +1,19 @@
 @props([
-  'link',      
+  'image',
+  'title',     
   'showBadge' => false,
-  'category' => null,
+  'category' => null
 ])
 
 @php
-  $containerClasses = 'shrink-0 relative overflow-hidden';
+  $containerClasses = 'aspect-video shrink-0 relative overflow-hidden';
 @endphp
 
 <div {{ $attributes->merge(['class' => $containerClasses]) }}>
-  <img 
-    src="{{ $link }}" 
-    class="w-full h-full object-cover" 
-    alt="{{ $attributes->get('alt', 'Imagem') }}" 
+  <img
+    src="{{ asset('storage/' . $image) }}"
+    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+    alt="Miniatura de: {{ $title }}"
     loading="lazy"
   >
 
