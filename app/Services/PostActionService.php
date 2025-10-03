@@ -28,7 +28,6 @@ class PostActionService
       $this->postTagService->addTags($post, $tags);
     }
 
-    //fix
     if($post->published){
       event(new PostPublished($post));
     }

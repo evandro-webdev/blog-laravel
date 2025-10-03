@@ -4,7 +4,6 @@
       <div class="space-y-2 md:col-span-1">
         <x-ui.panel>
           <div class="space-y-4 flex flex-col items-center">
-  
             <div class="relative">
               <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
 
@@ -12,19 +11,20 @@
                 <form id="uploadForm" action="{{ route('profile.updatePicture', $user) }}" method="POST" enctype="multipart/form-data">
                   @method('PATCH')
                   @csrf
-                  <input id="profile_pic" type="file" name="profile_pic" hidden  onchange="submitForm()">
+                  <input id="profile_pic" type="file" name="profile_pic" hidden onchange="submitForm()">
                 </form>
-
                 <label for="profile_pic" class="p-2 rounded-full cursor-pointer absolute bottom-0 right-0 bg-blue-600">
                   <x-ui.icons.camera class="text-white"/>
                 </label> 
               @endif
             </div>
-            
+
             <div class="space-y-1 text-center">
               <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $user->name }}</h3>
               <x-ui.badge small variant="white">{{ '@' . $user->username }}</x-ui.badge>
             </div>
+
+            <x-ui.follow-button :$user/>
 
             <div class="w-full flex justify-around">
               <div class="text-center">
@@ -40,8 +40,6 @@
                 <p class="text-sm text-gray-500 dark:text-gray-100">Publicações</p>
               </div>
             </div>
-  
-            <x-ui.follow-button :$user/>
 
             @if($user->is_private && !$isOwnProfile)
               <div class="p-4 text-sm text-gray-600 rounded mb-4 text-center bg-gray-50">
@@ -58,7 +56,9 @@
             <div class="space-y-4">
               <p class="text-sm text-gray-800 dark:text-gray-100">{{ $user->bio }}</p>
               <div class="space-y-3">
-                <x-ui.icon-item icon="local" label="{{ $user->city ?? 'Não informado' }}"/>
+                @if ($user->city)
+                  <x-ui.icon-item icon="local" label="{{ $user->city }}"/>
+                @endif
                 <x-ui.icon-item icon="calendar" label="Entrou em {{ $user->created_at->translatedFormat('d \d\e F, Y') }}"/>
               </div>
 
