@@ -1,3 +1,8 @@
+@props([
+  'post',
+  'comment'
+])
+
 <div 
   x-data="{ 
     editing: false, 

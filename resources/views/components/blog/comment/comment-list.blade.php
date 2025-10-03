@@ -1,3 +1,8 @@
+@props([
+  'post',
+  'comments'
+])
+
 <div 
   @update-comment.window="
     axios.put('/comments/' + $event.detail.id, { content: $event.detail.content })

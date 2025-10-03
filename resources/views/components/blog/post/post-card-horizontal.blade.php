@@ -11,9 +11,10 @@
         <span class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ $post->user->name }}</span>
       </div>
       <span class="text-gray-600 dark:text-gray-100">·</span>
-      <time class="text-xs text-gray-600 dark:text-gray-100" datetime="{{ $post->created_at }}">
-        {{ $post->created_at->diffForHumans() }}
-      </time>
+      <x-ui.datetime 
+        :date="$post->created_at"
+        class="text-xs text-gray-600 dark:text-gray-100"
+      />
     </div>
 
     <a href="{{ route('posts.show', $post) }}" class="space-y-1">

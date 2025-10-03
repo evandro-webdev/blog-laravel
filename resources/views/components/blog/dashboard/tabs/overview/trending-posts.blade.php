@@ -10,9 +10,7 @@
         <span class="hidden sm:block">•</span>
         <span class="text-nowrap hidden sm:block">{{ $post->comments->count() }} comentários</span>
         <span>|</span>
-        <time datetime="{{ $post->created_at }}" class="block text-nowrap">
-          {{ $post->created_at->translatedFormat('d \d\e F, Y') }}
-        </time>
+        <x-ui.datetime :date="$post->created_at" format="d \d\e F, Y"/>
       </div>
     </a>
   @endforeach
