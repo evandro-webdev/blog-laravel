@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait LogsActivity
 {
-  public function logActivity(string $action, $subject = null, ?string $description)
+  public function logActivity(string $action, $subject = null, ?string $description = null)
   {
     ActivityLog::create([
       'user_id' => Auth::id(),
