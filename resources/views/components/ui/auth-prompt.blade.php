@@ -2,11 +2,11 @@
   'message' => 'Faça login para continuar'
 ])
 
-<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm text-center">
-  <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $message }}</p>
-  <div class="flex gap-2 items-center justify-center">
-    <x-ui.forms.button href="{{ route('login') }}" size="sm">Fazer login</x-ui.forms.button>
-    <span class="text-gray-600 dark:text-gray-300">ou</span>
-    <x-ui.forms.button href="{{ route('register') }}" size="sm">Criar conta</x-ui.forms.button>
-  </div>
-</div>
+<x-ui.panel class="text-center flex flex-col items-center gap-4">
+  <p class="text-gray-600 dark:text-white">{{ $message }}</p>
+  <x-ui.forms.button href="{{ route('login') }}" icon="enter" size="sm">Entrar</x-ui.forms.button>
+  <p class="text-sm text-gray-500 dark:text-gray-100">
+    Ainda não tem conta?
+    <a href="{{ route('register') }}" class="text-blue-600 dark:text-blue-400 hover:underline">Cadastre-se</a>
+  </p>
+</x-ui.panel>
