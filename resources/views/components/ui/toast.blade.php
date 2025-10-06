@@ -4,8 +4,6 @@
 ])
 
 @php
-  $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
-
   $positions = [
     'right-top'    => 'top-5 right-5',
     'right-bottom' => 'bottom-5 right-5',
@@ -16,10 +14,18 @@
   ];
 
   $positionClass = $positions[$position];
+  $classes = "w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white bg-white dark:bg-gray-700 shadow-sm flex items-center justify-between z-200" 
 @endphp
 
 <div 
   x-data="{ show: false, message: ''}"
+   x-init="
+    @if (session('message'))
+      message = '{{ session('message') }}';
+      show = true;
+      setTimeout(() => show = false, 3000);
+    @endif
+  "
   @notify.window="
     message = $event.detail;
     show = true;
@@ -27,9 +33,8 @@
   "
   x-show="show"
   id="toast"
-  class="w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white bg-white dark:bg-gray-700 shadow-sm
-        flex items-center justify-between z-50" 
   role="alert"
+  class="{{ $classes }}"
   x-transition:enter="transform ease-out duration-300 transition"
   x-transition:enter-start="translate-y-2 opacity-0"
   x-transition:enter-end="translate-y-0 opacity-100"
@@ -39,9 +44,7 @@
 >
   <div class="flex items-center">
     @if ($icon)
-      <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
-        <img src="{{ $iconUrl }}" alt="Botão X de fechar">
-      </div>
+      <x-dynamic-component :component="'ui.icons.' . $icon"/>
     @endif
   
     <div x-text="message" class="ms-3 text-sm font-normal"></div>
@@ -55,7 +58,6 @@
     aria-label="Fechar"
     @click="show=false"
   >
-    <span class="sr-only">Fechar</span>
     <x-ui.icons.close class="text-blue-600 dark:text-blue-400"/>
   </button>
 </div>
