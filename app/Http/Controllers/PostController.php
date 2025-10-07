@@ -61,7 +61,8 @@ class PostController extends Controller
 
     $this->logActivity('Post publicado', $post);
 
-    return redirect('/admin/dashboard?tab=posts');
+    return redirect('/admin/dashboard?tab=posts')
+      ->with('message', 'Post criado com sucesso');
   }
 
   public function edit(Post $post)
@@ -80,7 +81,8 @@ class PostController extends Controller
 
     $this->logActivity('Post atualizado', $post);
 
-    return redirect('/admin/dashboard?tab=posts');
+    return redirect('/admin/dashboard?tab=posts')
+      ->with('message', 'Post atualizado com sucesso');
   }
 
   public function destroy(Post $post)
@@ -89,6 +91,7 @@ class PostController extends Controller
 
     $this->logActivity('Post deletado', $post);
 
-    return redirect('/admin/dashboard?tab=posts');
+    return redirect('/admin/dashboard?tab=posts')
+      ->with('message', 'Post deletado com sucesso');
   }
 }
