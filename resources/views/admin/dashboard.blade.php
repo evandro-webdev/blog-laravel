@@ -2,7 +2,7 @@
   <div class="flex-1">
     <x-section>
       <div class="max-w-[1280px] mx-auto">
-        <div class="mb-6 sm:flex items-center justify-between">
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <x-page-heading 
             title="Dashboard" 
             subtitle="Gerencie o conteúdo do seu blog e veja estatísticas."

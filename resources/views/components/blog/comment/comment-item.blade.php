@@ -31,10 +31,10 @@
     }
   }"
   id="comment-{{ $comment->id }}"
-  class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm"
+  class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm"
 >
-  <div class="flex gap-4">
-    <x-profile.avatar :user="$comment->user"/>
+  <div class="flex gap-3 md:gap-4">
+    <x-profile.avatar :user="$comment->user" size="w-8 h-8"/>
       
     <div class="flex-1">
       <x-blog.comment.comment-header :$comment :$post/>

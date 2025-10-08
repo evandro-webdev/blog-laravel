@@ -5,7 +5,7 @@
     <x-ui.base.badge small variant="blue">{{ $post->category->name }}</x-ui.badge>
 
     <h3 class="my-2 font-semibold line-clamp-2 text-gray-800 dark:text-white">
-      <a href="/posts/{{ $post->slug }}" class="hover:text-blue-600 transition-colors">
+      <a href="/posts/{{ $post->slug }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
         {{ $post->title }}
       </a>
     </h3>

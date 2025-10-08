@@ -9,11 +9,11 @@
           {{ $post->category->name }}
         </x-ui.base.badge>
 
-        <h1 class="mt-4 mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+        <h1 class="mt-4 mb-4 md:mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
           {{ $post->title }}
         </h1>
 
-        <p class="max-w-3xl mb-8 text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p class="max-w-3xl mb-6 md:mb-8 text-md sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
           {!! $post->excerpt !!}
         </p>
 
@@ -57,7 +57,7 @@
       </div>
     </header>
 
-    <section class="py-12 bg-white dark:bg-slate-800">
+    <section class="py-6 md:py-12 bg-white dark:bg-slate-800">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <figure class="rounded-xl overflow-hidden shadow-lg">
           <img 
@@ -71,30 +71,30 @@
     </section>
 
     <div class="bg-white dark:bg-slate-800">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
           <article class="lg:col-span-3">
-            <div class="max-w-none prose prose-lg prose-gray dark:prose-invert">
+            <div class="max-w-none prose prose-base sm:prose-md lg:prose-lg prose-gray dark:prose-invert">
               {!! $post->content !!}
             </div>
 
             <footer class="mt-6 pt-2 space-y-4">
-              <div class="p-6 rounded-xl bg-gray-50 dark:bg-slate-700">
+              <div class="p-6 rounded-xl bg-gray-50 dark:bg-slate-900">
                 <div class="flex flex-col items-center">
                   <x-profile.avatar :user="$post->user" size="w-16 h-16"/>
                   <a 
                     href="{{ route('profile.show', $post->user) }}"
-                    class="my-2 font-semibold text-gray-900 dark:text-white"
+                    class="mt-2 font-semibold text-gray-900 dark:text-white"
                   >
                     {{ $post->user->name }}
                   </a>
                 </div>
 
                 @if($post->user->bio)
-                  <p class="mb-4 text-sm text-center text-gray-600 dark:text-gray-300">{{ $post->user->bio }}</p>
+                  <p class="[text-wrap:balance] my-4 text-sm text-center text-gray-600 dark:text-gray-300">{{ $post->user->bio }}</p>
                 @endif
 
-                <div class="text-sm flex justify-center gap-4 text-blue-600 dark:text-blue-400  ">
+                <div class="text-sm flex justify-center gap-4 text-blue-600 dark:text-blue-500">
                   <span>{{ $post->user->posts()->where('published', true)->count() }} posts</span>
                   <span>{{ $post->user->getFollowersCount() }} seguidores</span>
                 </div>
@@ -107,13 +107,13 @@
                 </div>
               @endauth
 
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="flex flex-wrap items-center justify-between gap-4">
                 @if($post->updated_at != $post->created_at)
                   <x-ui.utilities.datetime
                     :date="$post->updated_at"
                     prefix="Ultima atualização: "
                     format="d \d\e F, Y \à\s H:i"
-                    class="text-sm text-gray-500 dark:text-gray-400"
+                    class="text-xs md:text-sm text-gray-500 dark:text-gray-400"
                   />
                 @endif
 
@@ -138,7 +138,7 @@
             </footer>
           </article>
 
-          <aside class="lg:col-span-1">
+          <aside class="lg:col-span-1 hidden lg:block">
             <div class="sticky top-4 space-y-8">
               <div class="p-4 rounded-xl bg-gray-50 dark:bg-slate-700">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Índice</h3>
@@ -190,14 +190,14 @@
     <section class="py-12 bg-gray-50 dark:bg-slate-900">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div x-data="{ count: {{ $post->comments->count() }} }" class="space-y-8">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-wrap items-center justify-between">
             <h2 
               x-text="count === 0 ? 'Seja o primeiro a comentar' : 'Comentários (' + count + ')'"
               class="text-2xl font-bold text-gray-800 dark:text-white"
             >
             </h2>
-            <button class="text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
-              Ordenar por: Mais recentes
+            <button class="text-xs text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
+              Mais recentes
             </button>
           </div>
 
@@ -216,8 +216,8 @@
       <section class="py-16 bg-white dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="mb-12 text-center">
-            <h2 class="mb-4 text-3xl font-bold text-gray-900 dark:text-white">Artigos relacionados</h2>
-            <p class="text-lg text-gray-600 dark:text-gray-300">Continue sua leitura com estes conteúdos similares</p>
+            <h2 class="mb-2 text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Artigos relacionados</h2>
+            <p class="[text-wrap:balance] text-base md:text-lg text-gray-600 dark:text-gray-300">Continue sua leitura com estes conteúdos similares</p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -232,8 +232,8 @@
     <section class="py-16 bg-blue-800">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="max-w-2xl mx-auto">
-          <h2 class="mb-4 text-3xl font-bold text-white">Não perca nenhum conteúdo</h2>
-          <p class="mb-8 text-xl text-blue-100">
+          <h2 class="mb-2 md:mb-4 text-xl sm:text-2xl md:text-3xl font-bold text-white">Não perca nenhum conteúdo</h2>
+          <p class="[text-wrap:balance] mb-6 md:mb-8 text-sm sm:text-lg md:text-xl text-blue-100">
             Receba os melhores artigos sobre desenvolvimento, dicas e tutoriais direto no seu email
           </p>
           

@@ -1,12 +1,12 @@
 <footer class="flex items-center gap-4" x-show="!editing">
-  <button class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
+  <button class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
     <x-ui.icons.heart size="w-4 h-4" stroke="2"/>
-    Curtir
+    <span>Curtir</span>
   </button>
     
-  <button class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
+  <button class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
     <x-ui.icons.corner-up-left size="w-4 h-4" stroke="2"/>
-    Responder
+    <span>Responder</span>
   </button>
     
   @can('update', $comment)

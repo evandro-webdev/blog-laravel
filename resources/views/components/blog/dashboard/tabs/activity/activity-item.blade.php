@@ -39,7 +39,7 @@
     <h4 class="text-sm font-bold text-gray-800 dark:text-white">{{ $activity->action }}</h4>
 
     @if ($activity->subject_url)
-      <a href="{{$activity->subject_url}}" class="text-sm truncate whitespace-nowrap overflow-hidden text-gray-700 dark:text-gray-100">
+      <a href="{{$activity->subject_url}}" class="block text-sm truncate whitespace-nowrap overflow-hidden text-gray-700 dark:text-gray-100">
         {{ $activity->description }}
       </a>
     @else

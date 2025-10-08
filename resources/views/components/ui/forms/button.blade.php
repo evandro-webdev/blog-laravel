@@ -52,9 +52,10 @@
 @if ($href)
   <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
     @if ($icon)
-      <x-dynamic-component 
+      <x-dynamic-component
         :component="'ui.icons.' . $icon"
         :stroke="1.5"
+        size="w-[1em] h-[1em]"
       />
     @endif
     <span>{{ $slot }}</span>
@@ -65,6 +66,7 @@
       <x-dynamic-component 
         :component="'ui.icons.' . $icon"
         :stroke="1.5"
+        size="w-[1em] h-[1em]"
       />
     @endif
     <span>{{ $slot }}</span>

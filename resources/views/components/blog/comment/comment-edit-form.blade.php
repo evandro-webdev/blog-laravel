@@ -1,5 +1,5 @@
 <form 
-  x-show="editing" 
+  x-show="editing"
   x-cloak
   x-collapse
   @submit.prevent="updateComment({{ $comment->id }})"

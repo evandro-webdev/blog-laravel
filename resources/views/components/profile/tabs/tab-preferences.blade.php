@@ -81,9 +81,11 @@
           placeholder="Confirme sua nova senha"
         />
       </div>
+
       <x-ui.forms.button 
         type="button" 
         @click="submit($event)"
+        size="sm"
       >
         <span x-show="!loading">Salvar</span>
         <x-ui.base.spinner x-show="loading"/>
