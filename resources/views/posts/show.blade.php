@@ -177,7 +177,7 @@
                 </div>
 
                 <form class="space-y-3">
-                  <x-ui.forms.input type="email" name="email" placeholder="Seu melhor email" size="sm"/>
+                  <x-ui.forms.input type="email" name="email" placeholder="Seu melhor email" size="sm" variant="white"/>
                   <x-ui.forms.button size="sm" class="w-full">Inscrever-se</x-ui.forms.button>
                 </form>
               </div>
