@@ -9,29 +9,7 @@
 
       <div class="flex flex-col gap-6 lg:flex-row">
         <div class="flex-1">
-          <div class="mb-4 flex border-b border-gray-200 dark:border-gray-600">
-            <a 
-              href="{{ request()->url() }}?tab=personal-feed&sort=recent" 
-              class="px-4 py-2 -mb-px border-b-2 font-medium text-sm flex items-center gap-2
-                {{ $tab === 'personal-feed' 
-                    ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400' 
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:border-gray-600' }}"
-            >
-              <x-ui.icons.users />
-              <span>Seguindo</span>
-            </a>
-
-            <a 
-              href="{{ request()->url() }}?tab=trending-feed&sort=popular" 
-              class="px-4 py-2 -mb-px border-b-2 font-medium text-sm flex items-center gap-2
-                {{ $tab === 'trending-feed' 
-                    ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400' 
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:border-gray-600' }}"
-            >
-              <x-ui.icons.world />
-              <span>Em alta</span>
-            </a>
-          </div>
+          <x-home.tab-links :$tab/>
 
           <div>
             @if ($tab === 'personal-feed')
@@ -81,16 +59,16 @@
               class="mb-6"
             />
 
-            <div class="space-y-4">
+            <div class="space-y-5">
               @foreach ($trendingPostsThisMonth as $trendingPost)
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2">
                   
                   <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-full 
                               bg-blue-600 text-white text-sm font-bold">
                     {{ $loop->iteration }}
                   </div>
 
-                  <h3 class="text-gray-800 dark:text-white font-medium hover:underline line-clamp-2">
+                  <h3 class="text-sm font-medium hover:underline line-clamp-2 text-gray-800 dark:text-white">
                     <a href="{{ route('posts.show', $trendingPost) }}">
                       {{ $trendingPost->title }}
                     </a>
