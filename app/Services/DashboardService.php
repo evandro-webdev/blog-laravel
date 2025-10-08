@@ -6,7 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\ActivityLog;
-use Illuminate\Support\Carbon;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class DashboardService
 {
@@ -22,7 +23,7 @@ class DashboardService
     ];
   }
 
-  private function getPaginatedPosts(User $user)
+  private function getPaginatedPosts(User $user): LengthAwarePaginator
   {
     return Post::where('user_id', $user->id)->latest()->paginate(10, ['*'], 'postsPage');
   }
@@ -32,20 +33,23 @@ class DashboardService
     return ActivityLog::where('user_id', $user->id)->latest()->paginate(10, ['*'], 'activitiesPage');
   }
 
-  private function getGroupedActivitiesByDate($activitiesCollection)
+  private function getGroupedActivitiesByDate(Collection $activitiesCollection): Collection
   {
-    return $activitiesCollection->groupBy(function ($activity) {
-      $daysAgo = (int) $activity->created_at->diffInDays(Carbon::now());
+    $today = now()->startOfDay();
+    $yesterday = $today->subDay();
+
+    return $activitiesCollection->groupBy(function ($activity) use($today, $yesterday) {
+      $activityDate = $activity->created_at->copy()->startOfDay();
 
       return match (true) {
-        $daysAgo === 0 => 'Hoje',
-        $daysAgo === 1 => 'Ontem',
-        default => "{$daysAgo} dias atrás"
+        $activityDate->equalTo($today) => 'Hoje',
+        $activityDate->equalTo($yesterday) => 'Ontem',
+        default => $activityDate->diffInDays($today) . ' dias atrás',
       };
     });
   }
 
-  private function getStatistics(User $user)
+  private function getStatistics(User $user): array
   {
     $thirtyDaysAgo = now()->subDays(30);
     $postsIds = $user->posts()->pluck('id');
@@ -75,7 +79,7 @@ class DashboardService
     return $user->followers();
   }
 
-  private function getMostViewedPosts(User $user)
+  private function getMostViewedPosts(User $user): LengthAwarePaginator
   {
     return $user->posts()->withCount('views')
       ->where('published', true)
@@ -83,7 +87,8 @@ class DashboardService
       ->paginate(5);
   }
 
-  private function getMostCommentedPosts(User $user){
+  private function getMostCommentedPosts(User $user): LengthAwarePaginator
+  {
     return $user->posts()->withCount('comments')
       ->where('published', true)
       ->orderByDesc('comments_count')
