@@ -13,11 +13,11 @@
 ])
 
 @php
-  $baseClasses = 'w-full border rounded-lg text-gray-800 dark:text-gray-100 placeholder-gray-400 outline-none transition-colors block resize-none';
+  $baseClasses = 'w-full rounded-lg  placeholder-gray-400 outline-none transition-colors block resize-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500';
 
   $variantClasses = [
-    'white' => 'border-0 bg-white',
-    'default' => 'border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-700 focus:border-gray-500 focus:ring-1 focus:ring-gray-500'
+    'default' => 'border border-gray-300 dark:border-slate-700 text-gray-800 dark:text-gray-100 bg-white dark:bg-slate-700',
+    'white' => 'text-gray-700 bg-white'
   ][$variant];
 
   $sizeClasses = [
