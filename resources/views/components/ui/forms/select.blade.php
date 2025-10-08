@@ -8,7 +8,7 @@
 ])
 
 @php
-  $classes = 'w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 dark:text-gray-100 focus:border-gray-500 focus:ring-1 focus:ring-gray-500 bg-white dark:bg-gray-800';
+  $classes = 'w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 dark:text-gray-100 focus:border-gray-500 focus:ring-1 focus:ring-gray-500 bg-white dark:bg-slate-700';
 @endphp
 
 <x-ui.forms.field

@@ -17,7 +17,7 @@
       <x-ui.icons.check size="w-4 h-4" stroke="2" class="text-inherit"/>
     </template>
 
-    <x-ui.spinner x-show="loading"/>
+    <x-ui.base.spinner x-show="loading"/>
 
     <span x-text="isRead ? 'Lido' : 'Marcar como lido'"></span>
   </button>

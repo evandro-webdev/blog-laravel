@@ -15,7 +15,7 @@
   x-effect="updateUrl()"
   {{ $attributes->merge(['class' => 'flex-1']) }}
 >
-  <div class="p-1 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-wrap gap-1">
+  <div class="p-1 rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex flex-wrap gap-1">
     {{ $tabs }}
   </div>
 

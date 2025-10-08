@@ -15,7 +15,7 @@
 <time
   title="{{ $date->translatedFormat('d/m/Y H:i') }}"
   datetime="{{ $date->toIso8601String() }}" 
-  {{ $attributes->merge(['class']) }}
+  {{ $attributes->merge(['class' => 'block']) }}
 >
   {{ $prefix ? $prefix . ' ' : '' }}{{ $formattedDate }}
 </time>
