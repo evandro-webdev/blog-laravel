@@ -1,16 +1,16 @@
 @props([
+  'type' => 'submit',
+  'href' => null,
   'variant' => 'default',
   'size' => 'md',
-  'href' => null,
   'outline' => false,
-  'type' => 'submit',
   'icon' => null
 ])
 
 @php
   $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
 
-  $baseClasses = 'rounded-lg font-medium cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
+  $baseClasses = 'rounded-lg border font-medium cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
 
   $sizeStyles = [
     'xs' => 'px-2 py-1 text-xs',
@@ -22,24 +22,28 @@
 
   $variantStyles = [
     'default' => [
-      'filled' => 'border border-blue-600 bg-blue-600 text-white hover:bg-blue-700',
-      'outline' => 'border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white'
+      'filled' => 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700',
+      'outline' => 'border-blue-400 text-blue-400 hover:bg-blue-600 hover:text-white'
     ],
     'success' => [
-      'filled' => 'border border-green-600 bg-green-600 text-white hover:bg-green-700',
-      'outline' => 'border border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
+      'filled' => 'border-green-600 bg-green-600 text-white hover:bg-green-700',
+      'outline' => 'border-green-600 dark:border-green-500 text-green-600 dark:text-green-500 hover:bg-green-600 hover:text-white'
     ],
     'danger' => [
-      'filled' => 'border border-red-600 bg-red-600 text-white hover:bg-red-700',
-      'outline' => 'border border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
+      'filled' => 'border-red-600 dark:border-red-700 bg-red-600 dark:bg-red-700 text-white hover:bg-red-700 dark:hover:bg-red-800',
+      'outline' => 'border-red-600 dark:border-red-500 text-red-600 dark:text-red-500 hover:bg-red-600 dark:hover:bg-red-700 hover:text-white'
     ],
     'neutral' => [
-      'filled' => 'border border-gray-600 bg-gray-600 text-white hover:bg-gray-700',
-      'outline' => 'border border-gray-600 text-gray-900 dark:text-gray-100 hover:text-white hover:bg-gray-800 hover:border-gray-900'
+      'filled' => 'border-slate-600 dark:border-slate-600 text-white bg-slate-600 dark:bg-slate-600 hover:bg-slate-700 dark:hover:bg-slate-700',
+      'outline' => 'border-slate-600 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-slate-600 '
+    ],
+    'white' => [
+      'filled' => 'border-white text-blue-600 bg-white hover:bg-gray-100',
+      'outline' => 'border-white text-white hover:text-blue-600 hover:bg-white'
     ]
   ];
 
-  $sizeClasses = $sizeStyles[$size] ?? $sizeStyles['md'];
+  $sizeClasses = $sizeStyles[$size];
   $variantClasses = $variantStyles[$variant][$outline ? 'outline' : 'filled'] ?? '';
 
   $classes = implode(' ', [$baseClasses, $sizeClasses, $variantClasses]);
