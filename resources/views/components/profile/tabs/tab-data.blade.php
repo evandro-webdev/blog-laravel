@@ -3,7 +3,7 @@
     @csrf
     @method('PUT')
 
-    <x-ui.panel>
+    <x-ui.base.panel>
       <div class="mb-8 flex items-center justify-between">
         <x-section-heading
           title="Informações pessoais"
@@ -18,9 +18,9 @@
         <x-ui.forms.input name="bio" value="{{ $user->bio }}" label="Bio" placeholder="Bio" as="textarea"/>
         <x-ui.forms.input name="city" value="{{ $user->city }}" label="Cidade" placeholder="Cidade"/>
       </div>
-    </x-ui.panel>
+    </x-ui.base.panel>
 
-    <x-ui.panel>
+    <x-ui.base.panel>
       <x-section-heading
         title="Redes sociais"
         desc="Conecte-se com seus seguidores pelas redes sociais"
@@ -68,6 +68,6 @@
           placeholder="https://youtube.com/@..."
         />
       </div>
-    </x-ui.panel>
+    </x-ui.base.panel>
   </form>
 </div>

@@ -1,13 +1,13 @@
 <x-layout>
-  <x-ui.progress-bar/>
+  <x-ui.base.progress-bar/>
   <x-blog.post.post-actions/>
 
   <main class="min-h-screen">
-    <header class="relative border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <header class="relative border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16">
-        <x-ui.badge href="/category/{{ $post->category->name }}" small>
+        <x-ui.base.badge href="/category/{{ $post->category->name }}" small>
           {{ $post->category->name }}
-        </x-ui.badge>
+        </x-ui.base.badge>
 
         <h1 class="mt-4 mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
           {{ $post->title }}
@@ -30,7 +30,7 @@
 
           <div class="flex items-center gap-1">
             <x-ui.icons.calendar size="w-4 h-4" stroke="2"/>
-            <x-ui.datetime
+            <x-ui.utilities.datetime
               :date="$post->created_at" 
               format="d \d\e F, Y"
             />
@@ -50,14 +50,14 @@
         @if($post->tags->count())
           <div class="mb-8 flex flex-wrap gap-2">
             @foreach ($post->tags as $tag)
-              <x-ui.badge href="/tags/{{ $tag->slug }}" variant="white" small>#{{ $tag->name }}</x-ui.badge>
+              <x-ui.base.badge href="/tags/{{ $tag->slug }}" variant="white" small>#{{ $tag->name }}</x-ui.base.badge>
             @endforeach
           </div>
         @endif
       </div>
     </header>
 
-    <section class="py-12 bg-white dark:bg-gray-800">
+    <section class="py-12 bg-white dark:bg-slate-800">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <figure class="rounded-xl overflow-hidden shadow-lg">
           <img 
@@ -70,16 +70,16 @@
       </div>
     </section>
 
-    <div class="bg-white dark:bg-gray-800">
+    <div class="bg-white dark:bg-slate-800">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
           <article class="lg:col-span-3">
             <div class="max-w-none prose prose-lg prose-gray dark:prose-invert">
               {!! $post->content !!}
             </div>
 
             <footer class="mt-6 pt-2 space-y-4">
-              <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-700">
+              <div class="p-6 rounded-xl bg-gray-50 dark:bg-slate-700">
                 <div class="flex flex-col items-center">
                   <x-profile.avatar :user="$post->user" size="w-16 h-16"/>
                   <a 
@@ -102,14 +102,14 @@
 
               @auth
                 <div class="pb-4 border-b border-gray-200 dark:border-gray-700 flex flex-wrap gap-3">
-                  <x-ui.save-button :$post/>
-                  <x-ui.read-button :$post/>
+                  <x-ui.interactive.save-button :$post/>
+                  <x-ui.interactive.read-button :$post/>
                 </div>
               @endauth
 
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 @if($post->updated_at != $post->created_at)
-                  <x-ui.datetime
+                  <x-ui.utilities.datetime
                     :date="$post->updated_at"
                     prefix="Ultima atualização: "
                     format="d \d\e F, Y \à\s H:i"
@@ -140,13 +140,34 @@
 
           <aside class="lg:col-span-1">
             <div class="sticky top-4 space-y-8">
-              <div class="p-4 rounded-xl bg-gray-50 dark:bg-gray-700">
+              <div class="p-4 rounded-xl bg-gray-50 dark:bg-slate-700">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Índice</h3>
                 <nav class="space-y-2">
                   <a href="#introducao" class="block text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Introdução</a>
                   <a href="#desenvolvimento" class="block text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Desenvolvimento</a>
                   <a href="#conclusao" class="block text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Conclusão</a>
                 </nav>
+              </div>
+
+              <div class="p-4 rounded-xl bg-gray-50 dark:bg-slate-700">
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Posts Populares</h3>
+                <div class="space-y-4">
+                  @foreach ($trendingPosts as $trendingPost)
+                    <a href="{{ route('posts.show', $trendingPost) }}" class="block">
+                      <h4
+                        title="{{ $trendingPost->title }}"
+                        class="text-sm font-medium text-gray-700 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2"
+                      >
+                        {{ $trendingPost->title }}
+                      </h4>
+                      <x-ui.utilities.datetime
+                        :date="$post->created_at" 
+                        format="d \d\e F, Y"
+                        class="mt-1 text-xs text-gray-600 dark:text-slate-300"
+                      />
+                    </a>
+                  @endforeach
+                </div>
               </div>
 
               <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-900">
@@ -156,39 +177,9 @@
                 </div>
 
                 <form class="space-y-3">
-                  <input 
-                    type="email" 
-                    placeholder="Seu melhor email" 
-                    class="w-full px-3 py-2 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <button 
-                      type="submit" 
-                      class="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                      Inscrever-se
-                    </button>
+                  <x-ui.forms.input type="email" name="email" placeholder="Seu melhor email" size="sm"/>
+                  <x-ui.forms.button size="sm" class="w-full">Inscrever-se</x-ui.forms.button>
                 </form>
-              </div>
-
-              <div class="p-4 rounded-xl bg-gray-50 dark:bg-gray-700">
-                <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Posts Populares</h3>
-                <div class="space-y-4">
-                  @foreach ($trendingPosts as $trendingPost)
-                    <a href="{{ route('posts.show', $post) }}" class="block">
-                      <h4
-                        title="{{ $post->title }}"
-                        class="text-sm font-medium text-gray-700 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2"
-                      >
-                        {{ $post->title }}
-                      </h4>
-                      <x-ui.datetime
-                        :date="$post->created_at" 
-                        format="d \d\e F, Y"
-                        class="mt-1 text-xs text-gray-500 dark:text-gray-400"
-                      />
-                    </a>
-                  @endforeach
-                </div>
               </div>
             </div>
           </aside>
@@ -196,7 +187,7 @@
       </div>
     </div>
 
-    <section class="py-12 bg-gray-50 dark:bg-gray-900">
+    <section class="py-12 bg-gray-50 dark:bg-slate-900">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div x-data="{ count: {{ $post->comments->count() }} }" class="space-y-8">
           <div class="flex items-center justify-between">
@@ -213,7 +204,7 @@
           @auth
             <x-blog.comment.comment-create-form :$post/>
           @else
-            <x-ui.auth-prompt message="Faça login para comentar"/>
+            <x-ui.utilities.auth-prompt message="Faça login para comentar"/>
           @endauth
 
           <x-blog.comment.comment-list :comments="$post->comments" :$post/>
@@ -238,7 +229,7 @@
       </section>
     @endif
 
-    <section class="py-16 bg-blue-600 dark:bg-blue-800">
+    <section class="py-16 bg-blue-800">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="max-w-2xl mx-auto">
           <h2 class="mb-4 text-3xl font-bold text-white">Não perca nenhum conteúdo</h2>
@@ -247,13 +238,8 @@
           </p>
           
           <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-            <x-ui.forms.input type="email" name="email" placeholder="Seu melhor email"/>
-            <button
-              type="submit" 
-              class="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Inscrever-se
-            </button>
+            <x-ui.forms.input type="email" name="email" placeholder="Seu melhor email" variant="white"/>
+            <x-ui.forms.button>Inscrever-se</x-ui.forms.button>
           </form>
           
           <p class="text-sm text-blue-200 mt-4">
@@ -263,7 +249,7 @@
       </div>
     </section>
 
-    <x-ui.toast/>
+    <x-ui.toast icon="comment"/>
   </main>
 </x-layout>
 

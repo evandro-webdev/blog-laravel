@@ -1,5 +1,5 @@
 <div x-show="tab === 'saved'" class="space-y-6">
-  <x-ui.panel>
+  <x-ui.base.panel>
     <x-section-heading
       title="Posts salvos"
       desc="Confira seus posts preferidos ou salvos para ler mais tarde"
@@ -17,8 +17,8 @@
           </div>
         </div>
       @empty
-        <x-ui.message message="Você não possui nenhum post salvo."/>
+        <x-ui.utilities.message message="Você não possui nenhum post salvo."/>
       @endforelse
     </div>
-  </x-ui.panel> 
+  </x-ui.base.panel> 
 </div>

@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-gray-900">
+<x-layout class="dark:bg-slate-800">
   <x-section>
     <div class="mb-12 space-y-2">
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">Criar novo post</h1>

@@ -1,5 +1,5 @@
 <div x-show="tab === 'activity'">
-  <x-ui.panel>
+  <x-ui.base.panel>
     <x-section-heading
       title="Atividades recentes"
       desc="Suas ultimas atividades no blog:"
@@ -19,8 +19,8 @@
 
         {{ $activities->appends(['tab' => 'activity'])->links() }}
       @else
-        <x-ui.message message="Você não possui nenhuma atividade recente"/>
+        <x-ui.utilities.message message="Você não possui nenhuma atividade recente"/>
       @endif
     </div>
-  </x-ui.panel>
+  </x-ui.base.panel>
 </div>

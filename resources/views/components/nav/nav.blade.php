@@ -17,7 +17,7 @@
         </div>
 
         <div class="hidden md:flex items-center gap-4">
-          <x-ui.toggle-theme-button/>
+          <x-ui.interactive.toggle-theme-button/>
           @auth
             <x-nav.notifications.notifications-dropdown/>
             <x-nav.user-dropdown/>

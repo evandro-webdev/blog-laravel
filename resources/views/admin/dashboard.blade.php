@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-gray-950">
+<x-layout class="dark:bg-slate-900">
   <div class="flex-1">
     <x-section>
       <div class="max-w-[1280px] mx-auto">
@@ -10,7 +10,7 @@
           <x-ui.forms.button href="/admin/posts/create">Novo post</x-ui.forms.button>
         </div>
         
-        <x-ui.tab-container default-tab="overview" class="space-y-2">
+        <x-ui.layout.tab-container default-tab="overview" class="space-y-2">
           <x-slot:tabs>
             <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
             <x-ui.tab value="posts" x-model="tab" icon="docs">Posts</x-ui.tab>

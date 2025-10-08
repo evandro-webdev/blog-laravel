@@ -1,8 +1,8 @@
-<x-layout class="dark:bg-gray-950">
+<x-layout class="dark:bg-slate-900">
   <x-section>
     <div class="grid md:grid-cols-3 gap-2">
       <div class="space-y-2 md:col-span-1">
-        <x-ui.panel>
+        <x-ui.base.panel>
           <div class="space-y-4 flex flex-col items-center">
             <div class="relative">
               <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
@@ -21,10 +21,10 @@
 
             <div class="space-y-1 text-center">
               <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $user->name }}</h3>
-              <x-ui.badge small variant="white">{{ '@' . $user->username }}</x-ui.badge>
+              <x-ui.base.badge small variant="white">{{ '@' . $user->username }}</x-ui.badge>
             </div>
 
-            <x-ui.follow-button :$user/>
+            <x-ui.interactive.follow-button :$user/>
 
             <div class="w-full flex justify-around">
               <div class="text-center">
@@ -42,24 +42,24 @@
             </div>
 
             @if($user->is_private && !$isOwnProfile)
-              <div class="p-4 text-sm text-gray-600 rounded mb-4 text-center bg-gray-50">
+              <div class="p-4 mb-4 rounded text-sm text-center text-gray-600 dark:text-slate-100 bg-gray-50 dark:bg-slate-700">
                 Este perfil é privado. Apenas seguidores aprovados podem ver os posts e atividades.
               </div>
             @endif
           </div>
-        </x-ui.panel>
+        </x-ui.base.panel>
 
         @if (!$user->is_private || $isOwnProfile)
-          <x-ui.panel>
+          <x-ui.base.panel>
             <h3 class="mb-4 font-bold text-gray-800 dark:text-white">Sobre</h3>
 
             <div class="space-y-4">
               <p class="text-sm text-gray-800 dark:text-gray-100">{{ $user->bio }}</p>
               <div class="space-y-3">
                 @if ($user->city)
-                  <x-ui.icon-item icon="local" label="{{ $user->city }}"/>
+                  <x-ui.icon-with-text icon="local" label="{{ $user->city }}"/>
                 @endif
-                <x-ui.icon-item icon="calendar" label="Entrou em {{ $user->created_at->translatedFormat('d \d\e F, Y') }}"/>
+                <x-ui.icon-with-text icon="calendar" label="Entrou em {{ $user->created_at->translatedFormat('d \d\e F, Y') }}"/>
               </div>
 
               @if ($user->socialProfiles->count() > 0) 
@@ -77,11 +77,11 @@
                 </div>
               @endif
             </div>
-          </x-ui.panel>
+          </x-ui.base.panel>
         @endif
       </div>
 
-      <x-ui.tab-container :default-tab="$isOwnProfile ? 'data' : 'posts'" class="space-y-2 md:col-span-2">
+      <x-ui.layout.tab-container :default-tab="$isOwnProfile ? 'data' : 'posts'" class="space-y-2 md:col-span-2">
         <x-slot:tabs>
           @if($isOwnProfile)
             <x-ui.tab value="data" x-model="tab" icon="user-data">Dados</x-ui.tab>
@@ -106,7 +106,7 @@
             <x-profile.tabs.about :$user/> --}}
           @endif
         </x-slot:content>
-      </x-ui.tab-container>
+      </x-ui.layout.tab-container>
     </div> 
   </x-section>
 </x-layout>

@@ -1,8 +1,8 @@
-<article class="rounded-xl overflow-hidden bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow group">
+<article class="rounded-xl overflow-hidden bg-white dark:bg-slate-700 shadow-sm hover:shadow-md transition-shadow group">
   <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title"/>
     
   <div class="p-6">
-    <x-ui.badge small variant="blue">{{ $post->category->name }}</x-ui.badge>
+    <x-ui.base.badge small variant="blue">{{ $post->category->name }}</x-ui.badge>
 
     <h3 class="my-2 font-semibold line-clamp-2 text-gray-800 dark:text-white">
       <a href="/posts/{{ $post->slug }}" class="hover:text-blue-600 transition-colors">
@@ -15,10 +15,10 @@
     </p>
     
     <div class="flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <a href="{{ route('profile.show', $post->user) }}" class="flex items-center gap-2">
         <x-profile.avatar :user="$post->user" size="w-6 h-6"/>
         <span class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ $post->user->name }}</span>
-      </div>
+      </a>
 
       <div class="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-100">
         <span class="flex items-center gap-1">

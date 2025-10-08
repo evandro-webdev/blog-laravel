@@ -2,7 +2,7 @@
   @foreach ($posts as $post)
     <a 
       href="{{ route('posts.show', $post) }}"
-      class="p-2 rounded-md space-y-1 block hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+      class="p-2 rounded-md space-y-1 block hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
     >
       <h3 class="text-sm font-medium line-clamp-2 text-gray-800 dark:text-white">{{ $post->title }}</h3>
       <div class="text-xs text-gray-500 dark:text-gray-400 flex gap-2">

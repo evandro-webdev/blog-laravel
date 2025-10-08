@@ -3,7 +3,7 @@
   
   <div class="p-4 rounded-b-md sm:rounded-l-none sm:rounded-t-md 
     border-1 border-t-0 sm:border-t-1 sm:border-l-0 
-    border-gray-200 dark:border-gray-700 space-y-4 bg-white dark:bg-gray-900 flex flex-col flex-1 justify-center"
+    border-gray-200 dark:border-gray-700 space-y-4 bg-white dark:bg-slate-800 flex flex-col flex-1 justify-center"
   >
     <div class="flex items-center gap-2">
       <div class="flex items-center gap-2">
@@ -11,7 +11,7 @@
         <span class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ $post->user->name }}</span>
       </div>
       <span class="text-gray-600 dark:text-gray-100">·</span>
-      <x-ui.datetime 
+      <x-ui.utilities.datetime 
         :date="$post->created_at"
         class="text-xs text-gray-600 dark:text-gray-100"
       />
@@ -23,7 +23,7 @@
     </a>
 
     <div class="flex items-center justify-between">
-      <x-ui.badge href="#" small>{{ $post->category->name }}</x-ui.badge>
+      <x-ui.base.badge href="#" small>{{ $post->category->name }}</x-ui.badge>
       <div class="text-gray-600 dark:text-gray-100 flex items-center gap-2">
         <div class="flex items-center gap-1">
           <x-ui.icons.save size="w-4 h-4"/>

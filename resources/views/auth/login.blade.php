@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-gray-950">
+<x-layout class="dark:bg-slate-900">
   <section class="w-full max-w-[600px] mx-auto px-2 md:px-4 py-8 md:py-14 lg:py-20">
     <x-page-heading 
       title="Entrar" 

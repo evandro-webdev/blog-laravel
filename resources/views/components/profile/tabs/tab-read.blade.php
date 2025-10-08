@@ -1,5 +1,5 @@
 <div x-show="tab === 'read'" class="space-y-6">
-  <x-ui.panel>
+  <x-ui.base.panel>
     <x-section-heading
       title="Posts lidos"
       desc="Confira seus ultimos posts lidos"
@@ -10,7 +10,7 @@
       @forelse ($user->readPosts as $readPost)
         <div class="pb-4 border-b-1 space-y-1 border-b-gray-200 dark:border-b-gray-700 last:border-b-0 last:pb-0">
           <h3 class="text-gray-800 dark:text-white">{{ $readPost->title }}</h3>
-          <x-ui.datetime 
+          <x-ui.utilities.datetime 
             :date="$readPost->pivot->created_at" 
             prefix="Lido em" 
             format="d \d\e F, Y"
@@ -18,8 +18,8 @@
           />
         </div>
       @empty
-        <x-ui.message message="Você não possui nenhum post marcado como lido."/>
+        <x-ui.utilities.message message="Você não possui nenhum post marcado como lido."/>
       @endforelse
     </div>
-  </x-ui.panel> 
+  </x-ui.base.panel> 
 </div>

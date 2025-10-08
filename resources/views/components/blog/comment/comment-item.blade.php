@@ -31,7 +31,7 @@
     }
   }"
   id="comment-{{ $comment->id }}"
-  class="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm"
+  class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm"
 >
   <div class="flex gap-4">
     <x-profile.avatar :user="$comment->user"/>

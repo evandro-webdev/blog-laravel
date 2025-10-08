@@ -27,7 +27,8 @@
     @click.away="notificationsOpen = false"
     x-cloak
     class="p-2 rounded-full cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors relative 
-            focus:ring-1 focus:ring-white dark:focus:ring-blue-600 focus:ring-offset-1 focus:ring-offset-blue-600 dark:focus:ring-offset-blue-900 focus:bg-blue-50 dark:focus:bg-blue-900  focus:outline-none"
+            focus:ring-1 focus:ring-white dark:focus:ring-blue-600 focus:ring-offset-1 focus:ring-offset-blue-600 
+            dark:focus:ring-offset-blue-900 focus:bg-blue-50 dark:focus:bg-blue-900 focus:outline-none"
   >
     <template x-if="unreadCount > 0">
       <span x-show="!notificationsOpen" class="w-4 h-4 rounded-full text-xs font-bold text-white bg-blue-600 absolute top-1">
@@ -40,14 +41,14 @@
   <div 
     x-show="notificationsOpen" 
     x-transition
-    class="w-80 rounded-md absolute top-16 right-0 bg-white dark:bg-gray-800 shadow-md overflow-hidden"
+    class="absolute top-16 right-0 w-80 rounded-md border-1 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md overflow-hidden"
   >
-    <div class="py-2 px-3 border-b border-gray-100 dark:border-gray-700 text-sm font-medium text-gray-800 dark:text-white flex justify-between items-center">
+    <div class="py-2 px-3 border-b border-gray-100 dark:border-slate-700 text-sm font-medium text-gray-800 dark:text-white flex justify-between items-center">
       <p>Notificações</p>
       <template x-if="unreadCount > 0">
-        <x-ui.badge pill small>
+        <x-ui.base.badge pill small>
           {{ $unreadCount }} novas
-        </x-ui.badge>
+        </x-ui.base.badge>
       </template>
     </div>
 

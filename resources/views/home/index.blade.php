@@ -1,5 +1,5 @@
 <x-layout>
-  <div class="bg-gray-50 dark:bg-gray-950">
+  <div class="bg-gray-50 dark:bg-slate-900">
     <x-section>
       <x-page-heading 
         title="{{ $user ? 'Bem vindo de volta, ' . $user->name : 'Bem vindo' }} " 
@@ -38,7 +38,7 @@
               @auth
                 <x-home.tabs.tab-personal-feed :$sort :$posts/>
               @else
-                <x-ui.auth-prompt message="Faça login para ver os posts de quem você segue."/>
+                <x-ui.utilities.auth-prompt message="Faça login para ver os posts de quem você segue."/>
               @endauth
             @endif
 
@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex flex-col gap-6 sm:flex-row lg:flex-col lg:min-w-xs lg:max-w-3">
-          <x-ui.panel class="flex-1 lg:flex-0">
+          <x-ui.base.panel class="flex-1 lg:flex-0">
             <x-section-heading
               title="Sugerido para você"
               link="#"
@@ -59,7 +59,7 @@
   
             <div class="space-y-2">
               @foreach ($usersToFollow as $userToFollow)
-                <div class="p-2 rounded-md cursor-pointer flex items-center justify-between gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <div class="p-2 rounded-md cursor-pointer flex items-center justify-between gap-2 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
                   <a href="{{ route('profile.show', $userToFollow) }}" class="cursor-pointer flex items-center gap-2">
                     <x-profile.avatar :user="$userToFollow" size="w-10 h-10"/>
                     <div class="flex flex-col">
@@ -67,11 +67,11 @@
                       <span class="text-xs text-gray-500 dark:text-gray-400">{{ $userToFollow->posts->count() }} posts</span>
                     </div>
                   </a>
-                  <x-ui.follow-button :user="$userToFollow"/>
+                  <x-ui.interactive.follow-button :user="$userToFollow"/>
                 </div>
               @endforeach
             </div>
-          </x-ui.panel>
+          </x-ui.base.panel>
 
           <div>
             <x-section-heading
@@ -101,7 +101,7 @@
           </div>
 
           @auth
-            <x-ui.panel class="flex-1 lg:flex-0">
+            <x-ui.base.panel class="flex-1 lg:flex-0">
               <x-section-heading
                 title="Seguindo"
                 link="#"
@@ -111,7 +111,7 @@
       
               <div class="space-y-2">
                 @foreach ($user->following as $following)
-                  <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  <a href="{{ route('profile.show', $following) }}" class="p-2 rounded-md cursor-pointer flex items-center gap-2 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
                     <x-profile.avatar :user="$following" size="w-10 h-10"/>
                     <div class="flex flex-col">
                       <span class="text-sm font-medium text-gray-800 dark:text-white">{{ $following->name }}</span>
@@ -120,7 +120,7 @@
                   </a>
                 @endforeach
               </div>
-            </x-ui.panel>
+            </x-ui.base.panel>
           @endauth
 
         </div>

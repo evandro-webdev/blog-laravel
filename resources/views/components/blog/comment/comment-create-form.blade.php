@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+<div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm">
   <div class="flex gap-4">
     <x-profile.avatar :user="Auth::user()"/>
 

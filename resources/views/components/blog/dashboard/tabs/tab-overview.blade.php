@@ -7,7 +7,7 @@
   </div>
 
   <div class="flex flex-col md:flex-row gap-2">
-    <x-ui.panel class="flex-1">
+    <x-ui.base.panel class="flex-1">
       <x-section-heading
         title="Posts mais vistos"
         desc="Confira quais dos seus posts estão sendo mais visualizados"
@@ -15,9 +15,9 @@
       />
 
       <x-blog.dashboard.tabs.overview.trending-posts :posts="$mostViewedPosts"/>
-    </x-ui.panel>
+    </x-ui.base.panel>
 
-    <x-ui.panel class="flex-1">
+    <x-ui.base.panel class="flex-1">
       <x-section-heading
         title="Posts mais comentados"
         desc="Confira seus posts mais comentados"
@@ -25,6 +25,6 @@
       />
 
       <x-blog.dashboard.tabs.overview.trending-posts :posts="$mostCommentedPosts"/>
-    </x-ui.panel>
+    </x-ui.base.panel>
   </div>
 </div>

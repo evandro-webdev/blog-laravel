@@ -1,5 +1,5 @@
 <div x-show="tab === 'preferences'" class="space-y-6">
-  <x-ui.panel>
+  <x-ui.base.panel>
     <x-section-heading
       title="Preferências"
       desc="Confira ou edite suas preferências"
@@ -15,14 +15,14 @@
       @method('PATCH')
 
       <div class="border-b-1 border-b-gray-200 dark:border-b-gray-700">
-        <x-ui.toggle label="Perfil privado" name="is_private" :checked="$user->is_private"/>
+        <x-ui.interactive.toggle label="Perfil privado" name="is_private" :checked="$user->is_private"/>
       </div>
 
       <x-ui.forms.button size="sm">Salvar preferências</x-ui.forms.button>
     </form>
-  </x-ui.panel>
+  </x-ui.base.panel>
 
-  <x-ui.panel 
+  <x-ui.base.panel 
     x-data="{
       show: {{ $errors->any() ? 'true' : 'false' }},
       ...passwordForm({
@@ -86,13 +86,13 @@
         @click="submit($event)"
       >
         <span x-show="!loading">Salvar</span>
-        <x-ui.spinner x-show="loading"/>
+        <x-ui.base.spinner x-show="loading"/>
       </x-ui.forms.button>
     </form>
 
     <x-ui.flash :message="session('success')" />
     <x-ui.toast position="center-top"/>
-  </x-ui.panel>
+  </x-ui.base.panel>
 </div>
 
 <script src="{{ Vite::asset('resources/js/validations/password.js') }}"></script>

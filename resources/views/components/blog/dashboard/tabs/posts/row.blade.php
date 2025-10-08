@@ -1,4 +1,4 @@
-<tr class="odd:bg-gray-50 dark:odd:bg-gray-800">
+<tr class="odd:bg-gray-50 dark:odd:bg-slate-700">
   <td class="max-w-[50ch] px-3 py-5 truncate text-gray-800 dark:text-white" title="{{ $post->title }}">
     {{ $post->title }}
   </td>
@@ -11,11 +11,11 @@
   </td>
   <td class="px-3 py-5 whitespace-nowrap">
     @if ($post->featured)
-      <x-ui.badge variant="blue" small>Destaque</x-ui.badge>
+      <x-ui.base.badge variant="blue" small>Destaque</x-ui.base.badge>
     @elseif ($post->published)
-      <x-ui.badge small>Publicado</x-ui.badge>
+      <x-ui.base.badge small>Publicado</x-ui.base.badge>
     @else
-      <x-ui.badge variant="white" small>Oculto</x-ui.badge>
+      <x-ui.base.badge variant="white" small>Oculto</x-ui.base.badge>
     @endif
   </td>
 
