@@ -1,4 +1,5 @@
 @props([
+  'message' => session('message'),
   'icon' => null,
   'position' => 'center-bottom',
 ])
@@ -14,26 +15,30 @@
   ];
 
   $positionClass = $positions[$position];
-  $classes = "w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white bg-white dark:bg-gray-700 shadow-sm flex items-center justify-between z-200" 
+  $classes = "w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white 
+              bg-white dark:bg-slate-700 shadow-sm flex items-center justify-between z-200" 
 @endphp
 
 <div 
-  x-data="{ show: false, message: ''}"
-   x-init="
-    @if (session('message'))
-      message = '{{ session('message') }}';
-      show = true;
-      setTimeout(() => show = false, 3000);
+  x-data="{ 
+    show: false, 
+    message: '',
+    trigger(msg){
+      this.message = msg;
+      this.show = true;
+      setTimeout(() => this.show = false, 3000);
+    }
+  }"
+  x-init="
+    @if ($message)
+      setTimeout(() => trigger(@js($message)), 600);
     @endif
-  "
-  @notify.window="
-    message = $event.detail;
-    show = true;
-    setTimeout(() => show = false, 3000);
+
+    window.addEventListener('notify', e => trigger(e.detail));
   "
   x-show="show"
-  id="toast"
   role="alert"
+  aria-live="assertive"
   class="{{ $classes }}"
   x-transition:enter="transform ease-out duration-300 transition"
   x-transition:enter-start="translate-y-2 opacity-0"
@@ -52,8 +57,8 @@
 
   <button 
     type="button"
-    class="h-8 w-8 p-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 bg-white dark:bg-gray-800 
-        hover:bg-gray-100 dark:hover:bg-gray-900 inline-flex items-center justify-center transition-colors" 
+    class="h-8 w-8 p-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 bg-white dark:bg-slate-800 
+        hover:bg-gray-100 dark:hover:bg-slate-900 inline-flex items-center justify-center transition-colors" 
     data-dismiss-target="#toast"
     aria-label="Fechar"
     @click="show=false"
