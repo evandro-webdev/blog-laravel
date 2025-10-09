@@ -8,8 +8,6 @@
 ])
 
 @php
-  $iconUrl = asset('images/icons' . '/' . $icon . '.svg');
-
   $baseClasses = 'rounded-lg border font-medium cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
 
   $sizeStyles = [
