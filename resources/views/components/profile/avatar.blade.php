@@ -13,7 +13,8 @@
   >
     <img 
       src="{{ $avatar }}" 
-      alt="{{ $user->name }}"
+      alt="Foto de {{ $user->name }}"
+      loading="lazy"
       class="w-full h-full object-cover block select-none pointer-events-none"
     >
 

@@ -1,5 +1,5 @@
 <article class="rounded-xl overflow-hidden bg-white dark:bg-slate-700 shadow-sm hover:shadow-md transition-shadow group">
-  <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title"/>
+  <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title" loading="lazy"/>
     
   <div class="p-6">
     <x-ui.base.badge small variant="blue">{{ $post->category->name }}</x-ui.badge>
