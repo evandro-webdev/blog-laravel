@@ -1,9 +1,10 @@
 <x-layout class="dark:bg-slate-800">
   <x-section>
-    <div class="mb-12 space-y-2">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white ">Editar post</h1>
-      <p class="text-gray-600 dark:text-gray-100">Preencha os campos abaixo para publicar um novo post.</p>
-    </div>
+    <x-page-heading 
+      title="Editar post" 
+      subtitle="Preencha os campos que você quer alterar no seu post"
+      class="mb-6"
+    />
 
     <form action="/admin/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data" class="space-y-8">
       @csrf
@@ -40,7 +41,7 @@
             placeholder="frontend, web, tailwind..."
             tip="Separe as tags por virgula"
           />
-          <x-ui.forms.file-dropzone name="image"/>
+          <x-ui.forms.file-dropzone name="image" image="{{ $post->image }}"/>
         </div>
   
         <div class="flex-1 space-y-6">
