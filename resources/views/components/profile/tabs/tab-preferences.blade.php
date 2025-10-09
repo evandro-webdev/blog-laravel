@@ -92,8 +92,7 @@
       </x-ui.forms.button>
     </form>
 
-    <x-ui.flash :message="session('success')" />
-    <x-ui.toast position="center-top"/>
+    <x-ui.toast position="center-top" icon="key"/>
   </x-ui.base.panel>
 </div>
 
