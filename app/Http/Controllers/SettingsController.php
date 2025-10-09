@@ -27,11 +27,12 @@ class SettingsController extends Controller
 
       return redirect()
       ->back()
-      ->with('success', 'Senha atualizada com sucesso!');
+      ->with('message', 'Senha atualizada com sucesso!');
     } catch (ValidationException $e) {
       RateLimiter::hit($this->settingsService->getPasswordUpdateKey($user), 3600);
 
-      return back()
+      return redirect()
+        ->back()
         ->withErrors($e->errors())
         ->withFragment('seguranca');
     }
@@ -41,6 +42,8 @@ class SettingsController extends Controller
   {
     $this->settingsService->updatePreferences(Auth::user(), $request->validated());
 
-    return back()->with('status', 'Preferências atualizadas com sucesso.');
+    return redirect()
+      ->back()
+      ->with('message', 'Preferências atualizadas com sucesso.');
   }
 }
