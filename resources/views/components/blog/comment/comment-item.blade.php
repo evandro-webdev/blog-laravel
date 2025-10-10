@@ -19,9 +19,7 @@
     },
 
     deleteComment(id) {
-      if (confirm('Tem certeza que deseja excluir este comentário?')) {
-        this.$dispatch('delete-comment', { id });
-      }
+      this.$dispatch('delete-comment', { id });
       this.menuOpen = false;
     },
 
