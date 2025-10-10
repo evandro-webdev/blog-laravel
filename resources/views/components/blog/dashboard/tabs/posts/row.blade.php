@@ -29,7 +29,8 @@
 
       <form 
         action="{{ route('posts.destroy', $post->id) }}" 
-        method="POST" class="flex"
+        method="POST" 
+        class="flex"
       >
         @csrf
         @method('DELETE')
@@ -37,6 +38,8 @@
         <button 
           type="button"
           @click.prevent="$dispatch('open-modal', {
+            title: 'Tem certeza?',
+            content: 'Excluir um post é uma ação irreversivel, confirme ou cancele abaixo',
             onConfirm: () => $el.closest('form').submit()
           })" 
           class="cursor-pointer"
