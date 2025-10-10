@@ -1,8 +1,12 @@
 <div
   x-data="{ 
     isOpen: false,
+    title: '',
+    content: '',
     callback: null,
     open(event){
+      this.title = event.detail.title
+      this.content = event.detail.content
       this.isOpen = true
       this.callback = event.detail?.onConfirm || null
     },
@@ -17,12 +21,13 @@
   }"
   x-show="isOpen"
   @open-modal.window="open($event)"
+  x-transition.opacity.duration.300ms
   class="fixed w-full h-full p-4 bg-black/10 dark:bg-black/40 flex justify-center items-center z-100"
 >
-  <div @click.outside="close()" class="w-md p-6 space-y-4 rounded-xl bg-white dark:bg-slate-800">
-    <div class="space-y-1">
-      <h3 class="text-xl font-semibold text-gray-700 dark:text-white">Tem certeza?</h3>
-      <p class="text-gray-600 dark:text-gray-100">Excluir um post é uma ação irreversivel, confirme ou cancele abaixo</p>
+  <div @click.outside="close()" class="w-md p-6 space-y-6 rounded-xl bg-white dark:bg-slate-800">
+    <div class="space-y-2">
+      <h3 x-text="title" class="text-xl font-semibold text-gray-700 dark:text-white"></h3>
+      <p x-text="content" class="text-gray-600 dark:text-gray-100"></p>
     </div>
 
     <div class="flex justify-end gap-2">
