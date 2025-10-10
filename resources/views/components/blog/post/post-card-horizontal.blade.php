@@ -19,7 +19,7 @@
 
     <a href="{{ route('posts.show', $post) }}" class="space-y-1">
       <h3 class="font-bold text-xl text-gray-800 dark:text-white">{{ $post->title }}</h3>
-      <p class="text-gray-600 dark:text-gray-100 line-clamp-2">{{ $post->excerpt }}</p>
+      <p class="text-gray-600 dark:text-gray-100 line-clamp-2">{!! $post->excerpt !!}</p>
     </a>
 
     <div class="flex items-center justify-between">

@@ -21,7 +21,7 @@
   $variantStyles = [
     'default' => [
       'filled' => 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700',
-      'outline' => 'border-blue-400 text-blue-400 hover:bg-blue-600 hover:text-white'
+      'outline' => 'border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white'
     ],
     'success' => [
       'filled' => 'border-green-600 bg-green-600 text-white hover:bg-green-700',

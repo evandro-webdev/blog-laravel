@@ -21,7 +21,7 @@
   ][$variant];
 
   $sizeClasses = [
-    'sm' => 'p-2 text-sm',
+    'sm' => 'p-2',
     'md' => 'p-3'
   ][$size];
 
