@@ -1,4 +1,4 @@
-<div class="min-h-full border-b border-b-gray-200 dark:border-b-slate-800 dark:bg-slate-900 z-100">
+<div class="min-h-full border-b border-b-gray-200 dark:border-b-slate-800 dark:bg-slate-900 z-50">
   <nav>
     <div class="max-w-[1200px] mx-auto px-2 md:px-4">
       <div class="flex h-16 items-center justify-between">

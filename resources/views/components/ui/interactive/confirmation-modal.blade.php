@@ -22,7 +22,7 @@
   x-show="isOpen"
   @open-modal.window="open($event)"
   x-transition.opacity.duration.300ms
-  class="fixed w-full h-full p-4 bg-black/10 dark:bg-black/40 flex justify-center items-center z-100"
+  class="fixed w-full h-full p-4 bg-black/20 dark:bg-black/40 flex justify-center items-center z-50"
 >
   <div @click.outside="close()" class="w-md p-6 space-y-6 rounded-xl bg-white dark:bg-slate-800">
     <div class="space-y-2">
