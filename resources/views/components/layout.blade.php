@@ -16,6 +16,8 @@
     {{ $slot }}
   </main>
 
+  <x-ui.interactive.confirmation-modal/>
+
   <x-footer/>
 </body>
 </html>
