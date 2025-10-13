@@ -13,7 +13,7 @@
                   @csrf
                   <input id="profile_pic" type="file" name="profile_pic" hidden onchange="submitForm()">
                 </form>
-                <label for="profile_pic" class="p-2 rounded-full cursor-pointer absolute bottom-0 right-0 bg-blue-600">
+                <label for="profile_pic" class="p-2 rounded-full cursor-pointer absolute bottom-0 right-0 bg-blue-600 hover:bg-blue-700 transition-colors">
                   <x-ui.icons.camera class="text-white"/>
                 </label> 
               @endif

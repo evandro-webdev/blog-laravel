@@ -15,16 +15,17 @@
     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
     alt="Miniatura de: {{ $title }}"
     loading="lazy"
+    onerror="this.onerror=null; this.src='{{ asset('storage/posts/placeholder.jpg') }}';"
   >
 
   @if($showBadge && $category)
-    <x-ui.badge 
+    <x-ui.base.badge 
       href="#" 
       class="absolute top-4 left-4"
       small
       variant="blue"
     >
       {{ $category->name }}
-    </x-ui.badge>
+    </x-ui.base.badge>
   @endif
 </div>
