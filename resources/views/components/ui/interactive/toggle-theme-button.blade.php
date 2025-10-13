@@ -18,7 +18,7 @@
       }
     }
   }" 
-  class="w-6 h-6 rounded-full cursor-pointer relative"
+  class="relative w-6 h-6 rounded-full cursor-pointer"
   @click="toggleTheme()"
 >
   <x-ui.icons.sun 

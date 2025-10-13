@@ -1,4 +1,4 @@
-<div x-data="{ dropdownOpen: false }" class="relative flex items-center justify-center">
+<div x-data="{ dropdownOpen: false }" class="relative hidden md:flex items-center justify-center">
   <button
     @click="dropdownOpen = !dropdownOpen"
     @click.away="dropdownOpen = false"
