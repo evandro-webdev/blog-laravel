@@ -2,82 +2,10 @@
   <x-section>
     <div class="grid md:grid-cols-3 gap-2">
       <div class="space-y-2 md:col-span-1">
-        <x-ui.base.panel>
-          <div class="space-y-4 flex flex-col items-center">
-            <div class="relative">
-              <x-profile.avatar :user="$isOwnProfile ? Auth::user() : $user" size="w-30 h-30"/>
-
-              @if ($isOwnProfile)
-                <form id="uploadForm" action="{{ route('profile.updatePicture', $user) }}" method="POST" enctype="multipart/form-data">
-                  @method('PATCH')
-                  @csrf
-                  <input id="profile_pic" type="file" name="profile_pic" hidden onchange="submitForm()">
-                </form>
-                <label for="profile_pic" class="p-2 rounded-full cursor-pointer absolute bottom-0 right-0 bg-blue-600 hover:bg-blue-700 transition-colors">
-                  <x-ui.icons.camera class="text-white"/>
-                </label> 
-              @endif
-            </div>
-
-            <div class="space-y-1 text-center">
-              <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $user->name }}</h3>
-              <x-ui.base.badge small variant="white">{{ '@' . $user->username }}</x-ui.badge>
-            </div>
-
-            <x-ui.interactive.follow-button :$user/>
-
-            <div class="w-full flex justify-around">
-              <div class="text-center">
-                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->getFollowersCount() }}</span>
-                <p class="text-sm text-gray-500 dark:text-gray-100">Seguidores</p>
-              </div>
-              <div class="text-center">
-                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->getFollowingCount() }}</span>
-                <p class="text-sm text-gray-500 dark:text-gray-100">Seguindo</p>
-              </div>
-              <div class="text-center">
-                <span class="text-xl font-bold text-blue-600 dark:text-blue-500">{{ $user->posts()->count() }}</span>
-                <p class="text-sm text-gray-500 dark:text-gray-100">Publicações</p>
-              </div>
-            </div>
-
-            @if($user->is_private && !$isOwnProfile)
-              <div class="p-4 mb-4 rounded text-sm text-center text-gray-600 dark:text-slate-100 bg-gray-50 dark:bg-slate-700">
-                Este perfil é privado. Apenas seguidores aprovados podem ver os posts e atividades.
-              </div>
-            @endif
-          </div>
-        </x-ui.base.panel>
+        <x-profile.public-user-info :$user :$isOwnProfile/>
 
         @if (!$user->is_private || $isOwnProfile)
-          <x-ui.base.panel>
-            <h3 class="mb-4 font-bold text-gray-800 dark:text-white">Sobre</h3>
-
-            <div class="space-y-4">
-              <p class="text-sm text-gray-800 dark:text-gray-100">{{ $user->bio }}</p>
-              <div class="space-y-3">
-                @if ($user->city)
-                  <x-ui.icon-with-text icon="local" label="{{ $user->city }}"/>
-                @endif
-                <x-ui.icon-with-text icon="calendar" label="Entrou em {{ $user->created_at->translatedFormat('d \d\e F, Y') }}"/>
-              </div>
-
-              @if ($user->socialProfiles->count() > 0) 
-                <div class="flex gap-2">
-                  @foreach ($user->socialProfiles as $socialProfile)
-                    <x-ui.forms.button
-                      href="{{ $socialProfile->url }}"
-                      variant="neutral" 
-                      outline 
-                      size="sm"
-                    >
-                      {{ Str::ucfirst($socialProfile->provider) }}
-                    </x-ui.forms.button>
-                  @endforeach
-                </div>
-              @endif
-            </div>
-          </x-ui.base.panel>
+          <x-profile.user-info :$user/>
         @endif
       </div>
 
@@ -108,13 +36,9 @@
         </x-slot:content>
       </x-ui.layout.tab-container>
     </div> 
+
+    <x-ui.toast/>
   </x-section>
 </x-layout>
 
 <script src="{{ Vite::asset('resources/js/components/follow-button.js') }}"></script>
-
-<script>
-  function submitForm(){
-    document.querySelector('#uploadForm').submit();
-  }
-</script>

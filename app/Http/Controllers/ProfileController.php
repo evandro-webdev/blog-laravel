@@ -31,13 +31,13 @@ class ProfileController extends Controller
   {
     $user = $this->profileService->updateProfile(Auth::user(), $request->validated());
 
-    return redirect()->route('profile.show', $user)->with('status', 'Perfil atualizado com sucesso');
+    return redirect()->route('profile.show', $user)->with('message', 'Perfil atualizado com sucesso');
   }
 
   public function updatePicture(ProfilePictureRequest $request, User $user)
   {
     $this->profileService->updateProfilePicture($request->validated()['profile_pic'], $user);
 
-    return back()->with('status', 'Foto de perfil atualizada com sucesso');
+    return back()->with('message', 'Foto de perfil atualizada com sucesso');
   }
 }
