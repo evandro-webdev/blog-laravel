@@ -1,49 +1,23 @@
-@php
-  $unreadCount = Auth::user()->unreadNotifications()->count();
-@endphp
-
-<div x-data="{ 
-    notificationsOpen: false,
-    unreadCount: {{ $unreadCount }},
-    markAsRead(){
-      if(this.unreadCount > 0){
-        const oldCount = this.unreadCount;
-        this.unreadCount = 0;
-
-        fetch('/notifications/read', {
-          method: 'POST', 
-          headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 
-          'Accept': 'application/json' } 
-        }).catch(() => {
-          this.unreadCount = this.oldcount;
-        });
-      }
-    }
-  }" 
-  class="relative z-50"
+<div
+  x-show="isNotificationsOpen"
+  x-cloak
+  x-transition.opacity.duration.200ms
+  class="max-w-[1200px] mx-auto sm:px-2 md:px-4 fixed inset-0 top-[64px] sm:top-[74px] z-50 bg-black/40 sm:bg-transparent"
 >
-  <button 
-    @click="notificationsOpen = !notificationsOpen; if({{ $unreadCount }} > 0) markAsRead()"" 
-    @click.away="notificationsOpen = false"
-    x-cloak
-    class="p-2 rounded-full cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors relative 
-            focus:ring-1 focus:ring-white dark:focus:ring-blue-600 focus:ring-offset-1 focus:ring-offset-blue-600 
-            dark:focus:ring-offset-blue-900 focus:bg-blue-50 dark:focus:bg-blue-900 focus:outline-none"
-  >
-    <template x-if="unreadCount > 0">
-      <span x-show="!notificationsOpen" class="w-4 h-4 rounded-full text-xs font-bold text-white bg-blue-600 absolute top-1">
-        {{ $unreadCount }}
-      </span>
-    </template>
-    <x-ui.icons.bell class="w-6 h-6 text-blue-600 dark:text-blue-400"/>
-  </button>
-
   <div 
-    x-show="notificationsOpen" 
-    x-transition
-    class="absolute top-16 right-0 w-80 rounded-md border-1 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md overflow-hidden"
+    x-show="isNotificationsOpen" 
+    @click.outside="isNotificationsOpen=false"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="-translate-y-6 opacity-0"
+    x-transition:enter-end="translate-y-0 opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="translate-y-0 opacity-100"
+    x-transition:leave-end="-translate-y-6 opacity-0"
+    class="sm:w-90 sm:ml-auto rounded-b-xl sm:rounded-xl sm:border sm:border-gray-200 sm:dark:border-slate-800 bg-white dark:bg-slate-900 sm:shadow-sm"
   >
-    <div class="py-2 px-3 border-b border-gray-100 dark:border-slate-700 text-sm font-medium text-gray-800 dark:text-white flex justify-between items-center">
+    <div class="p-3 border-b border-gray-100 dark:border-slate-800 font-medium 
+              text-gray-800 dark:text-white flex justify-between items-center"
+    >
       <p>Notificações</p>
       <template x-if="unreadCount > 0">
         <x-ui.base.badge pill small>
@@ -52,7 +26,7 @@
       </template>
     </div>
 
-    <div class="max-h-80 overflow-y-auto">
+    <div class="overflow-y-auto">
       @forelse (Auth::user()->notifications as $notification)
         <x-nav.notifications.notification-item :$notification/>
       @empty
