@@ -14,7 +14,7 @@
   <select
     x-model="value"
     @change="update"
-    class="border border-gray-200 dark:border-gray-700 rounded p-2 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 cursor-pointer"
+    class="p-2 rounded border border-gray-200 dark:border-gray-700  text-gray-600 dark:text-gray-200 bg-transparent cursor-pointer"
   >
     @foreach ($options as $option)
       <option value="{{ $option }}">

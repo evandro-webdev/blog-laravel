@@ -1,9 +1,7 @@
-<article class="rounded-md overflow-hidden flex flex-col sm:flex-row group">
+<article class="rounded-md overflow-hidden flex flex-col sm:flex-row group shadow-sm">
   <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title" class="sm:w-1/3 sm:aspect-[4/3] object-cover"/>
   
-  <div class="p-4 rounded-b-md sm:rounded-l-none sm:rounded-t-md 
-    border-1 border-t-0 sm:border-t-1 sm:border-l-0 
-    border-gray-200 dark:border-gray-700 space-y-4 bg-white dark:bg-slate-800 flex flex-col flex-1 justify-center"
+  <div class="p-4 rounded-b-md sm:rounded-l-none sm:rounded-t-md space-y-4 dark:bg-slate-700 flex flex-col flex-1 justify-center"
   >
     <div class="flex items-center gap-2">
       <div class="flex items-center gap-2">
@@ -18,12 +16,17 @@
     </div>
 
     <a href="{{ route('posts.show', $post) }}" class="space-y-1">
-      <h3 class="font-bold text-xl text-gray-800 dark:text-white">{{ $post->title }}</h3>
-      <p class="text-gray-600 dark:text-gray-100 line-clamp-2">{!! $post->excerpt !!}</p>
+      <h3 
+        title="{{ $post->title }}" 
+        class="font-bold text-xl text-gray-800 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors line-clamp-2"
+      >
+        {{ $post->title }}
+      </h3>
+      <p class="text-sm text-gray-600 dark:text-gray-200 line-clamp-2">{!! $post->excerpt !!}</p>
     </a>
 
     <div class="flex items-center justify-between">
-      <x-ui.base.badge href="#" small>{{ $post->category->name }}</x-ui.badge>
+      <x-ui.base.badge href="#" small variant="blue">{{ $post->category->name }}</x-ui.badge>
       <div class="text-gray-600 dark:text-gray-100 flex items-center gap-2">
         <div class="flex items-center gap-1">
           <x-ui.icons.save size="w-4 h-4"/>

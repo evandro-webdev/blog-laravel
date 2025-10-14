@@ -8,6 +8,6 @@
       @endforeach
     </div>
   @else
-    <x-ui.message message="Não há publicações para você, comece a seguir autores para ver novas publicações"/>
+    <x-ui.utilities.message message="Não há publicações para você, comece a seguir autores para ver novas publicações"/>
   @endif
 </div>

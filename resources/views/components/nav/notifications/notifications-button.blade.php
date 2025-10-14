@@ -26,7 +26,7 @@
 >
   <x-ui.icons.bell size="w-6 h-6" class="text-blue-600 dark:text-blue-400"/>
   <template x-if="unreadCount > 0">
-    <span x-show="!isNotificationsOpen" class="w-4 h-4 rounded-full text-xs font-bold text-white bg-blue-600 absolute top-1">
+    <span x-show="!isNotificationsOpen" class="absolute top-3 w-4 h-4 rounded-full text-xs font-bold text-white bg-blue-600">
       {{ $unreadCount }}
     </span>
   </template>

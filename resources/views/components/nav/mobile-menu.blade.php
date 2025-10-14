@@ -13,7 +13,7 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="translate-y-0 opacity-100"
     x-transition:leave-end="-translate-y-6 opacity-0"
-    class="h-fit rounded-b-xl overflow-hidden bg-white dark:bg-slate-900 mx-auto w-full"
+    class="h-fit rounded-b-xl overflow-hidden bg-white dark:bg-slate-900"
   >
     <div class="px-2 py-6 space-y-1">
       <x-nav.mobile-link href="/" :active="request()->is('/')">Início</x-nav.mobile-link>

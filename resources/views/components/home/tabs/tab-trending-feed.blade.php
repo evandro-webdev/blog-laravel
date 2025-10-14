@@ -8,6 +8,6 @@
       @endforeach
     </div>
   @else
-    <x-ui.message message="Não há publicações para disponíveis"/>
+    <x-ui.utilities.message message="Não há publicações para disponíveis"/>
   @endif
 </div>

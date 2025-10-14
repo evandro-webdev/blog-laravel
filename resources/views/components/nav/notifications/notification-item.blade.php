@@ -1,6 +1,6 @@
 <div 
-  class="p-3 flex gap-2 transition-colors hover:bg-gray-50 dark:hover:bg-slate-700 border-l-4 
-  {{ is_null($notification->read_at) ? 'border-blue-500 bg-blue-50 dark:bg-gray-700' : 'border-transparent' }}"
+  class="p-3 flex gap-2 transition-colors hover:bg-gray-50 dark:hover:bg-slate-600 border-l-4 
+  {{ is_null($notification->read_at) ? 'border-blue-500 bg-blue-50 dark:bg-slate-600' : 'border-transparent' }}"
 >
   <x-profile.avatar :user="$notification->actor" />
 

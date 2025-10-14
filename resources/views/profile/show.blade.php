@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-slate-900">
+<x-layout class="dark:bg-slate-800">
   <x-section>
     <div class="grid md:grid-cols-3 gap-2">
       <div class="space-y-2 md:col-span-1">

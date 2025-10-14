@@ -1,4 +1,4 @@
-<tr class="odd:bg-gray-50 dark:odd:bg-slate-700">
+<tr class="odd:bg-gray-50 dark:odd:bg-slate-600">
   <td class="max-w-[50ch] px-3 py-5 truncate text-gray-800 dark:text-white" title="{{ $post->title }}">
     <a href="/posts/{{ $post->slug }}" target="_blank">
       {{ $post->title }}

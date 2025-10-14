@@ -13,14 +13,18 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="translate-y-0 opacity-100"
     x-transition:leave-end="-translate-y-6 opacity-0"
-    class="sm:w-90 sm:ml-auto rounded-b-xl sm:rounded-xl sm:border sm:border-gray-200 sm:dark:border-slate-800 bg-white dark:bg-slate-900 sm:shadow-sm"
+    class="sm:w-90 sm:ml-auto rounded-b-xl sm:rounded-xl sm:border sm:border-gray-200 
+         sm:dark:border-slate-600 bg-white dark:bg-slate-700 sm:shadow-sm"
   >
-    <div class="p-3 border-b border-gray-100 dark:border-slate-800 font-medium 
+    <div class="p-3 border-b border-gray-100 dark:border-slate-600 font-medium 
               text-gray-800 dark:text-white flex justify-between items-center"
     >
-      <p>Notificações</p>
+      <div class="flex items-center gap-2">
+        <x-ui.icons.bell/>
+        <p>Notificações</p>
+      </div>
       <template x-if="unreadCount > 0">
-        <x-ui.base.badge pill small>
+        <x-ui.base.badge pill small variant="blue">
           {{ $unreadCount }} novas
         </x-ui.base.badge>
       </template>

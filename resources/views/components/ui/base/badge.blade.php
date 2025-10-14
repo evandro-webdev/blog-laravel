@@ -19,7 +19,7 @@
   $variantClasses = [
     'default' => 'text-blue-500 dark:text-blue-300 bg-blue-50 dark:bg-blue-900 hover:bg-blue-100 dark:hover:bg-blue-800',
     'blue' => 'text-white bg-blue-600 hover:bg-blue-700',
-    'white' => 'text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600'
+    'white' => 'text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-900'
   ];
 
   $classes = implode(' ', [$baseClasses, $roundedClass, $sizeClass, $variantClasses[$variant]]);

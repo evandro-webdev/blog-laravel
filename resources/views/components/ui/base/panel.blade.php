@@ -1,7 +1,7 @@
 @props(['border' => 'gray'])
 
 @php
-  $baseClasses = 'p-6 rounded-md border bg-white dark:bg-slate-800 transition-colors duration-300';
+  $baseClasses = 'p-6 rounded-xl border bg-white dark:bg-slate-700 transition-colors duration-300';
 
   $borderClasses = [
     'gray' => 'border-gray-200 dark:border-slate-700',

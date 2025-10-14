@@ -1,12 +1,6 @@
 <x-layout>
-  <div class="bg-gray-50 dark:bg-slate-900">
+  <div class="bg-white dark:bg-slate-800">
     <x-section>
-      <x-page-heading 
-        title="{{ $user ? 'Bem vindo de volta, ' . $user->name : 'Bem vindo' }} " 
-        subtitle="Veja o que acontece na área de tecnologia"
-        class="mb-8"
-      />
-
       <div class="flex flex-col gap-6 lg:flex-row">
         <div class="flex-1">
           <x-home.tab-links :$tab/>
@@ -26,8 +20,8 @@
           </div>
         </div>
 
-        <div class="flex flex-col gap-6 sm:flex-row sm:flex-wrap lg:flex-col lg:min-w-xs lg:max-w-3">
-          <x-ui.base.panel class="flex-1 lg:flex-0">
+        <div class="flex flex-col gap-10 sm:flex-row sm:flex-wrap lg:flex-col lg:min-w-xs lg:max-w-3">
+          <div class="flex-1 lg:flex-0">
             <x-section-heading
               title="Sugerido para você"
               link="#"
@@ -49,10 +43,10 @@
                 </div>
               @endforeach
             </div>
-          </x-ui.base.panel>
+          </div>
 
           @auth
-            <x-ui.base.panel class="flex-1 lg:flex-0">
+            <div class="flex-1 lg:flex-0">
               <x-section-heading
                 title="Seguindo"
                 link="#"
@@ -71,7 +65,7 @@
                   </a>
                 @endforeach
               </div>
-            </x-ui.base.panel>
+            </div>
           @endauth
 
           <div class="w-full">

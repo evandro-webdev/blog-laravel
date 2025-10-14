@@ -4,7 +4,7 @@
   'statistic'
 ])
 
-<x-ui.base.panel class="space-y-4 hover:bg-gray-50 dark:hover:bg-slate-700">
+<x-ui.base.panel class="space-y-4 hover:bg-gray-50 dark:hover:bg-slate-600">
   <div class="flex justify-between">
     <span class="font-medium text-gray-900 dark:text-white">{{ $label }}</span>
     <x-dynamic-component :component="'ui.icons.' . $icon" class="text-blue-600 dark:text-blue-500"/>

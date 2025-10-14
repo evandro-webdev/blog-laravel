@@ -29,7 +29,7 @@
   </div>
   
   @if ($link)
-    <a href="{{ $link }}" class="{{ $sizes[$size]['link'] }} font-medium text-gray-700 dark:text-white">
+    <a href="{{ $link }}" class="{{ $sizes[$size]['link'] }} font-medium hover:underline text-gray-700 dark:text-white">
       Ver todos →
     </a>
   @endif

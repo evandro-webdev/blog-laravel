@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-slate-900">
+<x-layout class="dark:bg-slate-800">
   <div class="flex-1">
     <x-section>
       <div class="max-w-[1280px] mx-auto">
