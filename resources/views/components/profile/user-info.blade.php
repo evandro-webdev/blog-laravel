@@ -2,7 +2,7 @@
   'user'
 ])
 
-<x-ui.base.panel>
+<x-ui.base.panel tone="darker">
   <h3 class="mb-4 font-bold text-gray-800 dark:text-white">Sobre</h3>
 
   <div class="space-y-4">

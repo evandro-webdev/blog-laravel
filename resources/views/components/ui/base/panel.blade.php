@@ -1,17 +1,17 @@
-@props(['border' => 'gray'])
+@props([
+  'tone' => 'default'
+])
 
 @php
-  $baseClasses = 'p-6 rounded-xl border bg-white dark:bg-slate-700 transition-colors duration-300';
+  $baseClasses = 'p-6 rounded-xl border border-gray-200 bg-white transition-colors duration-300';
 
-  $borderClasses = [
-    'gray' => 'border-gray-200 dark:border-slate-700',
-    'blue' => 'border-blue-100 hover:bg-blue-50',
-  ][$border];
+  $variants = [
+    'default' => 'dark:border-transparent dark:bg-slate-700',
+    'darker' => 'dark:border-transparent dark:bg-slate-800',
+    'darkest' => 'dark:border-transparent dark:bg-slate-900',
+  ];
 
-  $classes = implode(' ', [
-    $baseClasses,
-    $borderClasses
-]);
+  $classes = "$baseClasses " . ($variants[$tone] ?? $variants['default']);
 @endphp
 
 <div {{ $attributes->merge(['class' => $classes]) }}>

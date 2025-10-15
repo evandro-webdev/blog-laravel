@@ -1,5 +1,5 @@
 <div x-show="tab === 'read'" class="space-y-6">
-  <x-ui.base.panel>
+  <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Posts lidos"
       desc="Confira seus ultimos posts lidos"

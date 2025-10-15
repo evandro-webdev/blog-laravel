@@ -2,7 +2,7 @@
   $unreadCount = Auth::check() ? Auth::user()->unreadNotifications()->count() : 0;
 @endphp
 
-<div class="border-b border-b-gray-200 dark:border-b-slate-700 dark:bg-slate-800 z-50">
+<div class="border-b border-b-gray-200 dark:border-b-slate-700 dark:bg-slate-800 transition-colors z-50">
   <nav>
     <div 
       x-data="{ 

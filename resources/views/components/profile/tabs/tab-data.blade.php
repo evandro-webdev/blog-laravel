@@ -1,9 +1,9 @@
 <div x-show="tab === 'data'" class="space-y-6">
-  <form action="{{ route('profile.update', $user) }}" method="POST" class="space-y-6">
+  <form action="{{ route('profile.update', $user) }}" method="POST" class="space-y-2">
     @csrf
     @method('PUT')
 
-    <x-ui.base.panel>
+    <x-ui.base.panel tone="darker">
       <div class="mb-8 flex items-center justify-between">
         <x-section-heading
           title="Informações pessoais"
@@ -20,7 +20,7 @@
       </div>
     </x-ui.base.panel>
 
-    <x-ui.base.panel>
+    <x-ui.base.panel tone="darker">
       <x-section-heading
         title="Redes sociais"
         desc="Conecte-se com seus seguidores pelas redes sociais"

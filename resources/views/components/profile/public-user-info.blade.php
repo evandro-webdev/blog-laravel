@@ -3,7 +3,7 @@
   'isOwnProfile'
 ])
 
-<x-ui.base.panel>
+<x-ui.base.panel tone="darker">
   <div class="space-y-6 flex flex-col items-center">
     <div>
       <div class="w-fit mx-auto relative">

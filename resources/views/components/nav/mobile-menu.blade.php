@@ -13,7 +13,7 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="translate-y-0 opacity-100"
     x-transition:leave-end="-translate-y-6 opacity-0"
-    class="h-fit rounded-b-xl overflow-hidden bg-white dark:bg-slate-900"
+    class="h-fit rounded-b-xl overflow-hidden bg-white dark:bg-slate-800"
   >
     <div class="px-2 py-6 space-y-1">
       <x-nav.mobile-link href="/" :active="request()->is('/')">Início</x-nav.mobile-link>
@@ -24,7 +24,7 @@
 
     <div
       x-data="{ isOpen: false }"
-      class="py-2 px-2 border-t border-gray-300 dark:border-slate-800 bg-gray-50 dark:bg-slate-900"
+      class="py-2 px-2 border-t border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-slate-800"
     >
       @auth
         <div 

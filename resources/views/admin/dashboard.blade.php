@@ -1,4 +1,4 @@
-<x-layout class="dark:bg-slate-800">
+<x-layout class="dark:bg-slate-900">
   <div class="flex-1">
     <x-section>
       <div class="max-w-[1280px] mx-auto">
@@ -7,7 +7,7 @@
             title="Dashboard" 
             subtitle="Gerencie o conteúdo do seu blog e veja estatísticas."
           />
-          <x-ui.forms.button href="/admin/posts/create">Novo post</x-ui.forms.button>
+          <x-ui.forms.button href="/admin/posts/create" icon="doc-plus">Novo post</x-ui.forms.button>
         </div>
         
         <x-ui.layout.tab-container default-tab="overview" class="space-y-2">

@@ -5,7 +5,7 @@
 ])
 
 @php
-  $borderClass = 'border-2 border-dashed border-gray-300 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition-colors';
+  $borderClass = 'border-2 border-dashed border-gray-300 dark:border-slate-600 hover:border-blue-300 dark:hover:border-blue-500 transition-colors';
 @endphp
 
 <div

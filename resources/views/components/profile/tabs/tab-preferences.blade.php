@@ -1,5 +1,5 @@
-<div x-show="tab === 'preferences'" class="space-y-6">
-  <x-ui.base.panel>
+<div x-show="tab === 'preferences'" class="space-y-2">
+  <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Preferências"
       desc="Confira ou edite suas preferências"
@@ -32,6 +32,7 @@
       })
     }"
     id="seguranca"
+    tone="darker"
   >
     <div class="flex items-center justify-between">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Segurança</h2>

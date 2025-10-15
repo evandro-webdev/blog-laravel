@@ -12,7 +12,7 @@
 <body class="min-h-screen flex flex-col">
   <x-nav/>
 
-  <main {{ $attributes->merge(['class' => 'flex-1 flex flex-col']) }}>
+  <main {{ $attributes->merge(['class' => 'flex-1 flex flex-col transition-colors']) }}>
     {{ $slot }}
   </main>
 

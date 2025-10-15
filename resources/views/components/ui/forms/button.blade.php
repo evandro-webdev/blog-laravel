@@ -8,7 +8,7 @@
 ])
 
 @php
-  $baseClasses = 'rounded-lg border font-medium cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
+  $baseClasses = 'rounded-lg border font-semibold cursor-pointer block text-center flex items-center justify-center gap-2 transition-colors duration-200';
 
   $sizeStyles = [
     'xs' => 'px-2 py-1 text-xs',
@@ -16,6 +16,14 @@
     'md' => 'px-6 py-2 text-base',
     'lg' => 'px-8 py-3 text-lg',
     'xl' => 'px-10 py-4 text-xl'
+  ];
+
+  $iconSizes = [
+    'xs' => 'w-3.5 h-3.5',
+    'sm' => 'w-4 h-4',
+    'md' => 'w-5 h-5',
+    'lg' => 'w-6 h-6',
+    'xl' => 'w-7 h-7',
   ];
 
   $variantStyles = [
@@ -41,10 +49,11 @@
     ]
   ];
 
-  $sizeClasses = $sizeStyles[$size];
+  $buttonSizeClasses = $sizeStyles[$size];
+  $iconSizeClasses = $iconSizes[$size];
   $variantClasses = $variantStyles[$variant][$outline ? 'outline' : 'filled'] ?? '';
 
-  $classes = implode(' ', [$baseClasses, $sizeClasses, $variantClasses]);
+  $classes = implode(' ', [$baseClasses, $buttonSizeClasses, $variantClasses]);
 @endphp
 
 @if ($href)
@@ -52,8 +61,8 @@
     @if ($icon)
       <x-dynamic-component
         :component="'ui.icons.' . $icon"
-        :stroke="1.5"
-        size="w-[1em] h-[1em]"
+        stroke="2"
+        size="{{ $iconSizeClasses }}"
       />
     @endif
     <span>{{ $slot }}</span>
@@ -63,8 +72,8 @@
     @if ($icon)
       <x-dynamic-component 
         :component="'ui.icons.' . $icon"
-        :stroke="1.5"
-        size="w-[1em] h-[1em]"
+        stroke="2"
+        size="{{ $iconSizeClasses }}"
       />
     @endif
     <span>{{ $slot }}</span>

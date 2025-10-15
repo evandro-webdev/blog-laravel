@@ -1,5 +1,5 @@
 <div x-show="tab === 'saved'" class="space-y-6">
-  <x-ui.base.panel>
+  <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Posts salvos"
       desc="Confira seus posts preferidos ou salvos para ler mais tarde"

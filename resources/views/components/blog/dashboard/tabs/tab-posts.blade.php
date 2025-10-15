@@ -1,5 +1,5 @@
 <div x-show="tab === 'posts'">
-  <x-ui.base.panel>
+  <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Meus posts"
       desc="Gerencie seus posts"
