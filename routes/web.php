@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save.store');
   Route::delete('/posts/{post}/save', [SavedPostController::class, 'destroy'])->name('posts.save.destroy');
 
+  Route::get('/notifications', [NotificationController::class, 'index']);
   Route::post('/notifications/read', [NotificationController::class, 'markAllAsRead']);
 });
 

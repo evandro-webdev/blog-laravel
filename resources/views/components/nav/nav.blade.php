@@ -8,6 +8,7 @@
       x-data="{ 
         isMenuOpen: false,
         isNotificationsOpen: false,
+        opened: false,
         unreadCount: {{ $unreadCount }}
       }"
       x-init="
