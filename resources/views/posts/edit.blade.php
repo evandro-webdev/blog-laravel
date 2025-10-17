@@ -60,12 +60,14 @@
               tip="Torna o post visivel para todos"
             />
 
-            <x-ui.forms.checkbox 
-              name="featured" 
-              label="Destaque"
-              :checked="$post->featured"
-              tip="Exibe o post em destaque na página inicial"
-            />
+            <div id="featured-container">
+              <x-ui.forms.checkbox 
+                name="featured" 
+                label="Destaque"
+                :checked="$post->featured"
+                tip="Exibe o post em destaque no seu perfil público"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -101,6 +103,29 @@
         const isDark = localStorage.getItem('theme') === 'dark'
         if (isDark) document.documentElement.classList.add('dark')
         initTinymce(isDark)
+      })
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+       const published = document.querySelector('input[name="published"]'); 
+       const featured = document.querySelector('input[name="featured"]');
+       const featuredContainer = document.querySelector('#featured-container');
+
+       if(published && featuredContainer && featured){
+        function updateFeaturedVisibility(){
+          if(published.checked){
+            featuredContainer.style.display = 'block';
+          } else {
+            featuredContainer.style.display = 'none';
+            featured.checked = false;
+          }
+        }
+
+        updateFeaturedVisibility();
+
+        published.addEventListener('change', updateFeaturedVisibility);
+       }
       })
     </script>
   @endpush
