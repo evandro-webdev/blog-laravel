@@ -1,7 +1,7 @@
-<article class="rounded-xl overflow-hidden bg-white dark:bg-slate-700 shadow-sm hover:shadow-md transition-shadow group">
+<article class="overflow-hidden group">
   <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title" loading="lazy"/>
     
-  <div class="p-6">
+  <div class="p-4">
     <x-ui.base.badge small variant="blue">{{ $post->category->name }}</x-ui.badge>
 
     <h3 class="my-2 font-semibold line-clamp-2 text-gray-700 dark:text-white">

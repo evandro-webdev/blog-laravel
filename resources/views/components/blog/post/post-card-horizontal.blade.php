@@ -1,13 +1,13 @@
-<article class="rounded-md overflow-hidden flex flex-col sm:flex-row group shadow-sm">
+<article class="overflow-hidden flex flex-col sm:flex-row group">
   <x-blog.post.post-thumbnail :image="$post->image" :title="$post->title" class="sm:w-1/3 sm:aspect-[4/3] object-cover"/>
   
-  <div class="p-4 rounded-b-md sm:rounded-l-none sm:rounded-t-md space-y-4 dark:bg-slate-700 flex flex-col flex-1 justify-center"
+  <div class="p-4 rounded-b-md sm:rounded-l-none sm:rounded-t-md space-y-5 flex flex-col flex-1 justify-center"
   >
     <div class="flex items-center gap-2">
-      <div class="flex items-center gap-2">
-        <x-profile.avatar :user="$post->user" size="w-7 h-7"/>
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ $post->user->name }}</span>
-      </div>
+      <a href="{{ route('profile.show', $post->user) }}" class="flex items-center gap-2">
+        <x-profile.avatar :user="$post->user" size="w-6 h-6"/>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-100">{{ $post->user->name }}</span>
+      </a>
       <span class="text-gray-600 dark:text-gray-100">·</span>
       <x-ui.utilities.datetime 
         :date="$post->created_at"
@@ -15,7 +15,7 @@
       />
     </div>
 
-    <a href="{{ route('posts.show', $post) }}" class="space-y-1">
+    <a href="{{ route('posts.show', $post) }}" class="space-y-2">
       <h3 
         title="{{ $post->title }}" 
         class="font-semibold text-xl text-gray-800 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors line-clamp-2"

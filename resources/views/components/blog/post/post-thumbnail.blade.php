@@ -6,7 +6,7 @@
 ])
 
 @php
-  $containerClasses = 'aspect-video shrink-0 relative overflow-hidden';
+  $containerClasses = 'aspect-video shrink-0 rounded-lg relative overflow-hidden';
 @endphp
 
 <div {{ $attributes->merge(['class' => $containerClasses]) }}>
