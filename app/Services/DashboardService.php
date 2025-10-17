@@ -36,7 +36,7 @@ class DashboardService
   private function getGroupedActivitiesByDate(Collection $activitiesCollection): Collection
   {
     $today = now()->startOfDay();
-    $yesterday = $today->subDay();
+    $yesterday = $today->copy()->subDay();
 
     return $activitiesCollection->groupBy(function ($activity) use($today, $yesterday) {
       $activityDate = $activity->created_at->copy()->startOfDay();
