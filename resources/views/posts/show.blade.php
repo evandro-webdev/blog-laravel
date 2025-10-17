@@ -253,5 +253,4 @@
   </main>
 </x-layout>
 
-<script src="{{ Vite::asset('resources/js/components/read-button.js') }}"></script>
-<script src="{{ Vite::asset('resources/js/components/save-button.js') }}"></script>
+<script src="{{ Vite::asset('resources/js/components/action-button.js') }}"></script>

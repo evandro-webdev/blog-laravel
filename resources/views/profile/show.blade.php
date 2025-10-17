@@ -41,4 +41,4 @@
   </x-section>
 </x-layout>
 
-<script src="{{ Vite::asset('resources/js/components/follow-button.js') }}"></script>
+<script src="{{ Vite::asset('resources/js/components/action-button.js') }}"></script>
