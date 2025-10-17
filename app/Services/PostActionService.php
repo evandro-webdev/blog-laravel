@@ -69,7 +69,7 @@ class PostActionService
       $data['image'] = $this->handleImageUpload($data['image'], $post);
     }
 
-    if(empty($data['exerpt']) && !empty($data['content'])){
+    if(empty($data['excerpt']) && !empty($data['content'])){
       $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
     }
 
