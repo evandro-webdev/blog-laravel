@@ -2,7 +2,7 @@
   @if ($posts->count() > 0)
     <x-home.filter-container :$posts :$sort/>
 
-    <div class="space-y-4">
+    <div class="space-y-8">
       @foreach ($posts as $post)
         <x-blog.post.post-card-horizontal :$post/>
       @endforeach
