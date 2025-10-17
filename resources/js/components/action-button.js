@@ -1,14 +1,13 @@
-function readButton(postId, isReadDefault, csrfToken) {
+function actionButton(url, isActiveDefault, csrfToken) {
   return {
-    isRead: isReadDefault,
+    isActive: isActiveDefault,
     loading: false,
 
-    async toggleRead() {
+    async toggleActive() {
       this.loading = true;
 
-      let url = `/posts/${postId}/read`;
       let options = {
-        method: this.isRead ? 'DELETE' : 'POST',
+        method: this.isActive ? 'DELETE' : 'POST',
         headers: {
           'X-CSRF-TOKEN': csrfToken,
           'Accept': 'application/json',
@@ -19,7 +18,7 @@ function readButton(postId, isReadDefault, csrfToken) {
         const response = await fetch(url, options);
         if (response.ok) {
           await new Promise(resolve => setTimeout(resolve, 300));
-          this.isRead = !this.isRead;
+          this.isActive = !this.isActive;
         } else {
           let error = await response.json();
           console.log(error.error || 'Ocorreu um erro.');
