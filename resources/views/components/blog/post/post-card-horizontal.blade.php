@@ -18,7 +18,7 @@
     <a href="{{ route('posts.show', $post) }}" class="space-y-1">
       <h3 
         title="{{ $post->title }}" 
-        class="font-bold text-xl text-gray-800 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors line-clamp-2"
+        class="font-semibold text-xl text-gray-800 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors line-clamp-2"
       >
         {{ $post->title }}
       </h3>
