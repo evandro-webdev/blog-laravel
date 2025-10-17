@@ -62,8 +62,8 @@ class PostActionService
   private function preparePostData(array $data, ?Post $post = null): array
   {
     $data['slug'] = $this->generateSlug($data['title'], $post);
-    $data['published'] = !empty($data['published']) ? true : false;
     $data['featured'] = !empty($data['featured']) ? true : false;
+    $data['published'] = !empty($data['published']) || $data['featured'] ? true : false;
 
     if(isset($data['image'])){
       $data['image'] = $this->handleImageUpload($data['image'], $post);
