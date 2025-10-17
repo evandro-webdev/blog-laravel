@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/notifications/read', [NotificationController::class, 'markAllAsRead']);
 });
 
-Route::middleware(['admin', 'auth'])->prefix('/admin')->group(function () {
+Route::middleware(['auth'])->prefix('/admin')->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
