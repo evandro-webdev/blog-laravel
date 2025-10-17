@@ -22,7 +22,7 @@
   @mouseenter="hover = true"
   @mouseleave="hover = false"
 >
-  <x-ui.forms.label label="Imagem de capa" name="$name"/>
+  <x-ui.forms.label label="Imagem de capa" :id="$name"/>
 
   <div
     class="w-full h-72 rounded-md flex justify-center items-center bg-center overflow-hidden"

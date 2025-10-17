@@ -8,7 +8,7 @@
 
 <div class="relative flex-1">
   @if ($label)
-    <x-ui.forms.label :$name :$label/>
+    <x-ui.forms.label :id="$name" :$label/>
   @endif
 
   @if ($icon)
