@@ -14,6 +14,7 @@
           <x-slot:tabs>
             <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
             <x-ui.tab value="posts" x-model="tab" icon="docs">Posts</x-ui.tab>
+            <x-ui.tab value="users" x-model="tab" icon="user">Usuários</x-ui.tab>
             <x-ui.tab value="activity" x-model="tab" icon="doc-list">Atividade</x-ui.tab>
           </x-slot:tabs>
 
@@ -24,6 +25,7 @@
               :mostCommentedPosts="$dashboardData['mostCommentedPosts']"
             />
             <x-blog.dashboard.tabs.tab-posts :posts="$dashboardData['posts']"/>
+            <x-blog.dashboard.tabs.tab-users :users="$dashboardData['users']"/>
             <x-blog.dashboard.tabs.tab-activity :groupedActivities="$dashboardData['groupedActivities']" :activities="$dashboardData['activities']"/>
           </x-slot:content>
         </x-ui.tab-container>
