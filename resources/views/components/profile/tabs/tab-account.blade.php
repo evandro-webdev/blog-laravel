@@ -1,4 +1,4 @@
-<div x-show="tab === 'preferences'" class="space-y-2">
+<div x-show="tab === 'account'" class="space-y-2">
   <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Preferências"
@@ -55,7 +55,7 @@
     >
       <x-section-heading
         title="Alterar senha"
-        desc="Confira ou edite suas preferências"
+        desc="Altere sua senha para ter mais segurança"
         class="mb-4"
         size="sm"
       />
@@ -108,7 +108,7 @@
       <div class="flex justify-between items-center">
         <x-section-heading
           title="Excluir conta"
-          desc="Apagar conta e todos seus dados"
+          desc="Apagar esta conta e todos seus dados"
           class="mb-4"
           size="sm"
         />

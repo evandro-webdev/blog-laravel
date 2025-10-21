@@ -15,7 +15,7 @@
             <x-ui.tab value="data" x-model="tab" icon="user-data">Dados</x-ui.tab>
             <x-ui.tab value="read" x-model="tab" icon="eye">Lidos ({{ $user->readPosts->count() }})</x-ui.tab>
             <x-ui.tab value="saved" x-model="tab" icon="save">Salvos ({{ $user->savedPosts->count() }})</x-ui.tab>
-            <x-ui.tab value="preferences" x-model="tab" icon="preferences">Preferências</x-ui.tab>
+            <x-ui.tab value="account" x-model="tab" icon="preferences">Conta</x-ui.tab>
           @else
             <x-ui.tab value="posts" x-model="tab" icon="doc">Posts</x-ui.tab>
             <x-ui.tab value="activity" x-model="tab" icon="user">Atividade</x-ui.tab>
@@ -27,7 +27,7 @@
             <x-profile.tabs.tab-data :$user/>
             <x-profile.tabs.tab-read :$user/>
             <x-profile.tabs.tab-saved :$user/>
-            <x-profile.tabs.tab-preferences :$user/>
+            <x-profile.tabs.tab-account :$user/>
           @else
             {{-- <x-profile.tabs.posts :$user/>
             <x-profile.tabs.activity :$user/>
