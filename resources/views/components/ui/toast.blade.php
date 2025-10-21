@@ -15,7 +15,7 @@
   ];
 
   $positionClass = $positions[$position];
-  $classes = "w-full max-w-xs p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white 
+  $classes = "w-full max-w-sm p-4 rounded-lg fixed {{ $positionClass }} text-gray-500 dark:text-white 
               bg-white dark:bg-slate-700 shadow-sm flex items-center justify-between z-200" 
 @endphp
 
@@ -52,7 +52,7 @@
       <x-dynamic-component :component="'ui.icons.' . $icon"/>
     @endif
   
-    <div x-text="message" class="ms-3 text-sm font-normal"></div>
+    <div x-text="message" class="[text-wrap:balance] ms-3 text-sm font-normal"></div>
   </div>
 
   <button 

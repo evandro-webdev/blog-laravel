@@ -29,24 +29,7 @@
               class="mb-4"
             />
 
-            <div class="space-y-1.5">
-              @foreach ($usersToFollow as $userToFollow)
-                <div class="flex items-center justify-between p-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors group">
-                  <a href="{{ route('profile.show', $userToFollow) }}" class="flex items-center gap-2">
-                    <x-profile.avatar :user="$userToFollow" size="w-10 h-10"/>
-                    <div>
-                      <span class="block text-sm font-medium text-gray-800 dark:text-white">
-                        {{ $userToFollow->name }}
-                      </span>
-                      <span class="block text-xs text-gray-500 dark:text-gray-400">
-                        {{ $userToFollow->posts->count() }} posts
-                      </span>
-                    </div>
-                  </a>
-                  <x-ui.interactive.follow-button :user="$userToFollow"/>
-                </div>
-              @endforeach
-            </div>
+            <x-home.users-list :users="$usersToFollow" follow/>
           </section>
 
           @auth
@@ -58,21 +41,7 @@
                 class="mb-4"
               />
 
-              <div class="space-y-1.5">
-                @foreach ($user->following as $following)
-                  <a href="{{ route('profile.show', $following) }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
-                    <x-profile.avatar :user="$following" size="w-10 h-10"/>
-                    <div>
-                      <span class="block text-sm font-medium text-gray-800 dark:text-white">
-                        {{ $following->name }}
-                      </span>
-                      <span class="block text-xs text-gray-500 dark:text-gray-400">
-                        {{ $following->posts->count() }} posts
-                      </span>
-                    </div>
-                  </a>
-                @endforeach
-              </div>
+            <x-home.users-list :users="$user->following"/>
             </section>
           @endauth
 
@@ -102,6 +71,7 @@
         </aside>
       </div>
 
+      <x-ui.toast/>
     </x-section>
   </div>
 </x-layout>
