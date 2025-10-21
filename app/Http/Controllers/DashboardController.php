@@ -17,9 +17,11 @@ class DashboardController extends Controller
   public function dashboard()
   {
     $dashboardData = $this->dashboardService->getDashboardData(Auth::user());
+    $isAdmin = Auth::user()->isAdmin();
 
     return view('admin.dashboard', [
-      'dashboardData' => $dashboardData
+      'dashboardData' => $dashboardData,
+      'isAdmin' => $isAdmin
     ]);
   }
 }

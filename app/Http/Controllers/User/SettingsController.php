@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\PreferencesRequest;
-use App\Http\Requests\UpdatePasswordRequest;
-use App\Services\SettingsService;
 use Illuminate\Http\Request;
+use App\Services\SettingsService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\PreferencesRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Validation\ValidationException;
 
 class SettingsController extends Controller

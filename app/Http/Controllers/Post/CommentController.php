@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Models\Comment;
 use App\Services\CommentService;
-use App\Http\Requests\CommentRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CommentController extends Controller

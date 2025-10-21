@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Models\Category;
-use App\Traits\LogsActivity;
-use Illuminate\Support\Facades\Auth;
-use App\Services\PostService;
-use App\Services\PostActionService;
-use App\Http\Requests\PostRequest;
 use App\Models\PostView;
+use App\Traits\LogsActivity;
+use App\Services\PostService;
+use App\Http\Requests\PostRequest;
+use App\Services\PostActionService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {

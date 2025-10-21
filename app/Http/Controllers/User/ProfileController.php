@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\ProfilePictureRequest;
 use App\Models\User;
-use App\Http\Requests\ProfileRequest;
 use App\Services\ProfileService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ProfilePictureRequest;
 
 class ProfileController extends Controller
 {
