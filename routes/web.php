@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
   
   Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
   Route::patch('/settings/preferences', [SettingsController::class, 'updatePreferences'])->name('settings.updatePreferences');
+  Route::delete('/settings/account', [SettingsController::class, 'deleteAccount'])->name('settings.deleteAccount');
 
   Route::post('/user/{user}/follow', [FollowController::class, 'store']);
   Route::delete('/user/{user}/follow', [FollowController::class, 'destroy']);

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePasswordRequest;
 use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class SettingsController extends Controller
@@ -45,5 +46,19 @@ class SettingsController extends Controller
     return redirect()
       ->back()
       ->with('message', 'Preferências atualizadas com sucesso.');
+  }
+
+  public function deleteAccount(Request $request)
+  {
+    $user = $request->user();
+
+    if(!Hash::check($request->passwordDelete, $user->password)){
+      return back()->with('message', 'Falha ao excluir conta. Senha incorreta.');
+    }
+
+    $user->delete();
+    Auth::logout();
+
+    return redirect('/')->with('message', 'Conta excluída com sucesso!');
   }
 }
