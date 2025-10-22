@@ -7,35 +7,21 @@ use App\Models\Category;
 use App\Models\PostView;
 use App\Traits\LogsActivity;
 use App\Services\PostService;
-use App\Http\Requests\PostRequest;
 use App\Services\PostActionService;
+use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
   use LogsActivity;
-
-  protected PostService $postService;
-  protected PostActionService $postActionService;
+  use AuthorizesRequests;
 
   public function __construct(
-    PostService $postService, 
-    PostActionService $postActionService
-  ){
-    $this->postService = $postService;
-    $this->postActionService = $postActionService;
-  }
-
-  // refatorar
-  public function index()
-  {
-    $posts = Post::latest()
-      ->where('published', true)
-      ->paginate(6);
-
-    return view('posts.index', compact('posts'));
-  }
+    private PostService $postService, 
+    private PostActionService $postActionService
+  ){}
 
   public function show(Post $post)
   {
@@ -62,18 +48,22 @@ class PostController extends Controller
 
     $this->logActivity('Post publicado', $post);
 
-    return redirect('/admin/dashboard?tab=posts')
+    return redirect('/dashboard?tab=posts')
       ->with('message', 'Post criado com sucesso');
   }
 
   public function edit(Post $post)
   {
+    $this->authorize('update', $post);
+
     $categories = Category::all();
     return view('posts.edit', ['post' => $post, 'categories' => $categories]);
   }
 
   public function update(PostRequest $request, Post $post)
   {
+    $this->authorize('update', $post);
+
     $post = $this->postActionService->updatePost(
       $request->validated(),
       $request->validated()['tags'],
@@ -82,17 +72,19 @@ class PostController extends Controller
 
     $this->logActivity('Post atualizado', $post);
 
-    return redirect('/admin/dashboard?tab=posts')
+    return redirect('/dashboard?tab=posts')
       ->with('message', 'Post atualizado com sucesso');
   }
 
   public function destroy(Post $post)
   {
+    $this->authorize('delete', $post);
+
     $this->postActionService->deletePost($post);
 
     $this->logActivity('Post deletado', $post);
 
-    return redirect('/admin/dashboard?tab=posts')
+    return redirect('/dashboard?tab=posts')
       ->with('message', 'Post deletado com sucesso');
   }
 }
