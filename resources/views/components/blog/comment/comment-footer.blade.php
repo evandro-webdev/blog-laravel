@@ -9,7 +9,7 @@
     <span>Responder</span>
   </button>
     
-  @can('update', $comment)
+  @can('delete', $comment)
     <div class="relative ml-auto" x-data="{ open: false }">
       <button 
         @click="open = !open" 

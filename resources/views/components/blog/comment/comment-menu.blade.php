@@ -13,7 +13,7 @@
     </button>
   @endcan
 
-  @can('update', $comment)
+  @can('delete', $comment)
     <button
       @click="
         $dispatch('open-modal', {

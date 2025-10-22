@@ -12,6 +12,4 @@
       <x-ui.utilities.message message="Você não possui nenhum post, comece a publicar agora mesmo"/>
     @endif
   </x-ui.base.panel>
-
-  <x-ui.toast icon="doc" position="center-top"/>
 </div>
