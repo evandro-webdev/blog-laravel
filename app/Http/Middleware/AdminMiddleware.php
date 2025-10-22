@@ -15,6 +15,6 @@ class AdminMiddleware
       return $next($request);
     }
 
-    return redirect('/')->with('error', 'Acesso negado! Você não é administrador.');
+    return redirect('/')->with('message', 'Acesso negado! Você não é administrador.');
   }
 }
