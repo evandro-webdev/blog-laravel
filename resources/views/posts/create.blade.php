@@ -6,7 +6,7 @@
       class="mb-6"
     />
 
-    <form action="/admin/posts" method="POST" enctype="multipart/form-data" class="space-y-8">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
       @csrf
       <div class="flex flex-col gap-6 md:flex-row">
         <div class="space-y-6 flex-1">

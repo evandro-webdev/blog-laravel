@@ -22,7 +22,7 @@
       <span>Perfil</span>
     </a>
     <a 
-      href="{{ route('admin.dashboard') }}"
+      href="{{ route('dashboard') }}"
       class="w-full px-4 py-3 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-600 flex items-center gap-2 transition-colors"
     >
       <x-ui.icons.chart-bar/>
