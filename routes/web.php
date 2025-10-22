@@ -2,21 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PostReadController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SessionController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\RegisterUserController;
-use App\Http\Controllers\SavedPostController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\Post\CommentController;
+use App\Http\Controllers\Post\PostReadController;
+use App\Http\Controllers\Post\SavedPostController;
+use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\Auth\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
@@ -25,9 +24,9 @@ Route::middleware('guest')->group(function () {
   Route::post('/login', [SessionController::class, 'store']);
 });
 
-Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
-
 Route::middleware('auth')->group(function () {
+  Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
+  
   Route::put('/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
   Route::patch('/{user:username}/picture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
   
@@ -52,9 +51,15 @@ Route::middleware('auth')->group(function () {
   Route::post('/notifications/read', [NotificationController::class, 'markAllAsRead']);
 });
 
-Route::middleware(['auth'])->prefix('/admin')->group(function () {
-  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware(['auth'])->group(function () {
+  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
 
+Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
+  Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
+  Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+});
+
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
