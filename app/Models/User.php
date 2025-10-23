@@ -78,7 +78,7 @@ class User extends Authenticatable
 
   public function notifications(): HasMany
   {
-    return $this->hasMany(Notification::class, 'user_id')->latest();
+    return $this->hasMany(Notification::class, 'user_id')->latest('updated_at');
   }
 
   public function postViews(): HasManyThrough

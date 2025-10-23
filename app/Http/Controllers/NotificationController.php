@@ -10,7 +10,6 @@ class NotificationController extends Controller
   {
     $notifications = Auth::user()
       ->notifications()
-      ->latest()
       ->paginate(6);
 
     return response()->json([
