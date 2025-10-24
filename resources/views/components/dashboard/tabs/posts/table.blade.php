@@ -1,3 +1,7 @@
+@props([
+  'posts'
+])
+
 <div class="mb-4 rounded-xl border border-gray-200 dark:border-gray-700 overflow-x-auto">
   <table class="w-full text-sm table-auto">
     <thead class="border-b border-gray-200 dark:border-gray-700">
@@ -12,7 +16,7 @@
     </thead>
     <tbody>
       @foreach ($posts as $post)
-        <x-blog.dashboard.tabs.posts.row :$post/>
+        <x-dashboard.tabs.posts.row :$post/>
       @endforeach
     </tbody>
   </table>

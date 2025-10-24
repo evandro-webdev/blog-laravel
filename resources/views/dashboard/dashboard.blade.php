@@ -1,20 +1,21 @@
 <x-layout class="dark:bg-slate-900">
   <div class="flex-1">
-    <x-section>
-      <div class="max-w-[1280px] mx-auto">
+    <div class="flex">
+      <x-blog.dashboard.sidebar/>
+
+      <div class="w-full p-10 mx-auto">
         <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <x-page-heading 
             title="Dashboard" 
             subtitle="Gerencie o conteúdo do seu blog e veja estatísticas."
           />
-          <x-ui.forms.button href="/admin/posts/create" icon="doc-plus">Novo post</x-ui.forms.button>
+          <x-ui.forms.button href="{{ route('posts.create') }}" icon="doc-plus">Novo post</x-ui.forms.button>
         </div>
         
         <x-ui.layout.tab-container default-tab="overview" class="space-y-2">
           <x-slot:tabs>
             <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
             <x-ui.tab value="posts" x-model="tab" icon="docs">Posts</x-ui.tab>
-            <x-ui.tab value="users" x-model="tab" icon="user">Usuários</x-ui.tab>
             <x-ui.tab value="activity" x-model="tab" icon="doc-list">Atividade</x-ui.tab>
           </x-slot:tabs>
 
@@ -25,11 +26,12 @@
               :mostCommentedPosts="$dashboardData['mostCommentedPosts']"
             />
             <x-blog.dashboard.tabs.tab-posts :posts="$dashboardData['posts']"/>
-            <x-blog.dashboard.tabs.tab-users :users="$dashboardData['users']"/>
             <x-blog.dashboard.tabs.tab-activity :groupedActivities="$dashboardData['groupedActivities']" :activities="$dashboardData['activities']"/>
           </x-slot:content>
         </x-ui.tab-container>
       </div>
-    </x-section>
+
+      <x-ui.toast position="center-top"/>
+    </div>
   </div>
 </x-layout>

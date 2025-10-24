@@ -52,7 +52,7 @@
           class="space-y-1"
         >
           <x-nav.mobile-link href="{{ route('profile.show', Auth::user()) }}" :active="request()->routeIs('profile.show')">Perfil</x-nav.mobile-link>
-          <x-nav.mobile-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">Dashboard</x-nav.mobile-link>
+          <x-nav.mobile-link href="{{ route('dashboard.personal.overview') }}" :active="request()->routeIs('dashboard')">Dashboard</x-nav.mobile-link>
 
           <form action="/logout" method="POST">
             @csrf

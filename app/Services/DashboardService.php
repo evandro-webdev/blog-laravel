@@ -14,6 +14,7 @@ class DashboardService
   public function getDashboardData(User $user){
     return [
       'posts' =>  $this->getPaginatedPosts($user),
+      'users' => $user->isAdmin() ? $this->getUsers() : '',
       'activities' => $this->getPaginatedActivities($user),
       'groupedActivities' => $this->getGroupedActivitiesByDate($this->getPaginatedActivities($user)->getCollection()),
       'statistics' => $this->getStatistics($user),
@@ -72,6 +73,11 @@ class DashboardService
         'last_30_days' => Comment::whereIn('post_id', $postsIds)->where('created_at', '>=', $thirtyDaysAgo)->count()
       ]
     ];
+  }
+
+  private function getUsers()
+  {
+    return User::latest()->paginate(10);
   }
 
   private function getFollowers(User $user)

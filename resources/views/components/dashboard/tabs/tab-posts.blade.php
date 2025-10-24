@@ -7,7 +7,7 @@
     />
     
     @if ($posts->count() > 0)
-      <x-blog.dashboard.tabs.posts.table :$posts/>
+      <x-dashboard.tabs.posts.table :$posts/>
     @else
       <x-ui.utilities.message message="Você não possui nenhum post, comece a publicar agora mesmo"/>
     @endif

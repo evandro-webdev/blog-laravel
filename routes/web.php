@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\Post\PostController;
-use App\Http\Controllers\Post\CommentController;
-use App\Http\Controllers\Post\PostReadController;
-use App\Http\Controllers\Post\SavedPostController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Post\CommentController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Post\PostReadController;
+use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\Post\SavedPostController;
+use App\Http\Controllers\AuthorDashboardController;
 use App\Http\Controllers\Auth\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
@@ -52,9 +52,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
   Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
+
+Route::middleware(['auth'])->prefix('/dashboard')->group(function () {
+  Route::get('/', [AuthorDashboardController::class, 'overview'])->name('dashboard.personal.overview');
+  Route::get('/posts', [AuthorDashboardController::class, 'posts'])->name('dashboard.personal.posts');
+  Route::get('/activity', [AuthorDashboardController::class, 'activity'])->name('dashboard.personal.activity');
+});
+
+
 
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
