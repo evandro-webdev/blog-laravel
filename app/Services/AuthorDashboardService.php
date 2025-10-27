@@ -9,18 +9,29 @@ use App\Models\ActivityLog;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
-class DashboardService
+class AuthorDashboardService
 {
-  public function getDashboardData(User $user){
+  public function getOverviewData(User $user)
+  {
     return [
-      'posts' =>  $this->getPaginatedPosts($user),
-      'users' => $user->isAdmin() ? $this->getUsers() : '',
-      'activities' => $this->getPaginatedActivities($user),
-      'groupedActivities' => $this->getGroupedActivitiesByDate($this->getPaginatedActivities($user)->getCollection()),
       'statistics' => $this->getStatistics($user),
-      'followers' => $this->getFollowers($user),
       'mostViewedPosts' => $this->getMostViewedPosts($user),
       'mostCommentedPosts' => $this->getMostCommentedPosts($user)
+    ];
+  }
+
+  public function getPostsData(User $user)
+  {
+    return [
+      'posts' =>  $this->getPaginatedPosts($user),
+    ];
+  }
+
+  public function getActivitiesData(User $user)
+  {
+    return [
+      'activities' => $this->getPaginatedActivities($user),
+      'groupedActivities' => $this->getGroupedActivitiesByDate($this->getPaginatedActivities($user)->getCollection()),
     ];
   }
 
@@ -73,16 +84,6 @@ class DashboardService
         'last_30_days' => Comment::whereIn('post_id', $postsIds)->where('created_at', '>=', $thirtyDaysAgo)->count()
       ]
     ];
-  }
-
-  private function getUsers()
-  {
-    return User::latest()->paginate(10);
-  }
-
-  private function getFollowers(User $user)
-  {
-    return $user->followers();
   }
 
   private function getMostViewedPosts(User $user): LengthAwarePaginator

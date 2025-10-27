@@ -3,36 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
+use App\Services\AuthorDashboardService;
 
 class AuthorDashboardController extends Controller
 {
-  private DashboardService $dashboardService;
-
-  public function __construct(DashboardService $dashboardService)
-  {
-    $this->dashboardService = $dashboardService;
-  }
+  public function __construct(private AuthorDashboardService $authorDashboardService)
+  {}
 
   public function overview()
   {
-    $dashboardData = $this->dashboardService->getDashboardData(Auth::user());
+    $overviewData = $this->authorDashboardService->getOverviewData(Auth::user());
 
-    return view('dashboard.author.overview', ['dashboardData' => $dashboardData]);
+    return view('dashboard.author.overview', ['overviewData' => $overviewData]);
   }
 
   public function posts()
   { 
-    $posts = Post::latest()->paginate(10);
+    $postsData = Post::latest()->paginate(10);
 
-    return view('dashboard.author.posts', ['posts' => $posts]);
+    return view('dashboard.author.posts', ['posts' => $postsData]);
   }
 
   public function activity()
   {
-    $dashboardData = $this->dashboardService->getDashboardData(Auth::user());
+    $activitiesData = $this->authorDashboardService->getActivitiesData(Auth::user());
 
-    return view('dashboard.author.activity', ['dashboardData' => $dashboardData]);
+    return view('dashboard.author.activity', ['activitiesData' => $activitiesData]);
   }
 }

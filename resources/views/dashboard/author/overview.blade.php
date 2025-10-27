@@ -14,9 +14,9 @@
 
     <x-slot:content>
       <x-dashboard.tabs.tab-overview 
-        :statistics="$dashboardData['statistics']" 
-        :mostViewedPosts="$dashboardData['mostViewedPosts']"
-        :mostCommentedPosts="$dashboardData['mostCommentedPosts']"
+        :statistics="$overviewData['statistics']" 
+        :mostViewedPosts="$overviewData['mostViewedPosts']"
+        :mostCommentedPosts="$overviewData['mostCommentedPosts']"
       />
     </x-slot:content>
   </x-ui.tab-container>

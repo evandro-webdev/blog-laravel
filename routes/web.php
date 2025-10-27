@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Post\CommentController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Post\PostReadController;
 use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\Post\CommentController;
+use App\Http\Controllers\Post\PostReadController;
 use App\Http\Controllers\Post\SavedPostController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\AuthorDashboardController;
+use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\RegisterUserController;
 
 Route::get('/', [BlogController::class, 'index']);
@@ -61,7 +62,12 @@ Route::middleware(['auth'])->prefix('/dashboard')->group(function () {
   Route::get('/activity', [AuthorDashboardController::class, 'activity'])->name('dashboard.personal.activity');
 });
 
-
+Route::middleware(['auth', 'admin'])->prefix('/dashboard/admin')->group(function () {
+  Route::get('/', [AdminDashboardController::class, 'overview'])->name('dashboard.admin.overview');
+  Route::get('/posts', [AdminDashboardController::class, 'posts'])->name('dashboard.admin.posts');
+  Route::get('/users', [AdminDashboardController::class, 'users'])->name('dashboard.admin.users');
+  Route::get('/categories-tags', [AdminDashboardController::class, 'categoriesTags'])->name('dashboard.admin.categories-tags');
+});
 
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');

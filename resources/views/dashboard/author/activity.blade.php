@@ -6,5 +6,5 @@
     subtitle="Veja sua atividade recente"
   />
 
-  <x-dashboard.tabs.tab-activity :activities="$dashboardData['activities']" :groupedActivities="$dashboardData['groupedActivities']"/>
+  <x-dashboard.tabs.tab-activity :activities="$activitiesData['activities']" :groupedActivities="$activitiesData['groupedActivities']"/>
 @endsection

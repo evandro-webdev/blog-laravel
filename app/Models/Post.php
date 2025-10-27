@@ -39,7 +39,7 @@ class Post extends Model
 
   public function viewsInPeriod(int $days): int
   {
-    return $this->postViews()
+    return $this->views()
       ->where('viewed_at', '>=', now()->subDays($days))
       ->count();
   }
