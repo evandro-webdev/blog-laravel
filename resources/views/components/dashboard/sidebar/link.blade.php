@@ -8,8 +8,8 @@
   $isActive = Route::currentRouteNamed($routeName);
 
   $activeClass = $isActive 
-    ? 'text-gray-700 dark:text-white bg-gray-100' 
-    : 'text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700';
+    ? 'text-gray-700 dark:text-white bg-gray-100 dark:bg-slate-700' 
+    : 'text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700';
 @endphp
 
 <li>

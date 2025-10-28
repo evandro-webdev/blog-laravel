@@ -1,22 +1,22 @@
-<aside id="default-sidebar" class="w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
-  <div class="h-full px-3 py-10 space-y-6 overflow-y-auto bg-white dark:bg-gray-800">
+<aside id="default-sidebar" class="w-64 transition-transform -translate-x-full sm:translate-x-0">
+  <div class="h-full px-3 py-10 space-y-6 overflow-y-auto bg-white dark:bg-slate-800">
     <div>
-      <h4 class="ml-2 mb-4 text-xl font-normal text-gray-800">Pessoal</h4>
+      <h4 class="ml-2 mb-4 text-xl font-semibold text-gray-800 dark:text-white">Pessoal</h4>
 
       <ul class="space-y-2">
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.personal.overview"
           icon="chart-bar"
           label="Visão Geral"
         />
 
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.personal.posts"
           icon="doc"
           label="Meus posts"
         />
 
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.personal.activity"
           icon="doc-list"
           label="Atividade"
@@ -24,28 +24,28 @@
       </ul>
     </div>
 
-    <hr class="text-gray-200">
+    <hr class="text-gray-200 dark:text-slate-700">
 
     <div>
-      <h4 class="ml-2 mb-4 text-xl font-normal text-gray-800">Administração</h4>
+      <h4 class="ml-2 mb-4 text-xl font-semibold text-gray-800 dark:text-white">Administração</h4>
 
       <ul class="space-y-2">
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.admin.overview"
           icon="chart-bar"
           label="Visão Geral"
         />
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.admin.posts"
           icon="docs"
           label="Posts"
         />
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.admin.users"
           icon="users"
           label="Usuários"
         />
-        <x-dashboard.sidebar-link 
+        <x-dashboard.sidebar.link 
           routeName="dashboard.admin.categories-tags"
           icon="grid"
           label="Categorias e Tags"

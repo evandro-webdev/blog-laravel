@@ -29,6 +29,12 @@ class AdminDashboardController extends Controller
 
   public function categoriesTags()
   {
-    
+    $categories = $this->adminDashboardService->getCategories();
+    $tags = $this->adminDashboardService->getTags();
+
+    return view('dashboard.admin.categories-tags.index', [
+      'categories' => $categories,
+      'tags' => $tags,
+    ]);
   }
 }

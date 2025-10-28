@@ -16,10 +16,10 @@
     </thead>
     <tbody>
       @foreach ($posts as $post)
-        <x-dashboard.tabs.posts.row :$post/>
+        @include('dashboard.author.posts.components.row', ['post' => $post])
       @endforeach
     </tbody>
   </table>
 </div>
 
-{{ $posts->appends(['tab' => 'posts'])->links() }}
+{{ $posts->appends(['tab' => 'all'])->links() }}

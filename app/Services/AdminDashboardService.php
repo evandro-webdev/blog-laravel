@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\PostView;
+use App\Models\Tag;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AdminDashboardService
@@ -17,6 +19,16 @@ class AdminDashboardService
       'mostViewedPosts' => $this->getMostViewedPosts(),
       'mostCommentedPosts' => $this->getMostCommentedPosts()
     ];
+  }
+
+  public function getCategories()
+  {
+    return Category::paginate(10);
+  }
+
+  public function getTags()
+  {
+    return Tag::paginate(10);
   }
 
   private function getStatistics(): array

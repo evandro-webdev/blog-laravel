@@ -1,4 +1,4 @@
-<div x-show="tab === 'posts'">
+<div x-show="tab === 'all'">
   <x-ui.base.panel tone="darker">
     <x-section-heading
       title="Meus posts"
@@ -7,7 +7,7 @@
     />
     
     @if ($posts->count() > 0)
-      <x-dashboard.tabs.posts.table :$posts/>
+      @include('dashboard.author.posts.components.table', ['posts' => $posts])
     @else
       <x-ui.utilities.message message="Você não possui nenhum post, comece a publicar agora mesmo"/>
     @endif

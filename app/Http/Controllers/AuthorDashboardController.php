@@ -20,15 +20,15 @@ class AuthorDashboardController extends Controller
 
   public function posts()
   { 
-    $postsData = Post::latest()->paginate(10);
+    $postsData = $this->authorDashboardService->getPostsData(Auth::user());
 
-    return view('dashboard.author.posts', ['posts' => $postsData]);
+    return view('dashboard.author.posts.index', ['postsData' => $postsData]);
   }
 
   public function activity()
   {
     $activitiesData = $this->authorDashboardService->getActivitiesData(Auth::user());
 
-    return view('dashboard.author.activity', ['activitiesData' => $activitiesData]);
+    return view('dashboard.author.activities.index', ['activitiesData' => $activitiesData]);
   }
 }

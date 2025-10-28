@@ -23,7 +23,7 @@ class AuthorDashboardService
   public function getPostsData(User $user)
   {
     return [
-      'posts' =>  $this->getPaginatedPosts($user),
+      'posts' => $this->getPaginatedPosts($user),
     ];
   }
 
