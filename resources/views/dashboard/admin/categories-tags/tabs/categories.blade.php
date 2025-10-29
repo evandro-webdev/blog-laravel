@@ -30,7 +30,7 @@
                 <td class="max-w-xs p-4">
                   <span x-show="!isEditing">{{ Str::ucfirst($category->name) }}</span>
 
-                  <form id="form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
+                  <form x-show="isEditing" id="form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
                     @method('PATCH')
                     @csrf
 
@@ -53,7 +53,11 @@
                 <td class="p-4">
                   <div x-show="!isEditing" class="flex justify-end gap-2">
                     <x-ui.forms.button @click="isEditing=!isEditing" size="sm">Editar</x-ui.forms.button>
-                    <x-ui.forms.button size="sm" variant="danger">Excluir</x-ui.forms.button>
+                    <form action="{{ route('admin.categories.delete', $category) }}" method="POST">
+                      @method('DELETE')
+                      @csrf
+                      <x-ui.forms.button size="sm" variant="danger">Excluir</x-ui.forms.button>
+                    </form>
                   </div>
                   <div x-show="isEditing" class="flex justify-end gap-2">
                     <x-ui.forms.button @click="isEditing=!isEditing" size="sm" variant="neutral">Cancelar</x-ui.forms.button>
