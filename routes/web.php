@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
@@ -11,6 +10,8 @@ use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Post\CommentController;
 use App\Http\Controllers\Post\PostReadController;
 use App\Http\Controllers\Post\SavedPostController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\AuthorDashboardController;
 use App\Http\Controllers\Auth\SessionController;
@@ -72,6 +73,10 @@ Route::middleware(['auth', 'admin'])->prefix('/dashboard/admin')->group(function
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
   Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+  Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+  Route::patch('/categories/{category}', [CategoryController::class, 'update']);
+  Route::delete('/categories/{category}', [CategoryController::class, 'delete']);
 });
 
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
