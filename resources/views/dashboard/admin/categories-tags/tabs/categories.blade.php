@@ -1,38 +1,61 @@
 <div x-show="tab === 'categories'">
   <x-ui.base.panel tone="darker">
-    <x-section-heading
-      title="Categorias"
-      desc="Gerencie as categorias do blog"
-      class="mb-6"
-    />
-
-    <div class="mb-4 rounded-xl border border-gray-200 dark:border-gray-700 overflow-x-auto">
-      <table class="w-full text-sm table-auto">
-        <thead class="border-b border-gray-200 dark:border-gray-700">
-          <tr class="text-left text-gray-600 dark:text-white">
-            <th class="p-5">Título</th>
-            <th class="p-5 hidden sm:table-cell">Posts</th>
-            <th class="p-5 hidden lg:table-cell">Views</th>
-            <th class="min-w-[120px] p-5 text-right whitespace-nowrap">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($categories as $category)
-            <tr>
-              <td class="p-5">
-                {{ Str::ucfirst($category->name) }}
-              </td>
-              <td class="p-5">
-                {{ $category->posts->count() }}
-              </td>
-              <td class="p-5">
-                {{ $category->views->count() }}
-              </td>
+    <div class="max-w-6xl">
+      <div class="mb-6 flex items-center justify-between">
+        <x-section-heading
+          title="Categorias"
+          desc="Gerencie as categorias do blog, atualmente há {{ $categories->count() }} categorias existentes"
+        />
+  
+        <form action="{{ route('admin.categories.store') }}" method="POST" class="flex gap-2">
+          @csrf
+          <x-ui.forms.input size="sm" name="name" placeholder="Nome da categoria"/>
+          <x-ui.forms.button size="sm">Adicionar</x-ui.forms.button>
+        </form>
+      </div>
+  
+      <div class="mb-4 rounded-xl border border-gray-200 dark:border-gray-700 overflow-x-auto">
+        <table class="table-fixed w-full text-sm">
+          <thead class="border-b border-gray-200 dark:border-gray-700">
+            <tr class="text-left text-gray-600 dark:text-white">
+              <th class="max-w-xs p-4">Título</th>
+              <th class="p-4 hidden sm:table-cell">Posts</th>
+              <th class="p-4 hidden lg:table-cell">Views</th>
+              <th class="p-4 text-right whitespace-nowrap">Ações</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @foreach ($categories as $category)
+              <tr x-data="{ isEditing: false }">
+                <td class="max-w-xs p-4">
+                  <span x-show="!isEditing">{{ Str::ucfirst($category->name) }}</span>
+                  <x-ui.forms.input 
+                    x-show="isEditing" 
+                    size="sm" 
+                    name="name" 
+                    value="{{ $category->name }}" 
+                    placeholder="Nome da categoria"
+                    class="max-w-sm"
+                  />
+                </td>
+                <td class="p-4">
+                  {{ $category->posts->count() }}
+                </td>
+                <td class="p-4">
+                  {{ $category->views->count() }}
+                </td>
+                <td class="p-4 flex justify-end gap-2">
+                  <x-ui.forms.button @click="isEditing=!isEditing" size="sm">Editar</x-ui.forms.button>
+                  <x-ui.forms.button x-show="!isEditing" size="sm" variant="danger">Excluir</x-ui.forms.button>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      
+      {{ $categories->links() }}
     </div>
-
+    
   </x-ui.base.panel>
 </div>
