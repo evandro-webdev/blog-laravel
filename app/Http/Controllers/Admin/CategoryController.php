@@ -18,4 +18,15 @@ class CategoryController extends Controller
 
     return back()->with('message', 'Categoria adicionada');
   }
+
+  public function update(Request $request, Category $category)
+  {
+    $request->validate([
+      'name' => ['required', 'unique:categories,name,' . $category->id]
+    ]);
+
+    $category->update(['name' => $request->name]);
+
+    return back()->with('message', 'Categoria atualizada');
+  }
 }
