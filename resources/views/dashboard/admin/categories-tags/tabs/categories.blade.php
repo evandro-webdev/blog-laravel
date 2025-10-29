@@ -1,6 +1,6 @@
 <div x-show="tab === 'categories'">
   <x-ui.base.panel tone="darker">
-    <div class="max-w-6xl">
+    <div class="max-w-4xl">
       <div class="mb-6 flex items-center justify-between">
         <x-section-heading
           title="Categorias"
@@ -29,14 +29,20 @@
               <tr x-data="{ isEditing: false }">
                 <td class="max-w-xs p-4">
                   <span x-show="!isEditing">{{ Str::ucfirst($category->name) }}</span>
-                  <x-ui.forms.input 
-                    x-show="isEditing" 
-                    size="sm" 
-                    name="name" 
-                    value="{{ $category->name }}" 
-                    placeholder="Nome da categoria"
-                    class="max-w-sm"
-                  />
+
+                  <form id="form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
+                    @method('PATCH')
+                    @csrf
+
+                    <x-ui.forms.input 
+                      x-show="isEditing" 
+                      size="sm" 
+                      name="name" 
+                      value="{{ $category->name }}" 
+                      placeholder="Nome da categoria"
+                      class="max-w-sm"
+                    />
+                  </form>
                 </td>
                 <td class="p-4">
                   {{ $category->posts->count() }}
@@ -44,9 +50,15 @@
                 <td class="p-4">
                   {{ $category->views->count() }}
                 </td>
-                <td class="p-4 flex justify-end gap-2">
-                  <x-ui.forms.button @click="isEditing=!isEditing" size="sm">Editar</x-ui.forms.button>
-                  <x-ui.forms.button x-show="!isEditing" size="sm" variant="danger">Excluir</x-ui.forms.button>
+                <td class="p-4">
+                  <div x-show="!isEditing" class="flex justify-end gap-2">
+                    <x-ui.forms.button @click="isEditing=!isEditing" size="sm">Editar</x-ui.forms.button>
+                    <x-ui.forms.button size="sm" variant="danger">Excluir</x-ui.forms.button>
+                  </div>
+                  <div x-show="isEditing" class="flex justify-end gap-2">
+                    <x-ui.forms.button @click="isEditing=!isEditing" size="sm" variant="neutral">Cancelar</x-ui.forms.button>
+                    <x-ui.forms.button form="form-{{ $category->id }}" size="sm">Salvar</x-ui.forms.button>
+                  </div>
                 </td>
               </tr>
             @endforeach
@@ -58,4 +70,6 @@
     </div>
     
   </x-ui.base.panel>
+
+  <x-ui.toast/>
 </div>
