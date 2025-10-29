@@ -29,4 +29,11 @@ class CategoryController extends Controller
 
     return back()->with('message', 'Categoria atualizada');
   }
+
+  public function delete(Category $category)
+  {
+    $category->delete();
+    
+    return back()->with('message', 'Categoria excluida');
+  }
 }
