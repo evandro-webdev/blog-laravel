@@ -21,9 +21,29 @@ class AdminDashboardService
     ];
   }
 
-  public function getCategories()
+  public function getCategoriesData()
   {
-    return Category::paginate(10);
+    $mostUsedCategories = Category::withCount('posts')
+      ->orderByDesc('posts_count')
+      ->take(5)
+      ->get(['name', 'posts_count']);
+
+    $mostViewedCategories = Category::withCount('views')
+      ->orderByDesc('views_count')
+      ->take(5)
+      ->get(['name', 'views_count']);
+
+    return [
+      'categories' => Category::paginate(10),
+      'mostUsed' => [
+        'names' => $mostUsedCategories->pluck('name'),
+        'count' => $mostUsedCategories->pluck('posts_count')
+      ],
+      'mostViewed' => [
+        'names' => $mostViewedCategories->pluck('name'),
+        'viewed' => $mostViewedCategories->pluck('views_count'),
+      ]
+    ];
   }
 
   public function getTags()
