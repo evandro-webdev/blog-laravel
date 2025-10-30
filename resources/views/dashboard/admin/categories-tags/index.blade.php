@@ -13,7 +13,7 @@
     </x-slot:tabs>
 
     <x-slot:content>
-      @include('dashboard.admin.categories-tags.tabs.categories', ['categories' => $categories])
+      @include('dashboard.admin.categories-tags.tabs.categories', ['categoriesData' => $categoriesData])
       @include('dashboard.admin.categories-tags.tabs.tags', ['tags' => $tags])
     </x-slot:content>
   </x-ui.tab-container>
