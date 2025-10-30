@@ -48,7 +48,7 @@ class PostController extends Controller
 
     $this->logActivity('Post publicado', $post);
 
-    return redirect('/dashboard?tab=posts')
+    return redirect()->route('dashboard.personal.posts')
       ->with('message', 'Post criado com sucesso');
   }
 
@@ -72,7 +72,7 @@ class PostController extends Controller
 
     $this->logActivity('Post atualizado', $post);
 
-    return redirect('/dashboard?tab=posts')
+    return redirect()->route('dashboard.personal.posts')
       ->with('message', 'Post atualizado com sucesso');
   }
 
@@ -84,7 +84,7 @@ class PostController extends Controller
 
     $this->logActivity('Post deletado', $post);
 
-    return redirect('/dashboard?tab=posts')
+    return redirect('/dashboard/posts')
       ->with('message', 'Post deletado com sucesso');
   }
 }

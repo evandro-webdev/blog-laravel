@@ -6,7 +6,7 @@
       class="mb-6"
     />
 
-    <form action="/admin/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+    <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
       @csrf
       @method('PATCH')
       <div class="flex flex-col gap-6 md:flex-row">
