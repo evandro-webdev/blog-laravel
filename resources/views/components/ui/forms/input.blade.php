@@ -13,7 +13,7 @@
 ])
 
 @php
-  $baseClasses = 'w-full rounded-lg text-sm placeholder-gray-400 outline-none transition-colors block resize-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500';
+  $baseClasses = 'w-full rounded-lg placeholder-gray-400 outline-none transition-colors block resize-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500';
 
   $tones = [
     'default' => 'border-gray-300 dark:border-slate-600 text-gray-800 dark:text-gray-100 bg-white dark:bg-slate-700',
@@ -26,8 +26,8 @@
   ][$variant];
 
   $sizeClasses = [
-    'sm' => 'p-2',
-    'md' => 'p-3'
+    'sm' => 'p-2 text-xs',
+    'md' => 'p-3 text-sm'
   ][$size];
 
   $iconPadding = $icon ? ' pl-10' : '';

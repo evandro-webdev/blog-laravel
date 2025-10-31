@@ -26,21 +26,23 @@
           </thead>
           <tbody>
             @foreach ($categoriesData['categories'] as $category)
-              <tr x-data="{ isEditing: false }" class="text-gray-600 dark:text-gray-100 odd:bg-gray-50 dark:odd:bg-slate-900 group">
-                <td class="max-w-xs p-4">
+              <tr 
+                x-data="{ isEditing: false }" 
+                class="min-h-[70px] text-gray-600 dark:text-gray-100 odd:bg-gray-50 dark:odd:bg-slate-900 group"
+              >
+                <td class="min-h-[70px] max-w-xs p-4">
                   <span x-show="!isEditing">{{ Str::ucfirst($category->name) }}</span>
 
                   <form x-show="isEditing" id="form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
                     @method('PATCH')
                     @csrf
 
-                    <x-ui.forms.input 
+                    <input 
                       x-show="isEditing" 
-                      size="sm" 
                       name="name" 
                       value="{{ $category->name }}" 
                       placeholder="Nome da categoria"
-                      class="max-w-sm"
+                      class="px-2 py-1 -ml-2 -my-1 rounded-lg text-sm border border-gray-200 dark:border-slate-600 placeholder-gray-400 bg-white dark:bg-slate-700"
                     />
                   </form>
                 </td>
@@ -53,17 +55,17 @@
                   {{ $category->views->count() }}
                 </td>
                 <td class="p-4">
-                  <div x-show="!isEditing" class="hidden group-hover:flex justify-end gap-2">
-                    <x-ui.forms.button @click="isEditing=!isEditing" size="sm" outline>Editar</x-ui.forms.button>
+                  <div x-show="!isEditing" class="flex justify-end gap-2">
+                    <x-ui.forms.button @click="isEditing=!isEditing" size="xs" outline>Editar</x-ui.forms.button>
                     <form action="{{ route('admin.categories.delete', $category) }}" method="POST">
                       @method('DELETE')
                       @csrf
-                      <x-ui.forms.button size="sm" variant="danger" outline>Excluir</x-ui.forms.button>
+                      <x-ui.forms.button size="xs" variant="danger" outline>Excluir</x-ui.forms.button>
                     </form>
                   </div>
                   <div x-show="isEditing" class="flex justify-end gap-2">
-                    <x-ui.forms.button @click="isEditing=!isEditing" size="sm" variant="neutral" outline>Cancelar</x-ui.forms.button>
-                    <x-ui.forms.button form="form-{{ $category->id }}" size="sm">Salvar</x-ui.forms.button>
+                    <x-ui.forms.button @click="isEditing=!isEditing" size="xs" variant="neutral" outline>Cancelar</x-ui.forms.button>
+                    <x-ui.forms.button form="form-{{ $category->id }}" size="xs">Salvar</x-ui.forms.button>
                   </div>
                 </td>
               </tr>
