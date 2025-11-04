@@ -28,4 +28,11 @@ class TagController extends Controller
 
     return back()->with('message', 'Tag atualizada');
   }
+
+  public function delete(Tag $tag)
+  {
+    $tag->delete();
+
+    return back()->with('message', 'Tag excluída');
+  }
 }
