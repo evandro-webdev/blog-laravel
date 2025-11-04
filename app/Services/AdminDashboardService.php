@@ -46,9 +46,26 @@ class AdminDashboardService
     ];
   }
 
-  public function getTags()
+  public function getTagsData()
   {
-    return Tag::paginate(10);
+    $mostUsedTags = Tag::withCount('posts')
+      ->orderByDesc('posts_count')
+      ->take(5)
+      ->get(['name', 'posts_count']);
+
+    $mostViewedTags = Tag::mostViewed();
+
+    return [
+      'tags' => Tag::paginate(10),
+      'mostUsed' => [
+        'names' => $mostUsedTags->pluck('name'),
+        'count' => $mostUsedTags->pluck('posts_count')
+      ],
+      'mostViewed' => [
+        'names' => $mostViewedTags->pluck('name'),
+        'viewed' => $mostViewedTags->pluck('views_count'),
+      ]
+    ];
   }
 
   private function getStatistics(): array
