@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\AuthorDashboardController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\TagController;
 
 Route::get('/', [BlogController::class, 'index']);
 
@@ -77,6 +78,10 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
   Route::patch('/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
   Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('admin.categories.delete');
+
+  Route::post('/tags', [TagController::class, 'store'])->name('admin.tags.store');
+  Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('admin.tags.update');
+  Route::delete('/tags/{tag}', [TagController::class, 'delete'])->name('admin.tags.delete');
 });
 
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
