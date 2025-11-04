@@ -17,4 +17,15 @@ class TagController extends Controller
 
     return back()->with('message', 'Tag adicionada');
   }
+
+  public function update(Request $request, Tag $tag)
+  {
+    $request->validate([
+      'name' =>['required', 'unique:tags,name']
+    ]);
+
+    $tag->update(['name' => $request->name]);
+
+    return back()->with('message', 'Tag atualizada');
+  }
 }
