@@ -14,7 +14,9 @@
 
     <x-slot:content>
       @include('dashboard.admin.categories-tags.tabs.categories', ['categoriesData' => $categoriesData])
-      @include('dashboard.admin.categories-tags.tabs.tags', ['tags' => $tags])
+      @include('dashboard.admin.categories-tags.tabs.tags', ['tagsData' => $tagsData])
     </x-slot:content>
   </x-ui.tab-container>
+
+  <x-ui.toast/>
 @endsection

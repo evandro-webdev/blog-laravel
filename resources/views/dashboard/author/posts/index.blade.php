@@ -16,4 +16,6 @@
       @include('dashboard.author.posts.tabs.all', ['posts' => $postsData['posts']])
     </x-slot:content>
   </x-ui.tab-container>
+
+  <x-ui.toast/>
 @endsection
