@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class SessionService
 {

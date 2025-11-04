@@ -33,7 +33,7 @@
                 <td class="min-h-[70px] max-w-xs p-4">
                   <span x-show="!isEditing">{{ Str::ucfirst($category->name) }}</span>
 
-                  <form x-show="isEditing" id="form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
+                  <form x-show="isEditing" id="category-form-{{ $category->id }}" action="{{ route('admin.categories.update', $category) }}" method="POST">
                     @method('PATCH')
                     @csrf
 
@@ -65,7 +65,7 @@
                   </div>
                   <div x-show="isEditing" class="flex justify-end gap-2">
                     <x-ui.forms.button @click="isEditing=!isEditing" size="xs" variant="neutral" outline>Cancelar</x-ui.forms.button>
-                    <x-ui.forms.button form="form-{{ $category->id }}" size="xs">Salvar</x-ui.forms.button>
+                    <x-ui.forms.button form="category-form-{{ $category->id }}" size="xs">Salvar</x-ui.forms.button>
                   </div>
                 </td>
               </tr>
@@ -103,8 +103,6 @@
       </x-ui.base.panel>
     </div>
   </div>
-
-  <x-ui.toast/>
 </div>
 
 <script src="{{ Vite::asset('resources/js/charts/chart.js') }}"></script>
