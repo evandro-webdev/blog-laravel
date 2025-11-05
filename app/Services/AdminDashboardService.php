@@ -63,7 +63,7 @@ class AdminDashboardService
       ],
       'mostViewed' => [
         'names' => $mostViewedTags->pluck('name'),
-        'viewed' => $mostViewedTags->pluck('views_count'),
+        'viewed' => $mostViewedTags->pluck('total_views'),
       ]
     ];
   }
