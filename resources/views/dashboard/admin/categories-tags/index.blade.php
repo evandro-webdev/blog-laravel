@@ -20,3 +20,5 @@
 
   <x-ui.toast/>
 @endsection
+
+<script src="{{ Vite::asset('resources/js/charts/chart.js') }}"></script>

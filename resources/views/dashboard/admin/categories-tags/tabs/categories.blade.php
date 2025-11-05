@@ -93,7 +93,7 @@
       <x-ui.base.panel tone="darker">
         <x-section-heading
           title="Categorias mais visualizadas"
-          desc="Gerencie as categorias do blog, atualmente há {{ $categoriesData['categories']->count() }} categorias existentes"
+          desc="Atualmente a categoria mais visualizada é: {{ $categoriesData['mostViewed']['names'][0] }}"
           class="mb-6"
         />
 
@@ -105,48 +105,43 @@
   </div>
 </div>
 
-<script src="{{ Vite::asset('resources/js/charts/chart.js') }}"></script>
 <script>
-  const mostUsed = document.querySelector('#mostUsedCategoriesChart');
-  const mostViewed = document.querySelector('#mostViewedCategoriesChart');
-
   const categoriesData = @json($categoriesData);
 
-  isDarkMode = localStorage.theme === 'dark';
+  function initCategoriesCharts(data) {
+    const charts = [
+      {
+        id: 'mostUsedCategoriesChart',
+        names: data.mostUsed.names,
+        values: data.mostUsed.count,
+        label: 'Posts por categoria',
+        gradientStart: '#60A5FA',
+        gradientEnd: '#3B82F6',
+        border: '#2563EB',
+      },
+      {
+        id: 'mostViewedCategoriesChart',
+        names: data.mostViewed.names,
+        values: data.mostViewed.viewed,
+        label: 'Visualizações por categoria',
+        gradientStart: '#C084FC',
+        gradientEnd: '#8B5CF6',
+        border: '#7C3AED',
+      },
+    ];
 
-  const palette = {
-    text: isDarkMode ? '#D1D5DB' : '#374151',
-    grid: isDarkMode ? '#374151' : '#E5E7EB',
-    tooltipBg: isDarkMode ? '#1F2937' : '#F9FAFB',
-    tooltipText: isDarkMode ? '#E5E7EB' : '#1F2937'
+    charts.forEach((chart) => {
+      const canvas = document.getElementById(chart.id);
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, chart.gradientStart);
+      gradient.addColorStop(1, chart.gradientEnd);
+
+      createChart(ctx, chart.names, chart.values, chart.label, gradient, chart.border);
+    });
   }
 
-  const ctx1 = mostUsed.getContext('2d');
-  const ctx2 = mostViewed.getContext('2d');
-
-  const gradientBlue = ctx1.createLinearGradient(0, 0, 0, 400);
-  gradientBlue.addColorStop(0, '#60A5FA');
-  gradientBlue.addColorStop(1, '#3B82F6');
-
-  const gradientPurple = ctx2.createLinearGradient(0, 0, 0, 400);
-  gradientPurple.addColorStop(0, '#C084FC');
-  gradientPurple.addColorStop(1, '#8B5CF6');
-
-  createChart(
-    ctx1,
-    categoriesData.mostUsed.names,
-    categoriesData.mostUsed.count,
-    'Posts por categoria',
-    gradientBlue,
-    '#2563EB'
-  );
-
-  createChart(
-    ctx2,
-    categoriesData.mostViewed.names,
-    categoriesData.mostViewed.viewed,
-    'Visualizações por categoria',
-    gradientPurple,
-    '#7C3AED'
-  );
+  initCategoriesCharts(categoriesData);
 </script>
