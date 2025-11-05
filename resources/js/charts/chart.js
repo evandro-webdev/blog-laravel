@@ -1,3 +1,12 @@
+isDarkMode = localStorage.theme === 'dark';
+
+const palette = {
+  text: isDarkMode ? '#D1D5DB' : '#374151',
+  grid: isDarkMode ? '#374151' : '#E5E7EB',
+  tooltipBg: isDarkMode ? '#1F2937' : '#F9FAFB',
+  tooltipText: isDarkMode ? '#E5E7EB' : '#1F2937'
+}
+
 function createChart(ctx, labels, data, label, background, border){
   return new Chart(ctx, {
     type: 'bar',
