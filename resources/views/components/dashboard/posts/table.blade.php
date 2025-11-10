@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       @foreach ($posts as $post)
-        @include('dashboard.author.posts.components.row', ['post' => $post])
+        <x-dashboard.posts.row :$post/>
       @endforeach
     </tbody>
   </table>
