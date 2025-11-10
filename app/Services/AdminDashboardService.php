@@ -21,6 +21,11 @@ class AdminDashboardService
     ];
   }
 
+  public function getPosts()
+  {
+    return Post::latest()->paginate(10);
+  }
+
   public function getUsers()
   {
     return User::latest()->paginate(10);

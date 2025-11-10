@@ -19,7 +19,9 @@ class AdminDashboardController extends Controller
 
   public function posts()
   {
-    
+    $posts = $this->adminDashboardService->getPosts();
+
+    return view('dashboard.admin.posts', ['posts' => $posts]);
   }
 
   public function users()
