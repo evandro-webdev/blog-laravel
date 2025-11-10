@@ -21,6 +21,11 @@ class AdminDashboardService
     ];
   }
 
+  public function getUsers()
+  {
+    return User::latest()->paginate(10);
+  }
+
   public function getCategoriesData()
   {
     $mostUsedCategories = Category::withCount('posts')
@@ -104,10 +109,5 @@ class AdminDashboardService
     return Post::all()->posts()->withCount('comments')
       ->orderByDesc('comments_count')
       ->paginate(5);;
-  }
-
-  private function getUsers()
-  {
-    return User::latest()->paginate(10);
   }
 }

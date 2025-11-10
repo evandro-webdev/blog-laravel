@@ -1,15 +1,16 @@
+@extends('dashboard.layout')
+
 @props([
   'users'
 ])
 
-<div x-show="tab === 'users'" class="space-y-2">
-  <x-ui.base.panel tone="darker">
-    <x-section-heading
-      title="Usuários"
-      desc="Gerencie usuários cadastrados"
-      class="mb-6"
-    />
+@section('content')
+  <x-page-heading 
+    title="Usuários" 
+    subtitle="Gerencie o conteúdo do seu blog e veja estatísticas."
+  />
 
+  <x-ui.base.panel tone="darker">
     <div class="mb-4 rounded-xl border border-gray-200 dark:border-gray-700 overflow-x-auto">
       <table class="w-full text-sm table-auto">
         <thead class="border-b border-gray-200 dark:border-gray-700">
@@ -90,4 +91,4 @@
     {{ $users->appends(['tab' => 'users'])->links() }}
 
   </x-ui.base.panel>
-</div>
+@endsection

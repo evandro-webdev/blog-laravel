@@ -14,7 +14,7 @@ class AdminDashboardController extends Controller
   {
     $overviewData = $this->adminDashboardService->getOverviewData();
 
-    return view('dashboard.author.overview', ['overviewData' => $overviewData]);
+    return view('dashboard.admin.overview', ['overviewData' => $overviewData]);
   }
 
   public function posts()
@@ -24,7 +24,9 @@ class AdminDashboardController extends Controller
 
   public function users()
   {
+    $users = $this->adminDashboardService->getUsers();
 
+    return view('dashboard.admin.users', ['users' => $users]);
   }
 
   public function categoriesTags()
