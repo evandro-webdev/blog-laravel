@@ -6,18 +6,34 @@
     subtitle="Gerencie o conteúdo do seu blog e veja estatísticas."
   />
 
-  <x-ui.layout.tab-container default-tab="overview" class="space-y-2">
-    <x-slot:tabs>
-      <x-ui.tab value="overview" x-model="tab" icon="doc-search">Visão geral</x-ui.tab>
-      <x-ui.tab value="something" x-model="tab" icon="doc-search">Alguma coisa</x-ui.tab>
-    </x-slot:tabs>
+  <div class="space-y-2">
+      <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <x-dashboard.panels.statistic label="Publicações" icon="doc" :statistic="$overviewData['statistics']['posts']"/>
+        <x-dashboard.panels.statistic label="Visualizações" icon="eye" :statistic="$overviewData['statistics']['views']"/>
+        <x-dashboard.panels.statistic label="Comentários" icon="chart-bar" :statistic="$overviewData['statistics']['comments']"/>
+        <x-dashboard.panels.statistic label="Usuários" icon="users" :statistic="$overviewData['statistics']['users']"/>
+      </div>
 
-    <x-slot:content>
-      <x-dashboard.tabs.tab-overview 
-        :statistics="$overviewData['statistics']" 
-        :mostViewedPosts="$overviewData['mostViewedPosts']"
-        :mostCommentedPosts="$overviewData['mostCommentedPosts']"
-      />
-    </x-slot:content>
-  </x-ui.tab-container>
+      <div class="flex flex-col md:flex-row gap-2">
+        <x-ui.base.panel class="flex-1" tone="darker">
+          <x-section-heading
+            title="Posts mais vistos"
+            desc="Confira quais dos seus posts estão sendo mais visualizados"
+            class="mb-8"
+          />
+
+          <x-dashboard.panels.list-posts :posts="$overviewData['mostViewedPosts']"/>
+        </x-ui.base.panel>
+
+        <x-ui.base.panel class="flex-1" tone="darker">
+          <x-section-heading
+            title="Posts mais comentados"
+            desc="Confira seus posts mais comentados"
+            class="mb-8"
+          />
+
+          <x-dashboard.panels.list-posts :posts="$overviewData['mostCommentedPosts']"/>
+        </x-ui.base.panel>
+      </div>
+    </div>
 @endsection

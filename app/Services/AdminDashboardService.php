@@ -104,15 +104,17 @@ class AdminDashboardService
 
   private function getMostViewedPosts(): LengthAwarePaginator
   {
-    return Post::all()->withCount('views')
+    return Post::withCount('views')
+      ->where('published', true)
       ->orderByDesc('views_count')
       ->paginate(5);
   }
 
   private function getMostCommentedPosts(): LengthAwarePaginator
   {
-    return Post::all()->posts()->withCount('comments')
+    return Post::withCount('comments')
+      ->where('published', true)
       ->orderByDesc('comments_count')
-      ->paginate(5);;
+      ->paginate(5);
   }
 }
