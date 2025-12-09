@@ -4,6 +4,14 @@
   'users'
 ])
 
+@php
+  $roleLabels = [
+    'admin' => 'Admin',
+    'moderator' => 'Moderador',
+    'author' => 'Autor',
+  ];
+@endphp
+
 @section('content')
   <x-page-heading 
     title="Usuários" 
@@ -32,7 +40,7 @@
                   {{ $user->name }}
                 </a>
               </td>
-              <td class="p-5 hidden lg:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
+              <td class="p-5 hidden md:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
                 {{ $user->posts->count() }}
               </td>
               <td class="p-5 hidden sm:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
@@ -43,6 +51,9 @@
               </td>
               <td class="p-5 hidden lg:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
                 {{ $user->getFollowingCount() }}
+              </td>
+              <td class="p-5 text-gray-600 dark:text-gray-100 whitespace-nowrap">
+                {{ $roleLabels[$user->role] ?? $user->role }}
               </td>
               <td class="p-5 hidden lg:table-cell text-gray-600 dark:text-gray-100 whitespace-nowrap">
                 <form action="{{ route('admin.users.updateRole', $user) }}" method="POST">

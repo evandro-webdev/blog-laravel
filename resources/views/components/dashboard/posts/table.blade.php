@@ -3,7 +3,7 @@
 ])
 
 <div class="mb-4 rounded-xl border border-gray-200 dark:border-gray-700 overflow-x-auto">
-  <table class="w-full text-sm table-auto">
+  <table class="min-w-full text-sm table-cell md:table-auto">
     <thead class="border-b border-gray-200 dark:border-gray-700">
       <tr class="text-left text-gray-600 dark:text-white">
         <th class="p-5">Título</th>

@@ -14,11 +14,11 @@
       <x-dashboard.panels.statistic label="Seguidores" icon="users" :statistic="$overviewData['statistics']['followers']"/>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-2">
+    <div class="flex flex-col lg:flex-row gap-2">
       <x-ui.base.panel class="flex-1" tone="darker">
         <x-section-heading
           title="Posts mais vistos"
-          desc="Confira quais dos seus posts estão sendo mais visualizados"
+          desc="Confira seus posts mais visualizados"
           class="mb-8"
         />
 
