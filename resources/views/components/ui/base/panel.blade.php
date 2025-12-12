@@ -3,7 +3,7 @@
 ])
 
 @php
-  $baseClasses = 'p-6 rounded-xl border border-gray-200 bg-white transition-colors duration-300';
+  $baseClasses = 'p-4 md:p-6 rounded-xl border border-gray-200 bg-white transition-colors duration-300';
 
   $variants = [
     'default' => 'dark:border-transparent dark:bg-slate-700',

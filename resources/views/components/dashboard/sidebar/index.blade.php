@@ -1,6 +1,6 @@
 <div 
   x-data="{ dashboardMenuOpen: false }"
-  class="py-4 px-1 sm:px-2 md:px-4 lg:px-10 space-y-4 bg-white dark:bg-slate-800"
+  class="fixed min-h-screen py-4 px-1 sm:px-2 md:px-4 lg:px-10 space-y-4 bg-white dark:bg-slate-800"
 >
   <button
     @click="dashboardMenuOpen = !dashboardMenuOpen"
@@ -77,7 +77,7 @@
       
       <a href="#" class="inline-flex items-center p-1 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 group">
         <x-ui.icons.out size="w-5 h-5 md:w-6 md:h-6"/>
-        <span class="flex-1 ms-3 hidden md:block">Sair</span>
+        <span x-show="dashboardMenuOpen" class="flex-1 ms-3 hidden md:block">Sair</span>
       </a>
     </div>
   </aside>
