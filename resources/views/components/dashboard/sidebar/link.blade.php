@@ -16,6 +16,12 @@
 <li>
   <a href="{{ route($routeName) }}" class="{{ $activeClass }} flex items-center p-1 rounded-lg">
     <x-dynamic-component :component="'ui.icons.'.$icon" size="w-5 h-5"/>
-    <span class="ms-3 whitespace-nowrap" x-show="dashboardMenuOpen">{{ $label }}</span>
+    <span 
+      x-show="dashboardMenuOpen || isLg"
+      x-transition
+      class="ms-3 whitespace-nowrap"
+    >
+      {{ $label }}
+    </span>
   </a>
 </li>
