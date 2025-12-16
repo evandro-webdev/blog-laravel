@@ -11,7 +11,7 @@
 >
   <button
     @click="dashboardMenuOpen = !dashboardMenuOpen"
-    class="p-1 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 md:hidden"
+    class="lg:hidden p-1 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
   >
     <x-ui.icons.menu/>
   </button>
@@ -26,21 +26,18 @@
             routeName="dashboard.personal.overview"
             icon="chart-bar"
             label="Visão Geral"
-            ::show-label="dashboardMenuOpen"
           />
   
           <x-dashboard.sidebar.link 
             routeName="dashboard.personal.posts"
             icon="doc"
             label="Meus posts"
-            ::show-label="dashboardMenuOpen"
           />
   
           <x-dashboard.sidebar.link 
             routeName="dashboard.personal.activity"
             icon="doc-list"
             label="Atividade"
-            ::show-label="dashboardMenuOpen"
           />
         </ul>
       </div>
@@ -56,25 +53,21 @@
               routeName="dashboard.admin.overview"
               icon="chart-bar"
               label="Visão Geral"
-              ::show-label="dashboardMenuOpen"
             />
             <x-dashboard.sidebar.link 
               routeName="dashboard.admin.posts"
               icon="docs"
               label="Posts"
-              ::show-label="dashboardMenuOpen"
             />
             <x-dashboard.sidebar.link 
               routeName="dashboard.admin.users"
               icon="users"
               label="Usuários"
-              ::show-label="dashboardMenuOpen"
             />
             <x-dashboard.sidebar.link 
               routeName="dashboard.admin.categories-tags"
               icon="grid"
               label="Categorias e Tags"
-              ::show-label="dashboardMenuOpen"
             />
           </ul>
         </div>
@@ -84,7 +77,7 @@
       
       <a href="#" class="inline-flex items-center p-1 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 group">
         <x-ui.icons.out size="w-5 h-5 md:w-6 md:h-6"/>
-        <span x-show="dashboardMenuOpen" class="flex-1 ms-3">Sair</span>
+        <span x-show="dashboardMenuOpen || isLg" class="flex-1 ms-3">Sair</span>
       </a>
     </div>
   </aside>

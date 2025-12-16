@@ -1,8 +1,7 @@
 @props([
   'routeName',
   'label',
-  'icon',
-  'showLabel' => false
+  'icon'
 ])
 
 @php
@@ -15,10 +14,9 @@
 
 <li>
   <a href="{{ route($routeName) }}" class="{{ $activeClass }} flex items-center p-1 rounded-lg">
-    <x-dynamic-component :component="'ui.icons.'.$icon" size="w-5 h-5"/>
+    <x-dynamic-component :component="'ui.icons.'.$icon" size="w-5 h-5 md:w-6 md:h-6"/>
     <span 
       x-show="dashboardMenuOpen || isLg"
-      x-transition
       class="ms-3 whitespace-nowrap"
     >
       {{ $label }}
