@@ -3,12 +3,12 @@
 ])
 
 <div class="mb-4 rounded-xl border border-gray-200 dark:border-slate-700 overflow-x-auto">
-  <table class="table-fixed w-full text-sm">
+  <table class="w-full text-sm table-auto">
     <thead class="border-b border-gray-200 dark:border-gray-700">
       <tr class="text-left text-gray-600 dark:text-white">
         <th class="max-w-xs p-4">Título</th>
         <th class="p-4 hidden sm:table-cell">Posts</th>
-        <th class="p-4 hidden lg:table-cell">Views</th>
+        <th class="p-4">Views</th>
         <th class="p-4 text-right whitespace-nowrap">Ações</th>
       </tr>
     </thead>
@@ -34,7 +34,7 @@
               />
             </form>
           </td>
-          <td class="p-4">
+          <td class="p-4 hidden sm:table-cell">
             <x-ui.base.badge small>
               {{ $category->posts->count() }} posts
             </x-ui.base.badge>

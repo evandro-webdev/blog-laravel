@@ -6,7 +6,7 @@
 ])
 
 @php
-  $baseClasses = 'inline-block max-w-max font-medium shrink-0 transition-colors';
+  $baseClasses = 'inline-block max-w-max font-medium shrink-0 transition-colors whitespace-nowrap';
 
   $roundedClass = $pill
     ? 'rounded-full'

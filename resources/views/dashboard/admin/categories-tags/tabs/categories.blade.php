@@ -1,7 +1,7 @@
 <div x-show="tab === 'categories'">
-  <div class="flex gap-2">
+  <div class="flex flex-col xl:flex-row gap-2">
     <x-ui.base.panel tone="darker">
-      <div class="mb-6 flex items-center justify-between">
+      <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <x-section-heading
           title="Categorias"
           desc="Gerencie as categorias do blog, atualmente há {{ $categoriesData['categories']->count() }} categorias existentes"
@@ -20,7 +20,7 @@
       )
     </x-ui.base.panel>
 
-    <div class="space-y-2 max-w-lg">
+    <div class="max-w-md space-y-2">
       <x-ui.base.panel tone="darker">
         <x-section-heading
           title="Categorias mais usadas"
