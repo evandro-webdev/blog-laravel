@@ -1,6 +1,6 @@
 <div x-show="tab === 'categories'">
-  <div class="flex flex-col xl:flex-row gap-2">
-    <x-ui.base.panel tone="darker">
+  <div class="flex flex-col 2xl:flex-row gap-2">
+    <x-ui.base.panel class="w-full" tone="darker">
       <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <x-section-heading
           title="Categorias"
@@ -20,7 +20,7 @@
       )
     </x-ui.base.panel>
 
-    <div class="max-w-md space-y-2">
+    <div class="w-full xl:max-w-lg space-y-2">
       <x-ui.base.panel tone="darker">
         <x-section-heading
           title="Categorias mais usadas"
