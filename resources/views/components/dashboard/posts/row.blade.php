@@ -1,3 +1,7 @@
+@props([
+  'post'
+])
+
 <tr class="odd:bg-gray-50 dark:odd:bg-slate-900">
   <td class="max-w-[50ch] p-5 truncate text-gray-800 dark:text-white" title="{{ $post->title }}">
     <a href="/posts/{{ $post->slug }}" target="_blank">

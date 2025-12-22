@@ -20,7 +20,7 @@
       )
     </x-ui.base.panel>
 
-    <div class="w-full xl:max-w-lg space-y-2">
+    <div class="w-full md:max-w-md lg:max-w-lg space-y-2">
       <x-ui.base.panel tone="darker">
         <x-section-heading
           title="Categorias mais usadas"
