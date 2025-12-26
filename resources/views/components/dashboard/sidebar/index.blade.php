@@ -7,7 +7,7 @@
     const mq = window.matchMedia('(min-width: 1024px)');
     mq.addEventListener('change', e => isLg = e.matches);
   "
-  class="absolute md:static min-h-screen py-4 px-1 sm:px-2 md:px-4 lg:px-10 border-r border-gray-200 dark:border-slate-700 space-y-4 bg-white dark:bg-slate-800"
+  class="absolute md:static min-h-screen py-4 px-1 sm:px-2 md:px-4 lg:px-6 border-r border-gray-200 dark:border-slate-700 space-y-4 bg-white dark:bg-slate-800"
 >
   <button
     @click="dashboardMenuOpen = !dashboardMenuOpen"

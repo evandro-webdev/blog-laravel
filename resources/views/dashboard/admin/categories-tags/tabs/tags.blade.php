@@ -4,7 +4,7 @@
       <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <x-section-heading
           title="Tags"
-          desc="Gerencie as tags do blog, atualmente há {{ $tagsData['tags']->count() }} tags existentes"
+          desc="{{ $tagsData['tags']->count() }} tags registradas"
         />
   
         <form action="{{ route('admin.tags.store') }}" method="POST" class="flex gap-2">

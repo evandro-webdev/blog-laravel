@@ -1,10 +1,10 @@
 <div x-show="tab === 'categories'">
-  <div class="flex flex-col 2xl:flex-row gap-2">
+  <div class="flex flex-col 2xl:flex-row gap-2 min-w-0 w-full">
     <x-ui.base.panel class="w-full" tone="darker">
       <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <x-section-heading
           title="Categorias"
-          desc="Gerencie as categorias do blog, atualmente há {{ $categoriesData['categories']->count() }} categorias existentes"
+          desc="{{ $categoriesData['categories']->count() }} categorias registradas"
         />
   
         <form action="{{ route('admin.categories.store') }}" method="POST" class="flex gap-2">
@@ -20,28 +20,28 @@
       )
     </x-ui.base.panel>
 
-    <div class="w-full md:max-w-md lg:max-w-lg space-y-2">
-      <x-ui.base.panel tone="darker">
+    <div class="flex flex-col gap-2 md:flex-row 2xl:flex-col min-w-0 2xl:min-w-lg">
+      <x-ui.base.panel tone="darker" class="w-full md:max-w-sm lg:max-w-md 2xl:max-w-lg min-w-0 overflow-hidden">
         <x-section-heading
           title="Categorias mais usadas"
           desc="Atualmente a categoria mais utilizada pelos autores é: {{ $categoriesData['mostUsed']['names'][0] }}"
           class="mb-6"
         />
   
-        <div class="w-full">
-          <canvas id="mostUsedCategoriesChart"></canvas>
+        <div class="w-full min-w-0 overflow-hidden">
+          <canvas id="mostUsedCategoriesChart" class="w-full max-w-full"></canvas>
         </div>
       </x-ui.base.panel>
 
-      <x-ui.base.panel tone="darker">
+      <x-ui.base.panel tone="darker" class="w-full md:max-w-sm lg:max-w-md 2xl:max-w-lg min-w-0 overflow-hidden">
         <x-section-heading
           title="Categorias mais visualizadas"
           desc="Atualmente a categoria mais visualizada é: {{ $categoriesData['mostViewed']['names'][0] }}"
           class="mb-6"
         />
 
-        <div class="w-full">
-          <canvas id="mostViewedCategoriesChart"></canvas>
+        <div class="w-full min-w-0 overflow-hidden">
+          <canvas id="mostViewedCategoriesChart" class="w-full max-w-full"></canvas>
         </div>
       </x-ui.base.panel>
     </div>
