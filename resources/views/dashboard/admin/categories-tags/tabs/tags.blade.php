@@ -1,5 +1,5 @@
 <div x-show="tab === 'tags'">
-  <div class="flex flex-col 2xl:flex-row gap-2">
+  <div class="flex flex-col 2xl:flex-row gap-2 min-w-0 w-full">
     <x-ui.base.panel class="w-full" tone="darker">
       <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <x-section-heading
@@ -20,28 +20,28 @@
       )
     </x-ui.base.panel>
 
-    <div class="w-full xl:max-w-lg space-y-2">
-      <x-ui.base.panel tone="darker">
+    <div class="flex flex-col gap-2 md:flex-row 2xl:flex-col min-w-0 2xl:min-w-lg">
+      <x-ui.base.panel tone="darker" class="w-full md:max-w-sm lg:max-w-md 2xl:max-w-lg min-w-0 overflow-hidden">
         <x-section-heading
           title="Tags mais usadas"
           desc="Atualmente a tag mais utilizada pelos autores é: {{ $tagsData['mostUsed']['names'][0] }}"
           class="mb-6"
         />
   
-        <div class="w-full">
-          <canvas id="mostUsedTagsChart"></canvas>
+        <div class="w-full min-w-0 overflow-hidden">
+          <canvas id="mostUsedTagsChart" class="w-full max-w-full"></canvas>
         </div>
       </x-ui.base.panel>
 
-      <x-ui.base.panel tone="darker">
+      <x-ui.base.panel tone="darker" class="w-full md:max-w-sm lg:max-w-md 2xl:max-w-lg min-w-0 overflow-hidden">
         <x-section-heading
           title="Tags mais visualizadas"
           desc="Atualmente a tag mais visualizada é: {{ $tagsData['mostViewed']['names'][0] }}"
           class="mb-6"
         />
 
-        <div class="w-full">
-          <canvas id="mostViewedTagsChart"></canvas>
+        <div class="w-full min-w-0 overflow-hidden">
+          <canvas id="mostViewedTagsChart" class="w-full max-w-full"></canvas>
         </div>
       </x-ui.base.panel>
     </div>
@@ -50,7 +50,6 @@
 
 <script>
   const tagsData = @json($tagsData);
-  console.log(tagsData)
 
   function initTagCharts(data) {
     const charts = [

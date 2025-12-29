@@ -17,7 +17,7 @@ function createChart(ctx, labels, data, label, background, border){
         data,
         backgroundColor: background,
         borderRadius: 6,
-        barThickness: 50,
+        barThickness: 30,
         hoverBackgroundColor: border,
       }]
     },
