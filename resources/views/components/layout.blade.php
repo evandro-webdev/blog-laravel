@@ -3,6 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme')
+
+      if (
+        theme === 'dark' ||
+        (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark')
+      }
+    })()
+  </script>
+
+  <style>
+    html { background-color: #ffffff; }
+    html.dark { background-color: #0f172a; }
+  </style>
+
   @vite(['resources/js/app.js'])
   @stack('scripts')
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
