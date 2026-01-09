@@ -7,9 +7,21 @@
 
 @php
   $sizes = [
-    'sm' => ['title' => 'text-lg',  'desc' => 'text-xs', 'link' => 'text-xs'],
-    'md' => ['title' => 'text-2xl', 'desc' => 'text-sm', 'link' => 'text-sm'],
-    'lg' => ['title' => 'text-4xl', 'desc' => 'text-base', 'link' => 'text-base'],
+    'sm' => [
+      'title' => 'text-base sm:text-lg',
+      'desc'  => 'text-xs sm:text-sm',
+      'link'  => 'text-xs sm:text-sm',
+    ],
+    'md' => [
+      'title' => 'text-lg sm:text-xl lg:text-2xl',
+      'desc'  => 'text-xs sm:text-sm',
+      'link'  => 'text-sm',
+    ],
+    'lg' => [
+      'title' => 'text-xl sm:text-2xl lg:text-4xl',
+      'desc'  => 'text-sm sm:text-base',
+      'link'  => 'text-sm sm:text-base',
+    ],
   ];
 
   $class = $link ? 'flex items-center justify-between' : '';
